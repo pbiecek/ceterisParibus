@@ -1,0 +1,57 @@
+---
+title: "What-If Plots 1D"
+author: "Przemyslaw Biecek"
+date: "29/05/2018"
+output: html_document
+---
+
+# Introduction
+
+First, let's create explainers for random Forest model and linear model
+
+```{r, warning=FALSE, message=FALSE}
+library(DALEX)
+library("randomForest")
+set.seed(59)
+
+apartments_lm_model <- lm(m2.price ~ construction.year + surface + floor + 
+                            no.rooms + district, data = apartments)
+
+apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor + 
+                                      no.rooms + district, data = apartments)
+
+explainer_rf <- explain(apartments_rf_model, 
+                        data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
+explainer_lm <- explain(apartments_lm_model, 
+                        data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
+```
+
+We will explain prediction for
+
+```{r}
+new_apartment <- apartmentsTest[1, ]
+new_apartment
+```
+
+# What-If 1D 
+
+```{r, fig.width=7, fig.height=7}
+library(WhatIfPlots)
+
+wi_rf <- what_if(explainer_rf, observation = new_apartment)
+plot(wi_rf)
+
+wi_lm <- what_if(explainer_lm, observation = new_apartment)
+plot(wi_lm)
+
+```
+
+# What-If 1D - many models
+
+
+```{r, fig.width=7, fig.height=7}
+plot(wi_rf, wi_lm)
+plot(wi_rf, wi_lm, split = "variables")
+
+```
+
