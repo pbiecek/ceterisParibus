@@ -57,3 +57,24 @@ plot(wi_rf, wi_lm, split = "variables")
 
 ```
 
+
+# Interactive What-If 1D 
+
+```{r, fig.width=7, fig.height=7, message=FALSE, warning=FALSE}
+library(WhatIfPlots)
+
+plot_interactive(wi_rf)
+
+plot_interactive(wi_lm)
+
+```
+
+# Interactive What-If 1D - two models
+
+
+```{r, fig.width=7, fig.height=7}
+plot_interactive(wi_rf, wi_lm)
+plot_interactive(wi_rf, wi_lm, split = "variables")
+
+```
+
