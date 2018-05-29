@@ -4,12 +4,14 @@
 \alias{plot.what_if_explainer}
 \title{Plots What-If Explanations}
 \usage{
-\method{plot}{what_if_explainer}(x, ...)
+\method{plot}{what_if_explainer}(x, ..., split = "models")
 }
 \arguments{
 \item{x}{a what-if explainer produced with the 'what_if' function}
 
 \item{...}{other explainers that shall be plotted together}
+
+\item{split}{a character, either 'models' or 'variables'. Sets the vaiable for faceting}
 }
 \value{
 a ggplot2 object

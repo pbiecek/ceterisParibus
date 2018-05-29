@@ -39,9 +39,11 @@ new_apartment
 library(WhatIfPlots)
 
 wi_rf <- what_if(explainer_rf, observation = new_apartment)
+wi_rf
 plot(wi_rf)
 
 wi_lm <- what_if(explainer_lm, observation = new_apartment)
+wi_lm
 plot(wi_lm)
 
 ```
