@@ -35,7 +35,7 @@ new_apartment
 
 # What-If 1D 
 
-```{r, fig.width=7, fig.height=7}
+```{r, fig.width=7, fig.height=7, message=FALSE, warning=FALSE}
 library(WhatIfPlots)
 
 wi_rf <- what_if(explainer_rf, observation = new_apartment)
@@ -46,7 +46,7 @@ plot(wi_lm)
 
 ```
 
-# What-If 1D - many models
+# What-If 1D - two models
 
 
 ```{r, fig.width=7, fig.height=7}
