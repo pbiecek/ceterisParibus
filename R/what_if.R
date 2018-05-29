@@ -1,0 +1,40 @@
+#' What-If 1D Plot
+#'
+#' @param explainer a model to be explained, preprocessed by the 'DALEX::explain' function
+#' @param observation a new observarvation for which predictions need to be explained
+#' @param grid_points number of points used for response path
+#'
+#' @return An object of the class 'what_if_explainer'.
+#' It's a data frame with calculated average responses.
+#' @export
+#'
+#' @examples
+what_if <- function(explainer, observation, grid_points = 101) {
+  if (!("explainer" %in% class(explainer)))
+      stop("The what_if() function requires an object created with explain() function.")
+  if (is.null(explainer$data))
+    stop("The what_if() function requires explainers created with specified 'data' parameter.")
+
+  data <- explainer$data
+  model <- explainer$model
+  predict_function <- explainer$predict_function
+  var_to_present <- which(sapply(explainer$data, is.numeric))
+  names_to_present <- colnames(explainer$data)[var_to_present]
+
+  responses <- lapply(names_to_present, function(vname) {
+    probs <- seq(0, 1, length.out = grid_points)
+    new_x <- quantile(data[,vname], probs = probs)
+    quant_x <- mean(observation[1,vname] >= data[,vname], na.rm = TRUE)
+    new_data <- observation[rep(1, grid_points),]
+    new_data[,vname] <- new_x
+    data.frame(y_hat = predict(model, newdata = new_data), new_x = new_x,
+               vname = vname, x_quant = quant_x, quant = probs,
+               relative_quant = probs - quant_x, label = explainer$label)
+  })
+  all_responses <- do.call(rbind, responses)
+  new_y_hat <- predict_function(model, newdata = observation)
+
+  attr(all_responses, "prediction") <- list(observation = observation, new_y_hat = new_y_hat)
+  class(all_responses) = c("what_if_explainer", "data.frame")
+  all_responses
+}
