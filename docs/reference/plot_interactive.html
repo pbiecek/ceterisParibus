@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • WhatIfPlots</title>
+<title>Plots Interactive What-If Explanations — plot_interactive • WhatIfPlots</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -37,7 +37,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top navbar-mi2" role="navigation">
   <div class="container">
@@ -88,64 +88,54 @@
       </header>
 
       <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;0.0.1</small>
-      </h1>
+    <h1>Plots Interactive What-If Explanations</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    
+    <p>Function 'plot.what_if_explainer' plots What-If plots for a single prediction.</p>
+    
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <pre class="usage"><span class='co'># S3 method for what_if_explainer</span>
+<span class='fu'>plot_interactive</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>"models"</span>)
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="plot_interactive.html">plot_interactive</a></code> </p>
-          </td>
-          <td><p>Plots Interactive What-If Explanations</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="plot.what_if_explainer.html">plot</a></code> </p>
-          </td>
-          <td><p>Plots What-If Explanations</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="print.what_if_explainer.html">print</a></code> </p>
-          </td>
-          <td><p>Prints What-If Explainer Summary</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="what_if.html">what_if</a></code> </p>
-          </td>
-          <td><p>What-If 1D Plot</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+<span class='fu'>plot_interactive</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>plot_interactive</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>"models"</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>a what-if explainer produced with the 'what_if' function</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>other explainers that shall be plotted together</p></td>
+    </tr>
+    <tr>
+      <th>split</th>
+      <td><p>a character, either 'models' or 'variables'. Sets the vaiable for faceting</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>a ggiraph object</p>
+    
+
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked contents-mi2">
-      <li><a href="#section-all-functions">All functions</a></li>
-    </ul>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
+
   </div>
 </div>
 
