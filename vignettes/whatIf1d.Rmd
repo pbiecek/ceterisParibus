@@ -40,10 +40,12 @@ library(WhatIfPlots)
 
 wi_rf <- what_if(explainer_rf, observation = new_apartment)
 wi_rf
+plot(wi_rf, split = "variables", color = "variables")
 plot(wi_rf)
 
 wi_lm <- what_if(explainer_lm, observation = new_apartment)
 wi_lm
+plot(wi_lm, split = "variables", color = "variables")
 plot(wi_lm)
 
 ```
@@ -53,8 +55,7 @@ plot(wi_lm)
 
 ```{r, fig.width=7, fig.height=7}
 plot(wi_rf, wi_lm)
-plot(wi_rf, wi_lm, split = "variables")
-
+plot(wi_rf, wi_lm, split = "variables", color = "models")
 ```
 
 
@@ -63,8 +64,10 @@ plot(wi_rf, wi_lm, split = "variables")
 ```{r, fig.width=7, fig.height=7, message=FALSE, warning=FALSE}
 library(WhatIfPlots)
 
+plot_interactive(wi_rf, split = "variables", color = "variables")
 plot_interactive(wi_rf)
 
+plot_interactive(wi_lm, split = "variables", color = "variables")
 plot_interactive(wi_lm)
 
 ```

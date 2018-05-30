@@ -8,6 +8,9 @@
 #' It's a data frame with calculated average responses.
 #' @export
 #'
+#' @importFrom stats quantile
+#' @importFrom utils head
+#'
 #' @examples
 #' library("DALEX")
 #' library("randomForest")
