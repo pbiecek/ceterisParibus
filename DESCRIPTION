@@ -1,15 +1,18 @@
 Package: WhatIfPlots
-Title: What-If 1D Plot
-Version: 0.0.1
+Title: What-If plots help to understand model predictions for selected observations
+Version: 0.1
 Authors@R: person("Przemyslaw", "Biecek", email = "przemyslaw.biecek@gmail.com", role = c("aut", "cre"))
-Description: Explains prediction for a single observtion.
+Description: Explains a model prediction for a single observation.
 Depends: R (>= 3.3),
-  ggplot2, 
-  DALEX,
-  ggiraph
-Suggest: randomForest
-Import: scales
+    ggplot2, 
+    ggiraph
+Suggests: randomForest
+Imports: DALEX,
+    knitr
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1.9000
+VignetteBuilder: knitr
+URL: https://pbiecek.github.io/WhatIfPlots/
+BugReports: https://github.com/pbiecek/WhatIfPlots/issues

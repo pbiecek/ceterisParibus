@@ -62,9 +62,9 @@ plot_interactive.what_if_explainer <- function(x, ..., split = "models", color =
     geom_vline(xintercept = 0, lty = 2) +
     geom_hline(data = all_predictions, aes(yintercept = prediction), lty = 2) +
     geom_point_interactive() +
-    theme_mi2() + ylab("Predicted y") + xlab("Relative percentile of X_i") + ggtitle("Interactive What-If Plot") +
+    DALEX::theme_mi2() + ylab("Predicted y") + xlab("Relative percentile of X_i") + ggtitle("Interactive What-If Plot") +
     theme(legend.position = "bottom") +
-    scale_x_continuous(breaks = seq(-1,1,0.2), labels=scales::percent)
+    scale_x_continuous(breaks = seq(-1,1,0.2), labels=paste0(seq(-100,100,20)))
 
   ggiraph(code = print(pl), hover_css = "fill-opacity:.3;cursor:pointer;")
 }

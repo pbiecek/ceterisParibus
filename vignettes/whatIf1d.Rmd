@@ -1,8 +1,12 @@
 ---
-title: "What-If Plots 1D"
+title: "What-If Plots"
 author: "Przemyslaw Biecek"
-date: "29/05/2018"
-output: html_document
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteIndexEntry{Title of your vignette}
+  %\usepackage[UTF-8]{inputenc}
 ---
 
 # Introduction
@@ -12,6 +16,8 @@ First, let's create explainers for random Forest model and linear model
 ```{r, warning=FALSE, message=FALSE}
 library(DALEX)
 library("randomForest")
+library("WhatIfPlots")
+library("ggiraph")
 set.seed(59)
 
 apartments_lm_model <- lm(m2.price ~ construction.year + surface + floor + 
@@ -26,17 +32,13 @@ explainer_lm <- explain(apartments_lm_model,
                         data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
 ```
 
+# What-If Plots
+
 We will explain prediction for
 
 ```{r}
 new_apartment <- apartmentsTest[1, ]
 new_apartment
-```
-
-# What-If 1D 
-
-```{r, fig.width=7, fig.height=7, message=FALSE, warning=FALSE}
-library(WhatIfPlots)
 
 wi_rf <- what_if(explainer_rf, observation = new_apartment)
 wi_rf
@@ -61,23 +63,19 @@ plot(wi_rf, wi_lm, split = "variables", color = "models")
 
 # Interactive What-If 1D 
 
-```{r, fig.width=7, fig.height=7, message=FALSE, warning=FALSE}
-library(WhatIfPlots)
-
+```{r, fig.width=7, fig.height=7, message=FALSE, warning=FALSE, eval=FALSE}
 plot_interactive(wi_rf, split = "variables", color = "variables")
 plot_interactive(wi_rf)
 
 plot_interactive(wi_lm, split = "variables", color = "variables")
 plot_interactive(wi_lm)
-
 ```
 
 # Interactive What-If 1D - two models
 
 
-```{r, fig.width=7, fig.height=7}
+```{r, fig.width=7, fig.height=7, eval=FALSE}
 plot_interactive(wi_rf, wi_lm)
 plot_interactive(wi_rf, wi_lm, split = "variables")
-
 ```
 
