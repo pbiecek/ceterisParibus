@@ -52,7 +52,7 @@ plot(wi_lm)
 
 ```
 
-# What-If 1D - two models
+# What-If - two models
 
 
 ```{r, fig.width=7, fig.height=7}
@@ -61,7 +61,7 @@ plot(wi_rf, wi_lm, split = "variables", color = "models")
 ```
 
 
-# Interactive What-If 1D 
+# Interactive What-If  
 
 ```{r, fig.width=7, fig.height=7, message=FALSE, warning=FALSE, eval=FALSE}
 plot_interactive(wi_rf, split = "variables", color = "variables")
@@ -71,7 +71,7 @@ plot_interactive(wi_lm, split = "variables", color = "variables")
 plot_interactive(wi_lm)
 ```
 
-# Interactive What-If 1D - two models
+# Interactive What-If - two models
 
 
 ```{r, fig.width=7, fig.height=7, eval=FALSE}

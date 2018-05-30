@@ -63,7 +63,7 @@ plot.what_if_explainer <- function(x, ..., split = "models", color = "variables"
     geom_line() +
     theme_mi2() + ylab("Predicted y") + xlab("Relative percentile of X_i") + ggtitle("What-If Plot") +
     theme(legend.position = "bottom") +
-    scale_x_continuous(breaks = seq(-1,1,0.2), labels = paste0(seq(-100,100,20)))
+    scale_x_continuous(breaks = seq(-1,1,0.2), labels = paste0(seq(-100,100,20),"%"))
 
   pl
 }
