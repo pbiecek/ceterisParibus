@@ -1,6 +1,6 @@
 # What-If Plots
 
-[![Build Status](https://api.travis-ci.org/pbiecek/DALEX.png)](https://travis-ci.org/pbiecek/DALEX)
+[![Build Status](https://api.travis-ci.org/pbiecek/WhatIfPlots.png)](https://travis-ci.org/pbiecek/WhatIfPlots)
 
 What-If plots for any Machine Learning model
 
