@@ -9,6 +9,21 @@
 #' @export
 #'
 #' @examples
+#' library("DALEX")
+#' library("randomForest")
+#' set.seed(59)
+#'
+#' apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
+#'       no.rooms + district, data = apartments)
+#'
+#' explainer_rf <- explain(apartments_rf_model,
+#'       data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
+#'
+#' new_apartment <- apartmentsTest[1, ]
+#' new_apartment
+#'
+#' wi_rf <- what_if(explainer_rf, observation = new_apartment)
+#' wi_rf
 what_if <- function(explainer, observation, grid_points = 101) {
   if (!("explainer" %in% class(explainer)))
       stop("The what_if() function requires an object created with explain() function.")
@@ -27,7 +42,7 @@ what_if <- function(explainer, observation, grid_points = 101) {
     quant_x <- mean(observation[1,vname] >= data[,vname], na.rm = TRUE)
     new_data <- observation[rep(1, grid_points),]
     new_data[,vname] <- new_x
-    data.frame(y_hat = predict(model, newdata = new_data), new_x = new_x,
+    data.frame(y_hat = predict_function(model, newdata = new_data), new_x = new_x,
                vname = vname, x_quant = quant_x, quant = probs,
                relative_quant = probs - quant_x, label = explainer$label)
   })

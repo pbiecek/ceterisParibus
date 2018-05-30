@@ -4,18 +4,41 @@
 \alias{plot.what_if_explainer}
 \title{Plots What-If Explanations}
 \usage{
-\method{plot}{what_if_explainer}(x, ..., split = "models")
+\method{plot}{what_if_explainer}(x, ..., split = "models",
+  color = "variables")
 }
 \arguments{
 \item{x}{a what-if explainer produced with the 'what_if' function}
 
 \item{...}{other explainers that shall be plotted together}
 
-\item{split}{a character, either 'models' or 'variables'. Sets the vaiable for faceting}
+\item{split}{a character, either 'models' or 'variables'. Sets the variable for faceting}
+
+\item{color}{a character, either 'models' or 'variables'. Sets the variable for coloring}
 }
 \value{
 a ggplot2 object
 }
 \description{
 Function 'plot.what_if_explainer' plots What-If plots for a single prediction.
+}
+\examples{
+library("DALEX")
+library("randomForest")
+set.seed(59)
+
+apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
+      no.rooms + district, data = apartments)
+
+explainer_rf <- explain(apartments_rf_model,
+      data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
+
+new_apartment <- apartmentsTest[1, ]
+new_apartment
+
+wi_rf <- what_if(explainer_rf, observation = new_apartment)
+wi_rf
+
+plot(wi_rf, split = "variables", color = "variables")
+plot(wi_rf)
 }

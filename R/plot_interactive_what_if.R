@@ -4,7 +4,8 @@
 #'
 #' @param x a what-if explainer produced with the 'what_if' function
 #' @param ... other explainers that shall be plotted together
-#' @param split a character, either 'models' or 'variables'. Sets the vaiable for faceting
+#' @param split a character, either 'models' or 'variables'. Sets the variable for faceting
+#' @param color a character, either 'models' or 'variables'. Sets the variable for coloring
 #'
 #' @return a ggiraph object
 #' @name plot_interactive
@@ -12,7 +13,25 @@
 #' @import ggiraph
 #'
 #' @examples
-plot_interactive.what_if_explainer <- function(x, ..., split = "models") {
+#' library("DALEX")
+#' library("randomForest")
+#' set.seed(59)
+#'
+#' apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
+#'       no.rooms + district, data = apartments)
+#'
+#' explainer_rf <- explain(apartments_rf_model,
+#'       data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
+#'
+#' new_apartment <- apartmentsTest[1, ]
+#' new_apartment
+#'
+#' wi_rf <- what_if(explainer_rf, observation = new_apartment)
+#' wi_rf
+#'
+#' plot_interactive(wi_rf, split = "variables", color = "variables")
+#' plot_interactive(wi_rf)
+plot_interactive.what_if_explainer <- function(x, ..., split = "models", color = "variables") {
   dfl <- c(list(x), list(...))
   all_responses <- do.call(rbind, dfl)
   class(all_responses) <- "data.frame"
@@ -25,19 +44,18 @@ plot_interactive.what_if_explainer <- function(x, ..., split = "models") {
   all_predictions <- do.call(rbind, all_predictions)
 
   # do we need faceting?
-  if (length(dfl) > 1) {
-    if (split == "models") {
-      pl <- ggplot(all_responses, aes(relative_quant, y_hat, color = vname,
-                          tooltip = paste(vname, "=", new_x, " -> ", round(y_hat)))) +
-        facet_wrap(~label, ncol = 1)
-    } else {
-      pl <- ggplot(all_responses, aes(relative_quant, y_hat, color = label,
-                          tooltip = paste(vname, "=", new_x, " -> ", round(y_hat)))) +
-        facet_wrap(~vname)
-    }
+  relative_quant <- y_hat <- label <- vname <- prediction <- new_x <- NULL
+  if (color == "models") {
+    pl <- ggplot(all_responses, aes(relative_quant, y_hat, color = label,
+                tooltip = paste("f(",vname, "=", new_x, ") = ", round(y_hat))))
   } else {
-    pl <- ggplot(all_responses, aes(relative_quant, y_hat, color = vname,
-                          tooltip = paste(vname, "=", new_x, " -> ", round(y_hat))))
+    pl <- ggplot(all_responses, aes(relative_quant, y_hat, color = vname),
+                 tooltip = paste("f(",vname, "=", new_x, ") = ", round(y_hat)))
+  }
+  if (split == "models") {
+    pl <- pl + facet_wrap(~label)
+  } else {
+    pl <- pl + facet_wrap(~vname)
   }
 
   pl <- pl +
@@ -45,9 +63,9 @@ plot_interactive.what_if_explainer <- function(x, ..., split = "models") {
     geom_hline(data = all_predictions, aes(yintercept = prediction), lty = 2) +
     geom_point_interactive() +
     geom_line_interactive() +
-    theme_mi2() + ylab("Predicted y") + xlab("X percentile") + ggtitle("1D 'What If' Plot") +
+    theme_mi2() + ylab("Predicted y") + xlab("Relative percentile of X_i") + ggtitle("Interactive What-If Plot") +
     theme(legend.position = "bottom") +
-    scale_x_continuous(breaks = seq(-1,1,0.1), labels=scales::percent)
+    scale_x_continuous(breaks = seq(-1,1,0.2), labels=scales::percent)
 
   ggiraph(code = print(pl), hover_css = "fill-opacity:.3;cursor:pointer;")
 }
