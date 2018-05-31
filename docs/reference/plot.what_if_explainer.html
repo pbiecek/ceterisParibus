@@ -98,7 +98,7 @@
     
 
     <pre class="usage"><span class='co'># S3 method for what_if_explainer</span>
-<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>"models"</span>,
+<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>quantiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>"models"</span>,
   <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"variables"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
@@ -111,6 +111,10 @@
     <tr>
       <th>...</th>
       <td><p>other explainers that shall be plotted together</p></td>
+    </tr>
+    <tr>
+      <th>quantiles</th>
+      <td><p>if TRUE (default) then quantiles will be presented on OX axis. If FALSE then original values will be presented on OX axis</p></td>
     </tr>
     <tr>
       <th>split</th>
@@ -149,7 +153,7 @@
 #&gt; 3% 4305.352  1923 construction.year 0.6268889  0.03     -0.5968889 randomForest
 #&gt; 4% 4305.352  1923 construction.year 0.6268889  0.04     -0.5868889 randomForest
 #&gt; 5% 4267.723  1924 construction.year 0.6268889  0.05     -0.5768889 randomForest</div><div class='input'>
-<span class='fu'>plot</span>(<span class='no'>wi_rf</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>"variables"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"variables"</span>)</div><div class='img'><img src='plot.what_if_explainer-5.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>wi_rf</span>)</div><div class='img'><img src='plot.what_if_explainer-6.png' alt='' width='700' height='432.632880098887' /></div></pre>
+<span class='fu'>plot</span>(<span class='no'>wi_rf</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>"variables"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"variables"</span>)</div><div class='img'><img src='plot.what_if_explainer-21.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>wi_rf</span>)</div><div class='img'><img src='plot.what_if_explainer-22.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

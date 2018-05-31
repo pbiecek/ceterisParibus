@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>What-If plots help to understand model predictions for selected observations • WhatIfPlots</title>
+<title>What-If Plots (Ceteris Paribus Plots) for a Single Observation • WhatIfPlots</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -63,11 +63,42 @@
       
       </header><div class="row">
   <div class="contents col-md-9">
-    <div class="section level1">
+    
+<div class="section level1">
 <div class="page-header"><h1>What-If Plots</h1></div>
-<p>What-If plots for XAI</p>
-<p>Example: <a href="https://pbiecek.github.io/WhatIfPlots/articles/whatIf1d.html" class="uri">https://pbiecek.github.io/WhatIfPlots/articles/whatIf1d.html</a></p>
+
+<p>What-If Plots (<em>Ceteris Paribus Plots</em>) are designed to present model responses around a single point in the feature space. For example around a single prediction for an interesting observation. Plots are designed to work in a model-agnostic fashion, they are working for any Machine Learning model and allow for model comparisons.</p>
+<p>The What-If Plots supplement the <a href="https://github.com/pbiecek/breakDown">breakDown Plots</a> that are designed to attribute features into parts of a single prediction.</p>
+<p>Imagine a scenario in which a client gets low credit score and is wondering why the score is so low. <em>What can I do to get a higher score?</em></p>
+<p>What-If Plots show possible scenarios for model predictions allowing for changes in a single dimension (ceteris paribus principle).</p>
 </div>
+<div class="section level1">
+<h1>Simple What-If Plot</h1>
+<p>The plot below shows What-If plots for an apartment data for a large apartment (130 m2) on 3-rd floor. On can read what would be the model prediction for smaller apartment (largest change) or one that is located higher.</p>
+<center><img width="600" src="misc/use_case_1.png"></center>
+</div>
+<div class="section level1">
+<h1>Uniform What-If Plot</h1>
+<p>Since different variables may have different scales, we recommend to transform variables into quantiles. Then it is much easier to see how a particular variable looks in relation to others.</p>
+<center><img width="600" src="misc/use_case_2.png"></center>
+<p>Having all variables in a single quantile scale we may plot them together in a single plot.</p>
+<center><img width="600" src="misc/use_case_3.png"></center>
+</div>
+<div class="section level1">
+<h1>Multimodel What-If Plot</h1>
+<p>We may compare responses for few models in a single plot.</p>
+<center><img width="600" src="misc/use_case_4.png"></center>
+</div>
+<div class="section level1">
+<h1>Some equations</h1>
+<p>More formally, a What If plot for variable V and observations O is a set of points (X, Y) where</p>
+<p>$$Y(X) := f(O_1, …, O_{V-1}, O_{V} + X, O_{V+1}, …, O_{p})$$</p>
+</div>
+<div class="section level1">
+<h1>More examples</h1>
+<p><a href="https://pbiecek.github.io/WhatIfPlots/articles/whatIf1d.html" class="uri">https://pbiecek.github.io/WhatIfPlots/articles/whatIf1d.html</a></p>
+</div>
+
   </div>
 
   <div class="col-md-3" id="sidebar">
@@ -86,6 +117,10 @@
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Przemyslaw Biecek <br><small class="roles"> Author, maintainer </small> </li>
+</ul>
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://travis-ci.org/pbiecek/WhatIfPlots"><img src="https://api.travis-ci.org/pbiecek/WhatIfPlots.png" alt="Build Status"></a></li>
 </ul>
 </div>
 </div>
