@@ -8,7 +8,15 @@ The What-If Plots supplement the [breakDown Plots]( https://github.com/pbiecek/b
 
 Imagine a scenario in which a client gets low credit score and is wondering why the score is so low. *What can I do to get a higher score?*
 
-What-If Plots show possible scenarios for model predictions allowing for changes in a single dimension (ceteris paribus principle).
+What-If Plots show possible scenarios for model predictions allowing for changes in a single dimension (the *ceteris paribus* principle).
+
+## Installation
+
+To get started, install the latest version of **WhatIfPlots** from GitHub:
+
+```
+devtools::install_github("pbiecek/WhatIfPlots")
+```
 
 # Simple What-If Plot
 
