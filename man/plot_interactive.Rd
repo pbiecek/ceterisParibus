@@ -47,5 +47,4 @@ wi_rf <- what_if(explainer_rf, observation = new_apartment)
 wi_rf
 
 plot_interactive(wi_rf, split = "variables", color = "variables")
-plot_interactive(wi_rf)
 }

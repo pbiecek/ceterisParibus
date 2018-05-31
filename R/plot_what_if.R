@@ -4,6 +4,7 @@
 #'
 #' @param x a what-if explainer produced with the 'what_if' function
 #' @param ... other explainers that shall be plotted together
+#' @param quantiles if TRUE (default) then quantiles will be presented on OX axis. If FALSE then original values will be presented on OX axis
 #' @param split a character, either 'models' or 'variables'. Sets the variable for faceting
 #' @param color a character, either 'models' or 'variables'. Sets the variable for coloring
 #'
@@ -31,7 +32,7 @@
 #'
 #' plot(wi_rf, split = "variables", color = "variables")
 #' plot(wi_rf)
-plot.what_if_explainer <- function(x, ..., split = "models", color = "variables") {
+plot.what_if_explainer <- function(x, ..., quantiles = TRUE, split = "models", color = "variables") {
   dfl <- c(list(x), list(...))
   all_responses <- do.call(rbind, dfl)
   class(all_responses) <- "data.frame"
@@ -43,27 +44,47 @@ plot.what_if_explainer <- function(x, ..., split = "models", color = "variables"
   })
   all_predictions <- do.call(rbind, all_predictions)
 
-  # do we need faceting?
-  relative_quant <- y_hat <- label <- vname <- prediction <- NULL
-  if (color == "models") {
-    pl <- ggplot(all_responses, aes(relative_quant, y_hat, color = label))
+  on_x <- y_hat <- label <- vname <- values <- prediction <- NULL
+  # what on OX scale
+  if (quantiles) {
+    all_responses$on_x <- all_responses$relative_quant
+    scales_x <- "fixed"
   } else {
-    pl <- ggplot(all_responses, aes(relative_quant, y_hat, color = vname))
+    all_responses$on_x <- all_responses$new_x
+    scales_x <- "free_x"
   }
-  if (split == "models") {
-    pl <- pl + facet_wrap(~label)
+  # colors
+  if (color == "models") {
+    pl <- ggplot(all_responses, aes(on_x, y_hat, color = label))
   } else {
-    pl <- pl + facet_wrap(~vname)
+    pl <- ggplot(all_responses, aes(on_x, y_hat, color = vname))
+  }
+  # do we need faceting?
+  if (split == "models") {
+    pl <- pl + facet_wrap(~label, scales = scales_x)
+  } else {
+    pl <- pl + facet_wrap(~vname, scales = scales_x)
   }
 
   pl <- pl +
-    geom_vline(xintercept = 0, lty = 2) +
     geom_hline(data = all_predictions, aes(yintercept = prediction), lty = 2) +
     geom_point() +
     geom_line() +
-    theme_mi2() + ylab("Predicted y") + xlab("Relative percentile of X_i") + ggtitle("What-If Plot") +
-    theme(legend.position = "bottom") +
-    scale_x_continuous(breaks = seq(-1,1,0.2), labels = paste0(seq(-100,100,20),"%"))
+    theme_mi2() + ylab("Predicted y") + ggtitle("What-If Plot") +
+    theme(legend.position = "bottom")
+
+  if (quantiles) {
+    pl <- pl +
+      geom_vline(xintercept = 0, lty = 2) +
+      xlab("Relative percentile") +
+      scale_x_continuous(breaks = seq(-1,1,0.2), labels = paste0(seq(-100,100,20),"%"))
+  } else {
+    numericals <- attr(x, "prediction")$observation[,levels(all_responses$vname)]
+    true_x <- data.frame(vname = colnames(numericals), values = unlist(numericals))
+    pl <- pl +
+      xlab("") +
+      geom_vline(data=true_x, aes(xintercept = values), lty = 2)
+  }
 
   pl
 }

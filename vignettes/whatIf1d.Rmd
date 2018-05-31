@@ -36,17 +36,19 @@ explainer_lm <- explain(apartments_lm_model,
 
 We will explain prediction for
 
-```{r}
+```{r, fig.width=7, fig.height=7}
 new_apartment <- apartmentsTest[1, ]
 new_apartment
 
 wi_rf <- what_if(explainer_rf, observation = new_apartment)
 wi_rf
+plot(wi_rf, split = "variables", color = "variables", quantiles = FALSE)
 plot(wi_rf, split = "variables", color = "variables")
 plot(wi_rf)
 
 wi_lm <- what_if(explainer_lm, observation = new_apartment)
 wi_lm
+plot(wi_lm, split = "variables", color = "variables", quantiles = FALSE)
 plot(wi_lm, split = "variables", color = "variables")
 plot(wi_lm)
 
@@ -56,8 +58,9 @@ plot(wi_lm)
 
 
 ```{r, fig.width=7, fig.height=7}
-plot(wi_rf, wi_lm)
+plot(wi_rf, wi_lm, split = "variables", color = "models", quantiles = FALSE)
 plot(wi_rf, wi_lm, split = "variables", color = "models")
+plot(wi_rf, wi_lm)
 ```
 
 

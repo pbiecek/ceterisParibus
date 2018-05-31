@@ -4,13 +4,15 @@
 \alias{plot.what_if_explainer}
 \title{Plots What-If Explanations}
 \usage{
-\method{plot}{what_if_explainer}(x, ..., split = "models",
+\method{plot}{what_if_explainer}(x, ..., quantiles = TRUE, split = "models",
   color = "variables")
 }
 \arguments{
 \item{x}{a what-if explainer produced with the 'what_if' function}
 
 \item{...}{other explainers that shall be plotted together}
+
+\item{quantiles}{if TRUE (default) then quantiles will be presented on OX axis. If FALSE then original values will be presented on OX axis}
 
 \item{split}{a character, either 'models' or 'variables'. Sets the variable for faceting}
 

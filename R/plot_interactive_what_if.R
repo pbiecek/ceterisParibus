@@ -30,7 +30,6 @@
 #' wi_rf
 #'
 #' plot_interactive(wi_rf, split = "variables", color = "variables")
-#' plot_interactive(wi_rf)
 plot_interactive.what_if_explainer <- function(x, ..., split = "models", color = "variables") {
   dfl <- c(list(x), list(...))
   all_responses <- do.call(rbind, dfl)
@@ -49,8 +48,8 @@ plot_interactive.what_if_explainer <- function(x, ..., split = "models", color =
     pl <- ggplot(all_responses, aes(relative_quant, y_hat, color = label,
                 tooltip = paste("f(",vname, "=", new_x, ") = ", round(y_hat))))
   } else {
-    pl <- ggplot(all_responses, aes(relative_quant, y_hat, color = vname),
-                 tooltip = paste("f(",vname, "=", new_x, ") = ", round(y_hat)))
+    pl <- ggplot(all_responses, aes(relative_quant, y_hat, color = vname,
+                 tooltip = paste("f(",vname, "=", new_x, ") = ", round(y_hat))))
   }
   if (split == "models") {
     pl <- pl + facet_wrap(~label)
