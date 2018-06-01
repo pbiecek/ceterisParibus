@@ -14,10 +14,9 @@ vignette: >
 First, let's create explainers for random Forest model and linear model
 
 ```{r, warning=FALSE, message=FALSE}
-library(DALEX)
+library("DALEX")
 library("randomForest")
-library("WhatIfPlots")
-library("ggiraph")
+library("ceterisParibus")
 set.seed(59)
 
 apartments_lm_model <- lm(m2.price ~ construction.year + surface + floor + 
@@ -66,6 +65,8 @@ plot(wi_rf, wi_lm)
 # Interactive Ceteris Paribus Plots 
 
 ```{r, fig.width=7, fig.height=7, message=FALSE, warning=FALSE, eval=FALSE}
+library("ggiraph")
+
 plot_interactive(wi_rf, split = "variables", color = "variables")
 plot_interactive(wi_rf)
 
