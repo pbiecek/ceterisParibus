@@ -1,8 +1,8 @@
-#' Plots Interactive What-If Explanations
+#' Plots Interactive Ceteris Paribus Explanations
 #'
-#' Function 'plot.what_if_explainer' plots What-If plots for a single prediction.
+#' Function 'plot_interactive.ceteris_paribus_explainer' plots Ceteris Paribus Plots for a single prediction.
 #'
-#' @param x a what-if explainer produced with the 'what_if' function
+#' @param x a ceteris_paribus explainer produced with the 'ceteris_paribus' function
 #' @param ... other explainers that shall be plotted together
 #' @param split a character, either 'models' or 'variables'. Sets the variable for faceting
 #' @param color a character, either 'models' or 'variables'. Sets the variable for coloring
@@ -26,11 +26,11 @@
 #' new_apartment <- apartmentsTest[1, ]
 #' new_apartment
 #'
-#' wi_rf <- what_if(explainer_rf, observation = new_apartment)
+#' wi_rf <- ceteris_paribus(explainer_rf, observation = new_apartment)
 #' wi_rf
 #'
 #' plot_interactive(wi_rf, split = "variables", color = "variables")
-plot_interactive.what_if_explainer <- function(x, ..., split = "models", color = "variables") {
+plot_interactive.ceteris_paribus_explainer <- function(x, ..., split = "models", color = "variables") {
   dfl <- c(list(x), list(...))
   all_responses <- do.call(rbind, dfl)
   class(all_responses) <- "data.frame"
@@ -76,4 +76,4 @@ plot_interactive <- function (x, ...) {
 
 #' @name plot_interactive
 #' @export
-plot_interactive.default <- plot_interactive.what_if_explainer
+plot_interactive.default <- plot_interactive.ceteris_paribus_explainer

@@ -1,5 +1,5 @@
 ---
-title: "What-If Plots"
+title: "Ceteris Paribus Plots"
 author: "Przemyslaw Biecek"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -32,7 +32,7 @@ explainer_lm <- explain(apartments_lm_model,
                         data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
 ```
 
-# What-If Plots
+# Ceteris Paribus Plots
 
 We will explain prediction for
 
@@ -40,13 +40,13 @@ We will explain prediction for
 new_apartment <- apartmentsTest[1, ]
 new_apartment
 
-wi_rf <- what_if(explainer_rf, observation = new_apartment)
+wi_rf <- ceteris_paribus(explainer_rf, observation = new_apartment)
 wi_rf
 plot(wi_rf, split = "variables", color = "variables", quantiles = FALSE)
 plot(wi_rf, split = "variables", color = "variables")
 plot(wi_rf)
 
-wi_lm <- what_if(explainer_lm, observation = new_apartment)
+wi_lm <- ceteris_paribus(explainer_lm, observation = new_apartment)
 wi_lm
 plot(wi_lm, split = "variables", color = "variables", quantiles = FALSE)
 plot(wi_lm, split = "variables", color = "variables")
@@ -54,8 +54,7 @@ plot(wi_lm)
 
 ```
 
-# What-If - two models
-
+# Ceteris Paribus - two models
 
 ```{r, fig.width=7, fig.height=7}
 plot(wi_rf, wi_lm, split = "variables", color = "models", quantiles = FALSE)
@@ -64,7 +63,7 @@ plot(wi_rf, wi_lm)
 ```
 
 
-# Interactive What-If  
+# Interactive Ceteris Paribus Plots 
 
 ```{r, fig.width=7, fig.height=7, message=FALSE, warning=FALSE, eval=FALSE}
 plot_interactive(wi_rf, split = "variables", color = "variables")
@@ -74,8 +73,7 @@ plot_interactive(wi_lm, split = "variables", color = "variables")
 plot_interactive(wi_lm)
 ```
 
-# Interactive What-If - two models
-
+# Interactive Ceteris Paribus Plots - two models
 
 ```{r, fig.width=7, fig.height=7, eval=FALSE}
 plot_interactive(wi_rf, wi_lm)

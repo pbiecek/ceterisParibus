@@ -1,10 +1,10 @@
-#' What-If 1D Plot
+#' Ceteris Paribus Plot
 #'
 #' @param explainer a model to be explained, preprocessed by the 'DALEX::explain' function
 #' @param observation a new observarvation for which predictions need to be explained
 #' @param grid_points number of points used for response path
 #'
-#' @return An object of the class 'what_if_explainer'.
+#' @return An object of the class 'ceteris_paribus_explainer'.
 #' It's a data frame with calculated average responses.
 #' @export
 #'
@@ -25,9 +25,9 @@
 #' new_apartment <- apartmentsTest[1, ]
 #' new_apartment
 #'
-#' wi_rf <- what_if(explainer_rf, observation = new_apartment)
+#' wi_rf <- ceteris_paribus(explainer_rf, observation = new_apartment)
 #' wi_rf
-what_if <- function(explainer, observation, grid_points = 101) {
+ceteris_paribus <- function(explainer, observation, grid_points = 101) {
   if (!("explainer" %in% class(explainer)))
       stop("The what_if() function requires an object created with explain() function.")
   if (is.null(explainer$data))
@@ -53,6 +53,6 @@ what_if <- function(explainer, observation, grid_points = 101) {
   new_y_hat <- predict_function(model, newdata = observation)
 
   attr(all_responses, "prediction") <- list(observation = observation, new_y_hat = new_y_hat)
-  class(all_responses) = c("what_if_explainer", "data.frame")
+  class(all_responses) = c("ceteris_paribus_explainer", "data.frame")
   all_responses
 }

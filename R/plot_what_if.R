@@ -1,8 +1,8 @@
-#' Plots What-If Explanations
+#' Plots Ceteris Paribus Explanations
 #'
-#' Function 'plot.what_if_explainer' plots What-If plots for a single prediction.
+#' Function 'plot.ceteris_paribus_explainer' plots Ceteris Paribus Plots (What-If Plots) for a single prediction / observation.
 #'
-#' @param x a what-if explainer produced with the 'what_if' function
+#' @param x a ceteris paribus explainer produced with the 'ceteris_paribus' function
 #' @param ... other explainers that shall be plotted together
 #' @param quantiles if TRUE (default) then quantiles will be presented on OX axis. If FALSE then original values will be presented on OX axis
 #' @param split a character, either 'models' or 'variables'. Sets the variable for faceting
@@ -27,12 +27,12 @@
 #' new_apartment <- apartmentsTest[1, ]
 #' new_apartment
 #'
-#' wi_rf <- what_if(explainer_rf, observation = new_apartment)
+#' wi_rf <- ceteris_paribus(explainer_rf, observation = new_apartment)
 #' wi_rf
 #'
 #' plot(wi_rf, split = "variables", color = "variables")
 #' plot(wi_rf)
-plot.what_if_explainer <- function(x, ..., quantiles = TRUE, split = "models", color = "variables") {
+plot.ceteris_paribus_explainer <- function(x, ..., quantiles = TRUE, split = "models", color = "variables") {
   dfl <- c(list(x), list(...))
   all_responses <- do.call(rbind, dfl)
   class(all_responses) <- "data.frame"
@@ -70,7 +70,7 @@ plot.what_if_explainer <- function(x, ..., quantiles = TRUE, split = "models", c
     geom_hline(data = all_predictions, aes(yintercept = prediction), lty = 2) +
     geom_point() +
     geom_line() +
-    theme_mi2() + ylab("Predicted y") + ggtitle("What-If Plot") +
+    theme_mi2() + ylab("Predicted y") + ggtitle("Ceteris Paribus Plot") +
     theme(legend.position = "bottom")
 
   if (quantiles) {

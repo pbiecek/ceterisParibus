@@ -1,6 +1,6 @@
-#' Prints What-If Explainer Summary
+#' Prints Ceteris Paribus Explainer Summary
 #'
-#' @param x a what-if explainer produced with the 'what_if' function
+#' @param x a ceteris_paribus explainer produced with the 'ceteris_paribus' function
 #' @param ... other arguments that will be passed to head()
 #'
 #' @export
@@ -15,7 +15,7 @@
 #' new_apartment <- apartmentsTest[1, ]
 #' new_apartment
 
-print.what_if_explainer <- function(x, ...) {
+print.ceteris_paribus_explainer <- function(x, ...) {
   class(x) <- "data.frame"
   print(head(x, ...))
 }
