@@ -1,8 +1,8 @@
-# What-If Plots
+# Ceteris Paribus Plots 
 
 [![Build Status](https://api.travis-ci.org/pbiecek/WhatIfPlots.png)](https://travis-ci.org/pbiecek/WhatIfPlots)
 
-What-If Plots (*Ceteris Paribus Plots*) are designed to present model responses around a single point in the feature space. For example around a single prediction for an interesting observation. Plots are designed to work in a model-agnostic fashion, they are working for any Machine Learning model and allow for model comparisons.
+*Ceteris Paribus Plots* (What-If Plots) are designed to present model responses around a single point in the feature space. For example around a single prediction for an interesting observation. Plots are designed to work in a model-agnostic fashion, they are working for any Machine Learning model and allow for model comparisons.
 
 The What-If Plots supplement the [breakDown Plots]( https://github.com/pbiecek/breakDown) that are designed to attribute features into parts of a single prediction.
 
