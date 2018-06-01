@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>What-If Plots (Ceteris Paribus Plots) for a Single Observation • WhatIfPlots</title>
+<title>Ceteris Paribus Plots (What-If Plots) for a Single Observation • ceterisParibus</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -26,7 +26,7 @@
       </button>
 	  <a class="navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src="https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt="MI2" height="46" title="MI2"></a>
-      <a class="navbar-brand navbar-mi2" href="index.html">WhatIfPlots</a>
+      <a class="navbar-brand navbar-mi2" href="index.html"></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -47,7 +47,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/whatIf1d.html">What-If Plots</a>
+      <a href="articles/whatIf1d.html">Ceteris Paribus Plots</a>
     </li>
   </ul>
 </li>
@@ -64,39 +64,51 @@
       </header><div class="row">
   <div class="contents col-md-9">
     
-<div class="section level1">
-<div class="page-header"><h1>What-If Plots</h1></div>
+<div id="ceteris-paribus-plots" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#ceteris-paribus-plots" class="anchor"></a>Ceteris Paribus Plots</h1></div>
 
-<p>What-If Plots (<em>Ceteris Paribus Plots</em>) are designed to present model responses around a single point in the feature space. For example around a single prediction for an interesting observation. Plots are designed to work in a model-agnostic fashion, they are working for any Machine Learning model and allow for model comparisons.</p>
-<p>The What-If Plots supplement the <a href="https://github.com/pbiecek/breakDown">breakDown Plots</a> that are designed to attribute features into parts of a single prediction.</p>
+<p><em>Ceteris Paribus Plots</em> (What-If Plots) are designed to present model responses around a single point in the feature space. For example around a single prediction for an interesting observation. Plots are designed to work in a model-agnostic fashion, they are working for any Machine Learning model and allow for model comparisons.</p>
+<p>The <a href="https://github.com/pbiecek/ceterisParibus">ceterisParibus</a> Plots supplement the <a href="https://github.com/pbiecek/breakDown">breakDown Plots</a> that are designed to attribute features into parts of a single prediction.</p>
 <p>Imagine a scenario in which a client gets low credit score and is wondering why the score is so low. <em>What can I do to get a higher score?</em></p>
-<p>What-If Plots show possible scenarios for model predictions allowing for changes in a single dimension (ceteris paribus principle).</p>
+<p>Ceteris Paribus Plots show possible scenarios for model predictions allowing for changes in a single dimension keeping all other features constant (the <em>ceteris paribus</em> principle).</p>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p>To get started, install the latest version of <strong>ceterisParibus</strong> from GitHub:</p>
+<pre><code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github("pbiecek/ceterisParibus")</a></code></pre>
 </div>
-<div class="section level1">
-<h1>Simple What-If Plot</h1>
-<p>The plot below shows What-If plots for an apartment data for a large apartment (130 m2) on 3-rd floor. On can read what would be the model prediction for smaller apartment (largest change) or one that is located higher.</p>
+</div>
+<div id="simple-ceteris-paribus-plot" class="section level1">
+<h1 class="hasAnchor">
+<a href="#simple-ceteris-paribus-plot" class="anchor"></a>Simple Ceteris Paribus Plot</h1>
+<p>The plot below shows Ceteris Paribus plots for an apartment data for a large apartment (130 m2) on 3-rd floor. On can read what would be the model prediction for smaller apartment (largest change) or one that is located higher.</p>
 <center><img width="600" src="misc/use_case_1.png"></center>
 </div>
-<div class="section level1">
-<h1>Uniform What-If Plot</h1>
+<div id="uniform-ceteris-paribus-plot" class="section level1">
+<h1 class="hasAnchor">
+<a href="#uniform-ceteris-paribus-plot" class="anchor"></a>Uniform Ceteris Paribus Plot</h1>
 <p>Since different variables may have different scales, we recommend to transform variables into quantiles. Then it is much easier to see how a particular variable looks in relation to others.</p>
 <center><img width="600" src="misc/use_case_2.png"></center>
 <p>Having all variables in a single quantile scale we may plot them together in a single plot.</p>
 <center><img width="600" src="misc/use_case_3.png"></center>
 </div>
-<div class="section level1">
-<h1>Multimodel What-If Plot</h1>
+<div id="multimodel-ceteris-paribus-plot" class="section level1">
+<h1 class="hasAnchor">
+<a href="#multimodel-ceteris-paribus-plot" class="anchor"></a>Multimodel Ceteris Paribus Plot</h1>
 <p>We may compare responses for few models in a single plot.</p>
 <center><img width="600" src="misc/use_case_4.png"></center>
 </div>
-<div class="section level1">
-<h1>Some equations</h1>
-<p>More formally, a What If plot for variable V and observations O is a set of points (X, Y) where</p>
+<div id="some-equations" class="section level1">
+<h1 class="hasAnchor">
+<a href="#some-equations" class="anchor"></a>Some equations</h1>
+<p>More formally, a Ceteris Paribus plot for variable V and observations O is a set of points (X, Y) where</p>
 <p>$$Y(X) := f(O_1, …, O_{V-1}, O_{V} + X, O_{V+1}, …, O_{p})$$</p>
 </div>
-<div class="section level1">
-<h1>More examples</h1>
-<p><a href="https://pbiecek.github.io/WhatIfPlots/articles/whatIf1d.html" class="uri">https://pbiecek.github.io/WhatIfPlots/articles/whatIf1d.html</a></p>
+<div id="more-examples" class="section level1">
+<h1 class="hasAnchor">
+<a href="#more-examples" class="anchor"></a>More examples</h1>
+<p><a href="https://pbiecek.github.io/ceterisParibus/articles/whatIf1d.html" class="uri">https://pbiecek.github.io/ceterisParibus/articles/whatIf1d.html</a></p>
 </div>
 
   </div>
@@ -107,21 +119,32 @@
 		This package is developed by the <a href="http://mi2.mini.pw.edu.pl">MI^2 group</a>. MI^2 (pronounce: Am I square?) is a group of mathematicians and computer scientists that love to play with data. We create tools, do consulting and share our positive attitude. 
 	 </p>
 	</div>
-    <h2>Links</h2>
+    <div class="links">
+<h2>Links</h2>
 <ul class="list-unstyled">
-<li>Report a bug at <br><a href="https://github.com/pbiecek/WhatIfPlots/issues">https://​github.com/​pbiecek/​WhatIfPlots/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/pbiecek/ceterisParibus/issues">https://​github.com/​pbiecek/​ceterisParibus/​issues</a>
 </li>
 </ul>
+</div>
+<div class="license">
 <h2>License</h2>
-<p><a href="https://www.r-project.org/Licenses/GPL-2">GPL-2</a></p>
+<ul class="list-unstyled">
+<li><a href="https://www.r-project.org/Licenses/GPL-2">GPL-2</a></li>
+</ul>
+</div>
+<div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Przemyslaw Biecek <br><small class="roles"> Author, maintainer </small> </li>
+<li>Przemyslaw Biecek <br><small class="roles"> Author, maintainer </small>  </li>
 </ul>
+</div>
+
+  <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/pbiecek/WhatIfPlots"><img src="https://api.travis-ci.org/pbiecek/WhatIfPlots.png" alt="Build Status"></a></li>
+<li><a href="https://travis-ci.org/pbiecek/WhatIfPlots"><img src="https://api.travis-ci.org/pbiecek/ceterisParibus.png" alt="Build Status"></a></li>
 </ul>
+</div>
 </div>
 </div>
 

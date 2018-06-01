@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plots Interactive Ceteris Paribus Explanations — plot_interactive • ceterisParibus</title>
+<title>Ceteris Paribus Plot — ceteris_paribus • ceterisParibus</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -48,7 +48,7 @@
 	  <a class = "navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src = "https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt = "MI2" height = 46 title = "MI2">
 	  </a>
-      <a class="navbar-brand navbar-mi2" href="../index.html">Plots Interactive Ceteris Paribus Explanations</a>
+      <a class="navbar-brand navbar-mi2" href="../index.html">Ceteris Paribus Plot</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -88,53 +88,43 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plots Interactive Ceteris Paribus Explanations</h1>
+    <h1>Ceteris Paribus Plot</h1>
     </div>
 
     
-    <p>Function 'plot_interactive.ceteris_paribus_explainer' plots Ceteris Paribus Plots for a single prediction.</p>
+    <p>Ceteris Paribus Plot</p>
     
 
-    <pre class="usage"><span class='co'># S3 method for ceteris_paribus_explainer</span>
-<span class='fu'>plot_interactive</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>"models"</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"variables"</span>)
-
-<span class='fu'>plot_interactive</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for default</span>
-<span class='fu'>plot_interactive</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>"models"</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"variables"</span>)</pre>
+    <pre class="usage"><span class='fu'>ceteris_paribus</span>(<span class='no'>explainer</span>, <span class='no'>observation</span>, <span class='kw'>grid_points</span> <span class='kw'>=</span> <span class='fl'>101</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>a ceteris_paribus explainer produced with the 'ceteris_paribus' function</p></td>
+      <th>explainer</th>
+      <td><p>a model to be explained, preprocessed by the 'DALEX::explain' function</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>other explainers that shall be plotted together</p></td>
+      <th>observation</th>
+      <td><p>a new observarvation for which predictions need to be explained</p></td>
     </tr>
     <tr>
-      <th>split</th>
-      <td><p>a character, either 'models' or 'variables'. Sets the variable for faceting</p></td>
-    </tr>
-    <tr>
-      <th>color</th>
-      <td><p>a character, either 'models' or 'variables'. Sets the variable for coloring</p></td>
+      <th>grid_points</th>
+      <td><p>number of points used for response path</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a ggiraph object</p>
+    <p>An object of the class 'ceteris_paribus_explainer'.
+It's a data frame with calculated average responses.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX"</span>)
-<span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
-<span class='fu'>set.seed</span>(<span class='fl'>59</span>)
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX"</span>)</div><div class='output co'>#&gt; <span class='message'>Welcome to DALEX (version: 0.2.2).</span></div><div class='input'><span class='fu'>library</span>(<span class='st'>"randomForest"</span>)</div><div class='output co'>#&gt; <span class='message'>randomForest 4.6-14</span></div><div class='output co'>#&gt; <span class='message'>Type rfNews() to see new features/changes/bug fixes.</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘randomForest’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:ggplot2’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    margin</span></div><div class='input'><span class='fu'>set.seed</span>(<span class='fl'>59</span>)
 
 <span class='no'>apartments_rf_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> + <span class='no'>floor</span> +
       <span class='no'>no.rooms</span> + <span class='no'>district</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
@@ -145,15 +135,14 @@
 <span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>, ]
 <span class='no'>new_apartment</span></div><div class='output co'>#&gt;      m2.price construction.year surface floor no.rooms    district
 #&gt; 1001     4644              1976     131     3        5 Srodmiescie</div><div class='input'>
-<span class='no'>wi_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ceteris_paribus.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>)
+<span class='no'>wi_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>ceteris_paribus</span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>)
 <span class='no'>wi_rf</span></div><div class='output co'>#&gt;       y_hat new_x             vname   x_quant quant relative_quant        label
 #&gt; 0% 4255.354  1920 construction.year 0.6268889  0.00     -0.6268889 randomForest
 #&gt; 1% 4300.702  1921 construction.year 0.6268889  0.01     -0.6168889 randomForest
 #&gt; 2% 4301.926  1922 construction.year 0.6268889  0.02     -0.6068889 randomForest
 #&gt; 3% 4305.352  1923 construction.year 0.6268889  0.03     -0.5968889 randomForest
 #&gt; 4% 4305.352  1923 construction.year 0.6268889  0.04     -0.5868889 randomForest
-#&gt; 5% 4267.723  1924 construction.year 0.6268889  0.05     -0.5768889 randomForest</div><div class='input'>
-<span class='fu'>plot_interactive</span>(<span class='no'>wi_rf</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>"variables"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"variables"</span>)</div></pre>
+#&gt; 5% 4267.723  1924 construction.year 0.6268889  0.05     -0.5768889 randomForest</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
