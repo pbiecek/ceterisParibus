@@ -45,12 +45,12 @@ ceteris_paribus <- function(explainer, observation, grid_points = 101) {
     quant_x <- mean(observation[1,vname] >= data[,vname], na.rm = TRUE)
     new_data <- observation[rep(1, grid_points),]
     new_data[,vname] <- new_x
-    data.frame(y_hat = predict_function(model, newdata = new_data), new_x = new_x,
+    data.frame(y_hat = predict_function(model, new_data), new_x = new_x,
                vname = vname, x_quant = quant_x, quant = probs,
                relative_quant = probs - quant_x, label = explainer$label)
   })
   all_responses <- do.call(rbind, responses)
-  new_y_hat <- predict_function(model, newdata = observation)
+  new_y_hat <- predict_function(model, observation)
 
   attr(all_responses, "prediction") <- list(observation = observation, new_y_hat = new_y_hat)
   class(all_responses) = c("ceteris_paribus_explainer", "data.frame")
