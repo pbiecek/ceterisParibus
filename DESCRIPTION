@@ -1,6 +1,6 @@
 Package: ceterisParibus
 Title: Ceteris Paribus Plots (What-If Plots) for a Single Observation
-Version: 0.1
+Version: 0.2
 Authors@R: person("Przemyslaw", "Biecek", email = "przemyslaw.biecek@gmail.com", role = c("aut", "cre"))
 Description: Ceteris Paribus Plots (What-If Plots) are designed to present model 
     responses around a single point in the feature space. 
@@ -10,7 +10,8 @@ Description: Ceteris Paribus Plots (What-If Plots) are designed to present model
     The Ceteris Paribus Plots supplement the Break Down Plots from breakDown package.
 Depends: R (>= 3.3),
     ggplot2, 
-    ggiraph
+    ggiraph,
+    gower
 Suggests: randomForest
 Imports: DALEX,
     knitr
