@@ -2,5 +2,6 @@ pandoc: 2.1.3
 pkgdown: 1.0.0
 pkgdown_sha: ~
 articles:
+  coral: coral.html
   whatIf1d: whatIf1d.html
 
