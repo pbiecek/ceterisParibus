@@ -8,6 +8,7 @@
 #'
 #' @return a ggplot2 object
 #' @export
+#' @importFrom stats na.omit
 #'
 #' @examples
 #' library("DALEX")
@@ -53,14 +54,14 @@ plot.coral_explainer <- function(x, ..., plot_residuals = TRUE) {
   # because of checks
   new_x <- obs_id <- predictions <- y <- y_hat <- NULL
 
-  pl <- ggplot(all_responses, aes(new_x, y_hat, group = obs_id)) +
-      geom_line(alpha = 0.1) +
-      geom_line(data = all_responses[all_responses$obs_id == 0, ], lwd = 1) +
+  pl <- ggplot(na.omit(all_responses), aes(new_x, group = obs_id)) +
+      geom_line(aes(y = y_hat), alpha = 0.1) +
+      geom_line(aes(y = y_hat), data = all_responses[all_responses$obs_id == 0, ], lwd = 1) +
       geom_point(data = all_predictions, aes(x, predictions), alpha = 0.5) +
       geom_point(data = all_predictions[1,], aes(x, predictions), size = 5)
 
   if (plot_residuals) {
-    pl <- pl + geom_linerange(data = all_predictions, aes(x, y = y, ymin = predictions, ymax = y, color = predictions > y), alpha = 0.5) +
+    pl <- pl + geom_linerange(data = all_predictions, aes(x,  ymin = predictions, ymax = y, color = predictions > y), alpha = 0.5) +
       geom_point(data = all_predictions, aes(x, y, color = predictions > y), alpha = 0.5)
   }
   pl <- pl + theme_mi2() + ylab("Predicted y") + xlab(vname) + theme(legend.position = "none") +
