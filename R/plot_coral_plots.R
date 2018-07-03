@@ -56,15 +56,18 @@ plot.coral_explainer <- function(x, ..., plot_residuals = TRUE) {
 
   pl <- ggplot(na.omit(all_responses), aes(new_x, group = obs_id)) +
       geom_line(aes(y = y_hat), alpha = 0.1) +
-      geom_line(aes(y = y_hat), data = all_responses[all_responses$obs_id == 0, ], lwd = 1) +
-      geom_point(data = all_predictions, aes(x, predictions), alpha = 0.5) +
-      geom_point(data = all_predictions[1,], aes(x, predictions), size = 5)
+      geom_line(aes(y = y_hat), data = all_responses[all_responses$obs_id == 0, ], lwd = 1)
 
   if (plot_residuals) {
-    pl <- pl + geom_linerange(data = all_predictions, aes(x,  ymin = predictions, ymax = y, color = predictions > y), alpha = 0.5) +
-      geom_point(data = all_predictions, aes(x, y, color = predictions > y), alpha = 0.5)
+    pl <- pl + geom_linerange(data = na.omit(all_predictions), aes(x,  ymin = predictions, ymax = y, color = predictions > y), alpha = 0.5) +
+      geom_point(data = na.omit(all_predictions), aes(x, y, color = predictions > y), alpha = 0.5)
+  } else {
+    pl <- pl +
+      geom_point(data = all_predictions, aes(x, predictions), alpha = 0.5)
   }
-  pl <- pl + theme_mi2() + ylab("Predicted y") + xlab(vname) + theme(legend.position = "none") +
+  pl <- pl +
+    geom_point(data = all_predictions[1,], aes(x, predictions), size = 5) +
+    theme_mi2() + ylab("Predicted y") + xlab(vname) + theme(legend.position = "none") +
     scale_color_manual(values = c("TRUE" = "blue3", "FALSE" = "red3"))
   pl
 }
