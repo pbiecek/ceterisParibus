@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Prints Ceteris Paribus Explainer Summary — print.ceteris_paribus_explainer • ceterisParibus</title>
+<title>Prints Local Fit / Wangkardu Summary — print.local_fit_explainer • ceterisParibus</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -48,7 +48,7 @@
 	  <a class = "navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src = "https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt = "MI2" height = 46 title = "MI2">
 	  </a>
-      <a class="navbar-brand navbar-mi2" href="../index.html">Prints Ceteris Paribus Explainer Summary</a>
+      <a class="navbar-brand navbar-mi2" href="../index.html">Prints Local Fit / Wangkardu Summary</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -91,14 +91,14 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Prints Ceteris Paribus Explainer Summary</h1>
+    <h1>Prints Local Fit / Wangkardu Summary</h1>
     </div>
 
     
-    <p>Prints Ceteris Paribus Explainer Summary</p>
+    <p>Prints Local Fit / Wangkardu Summary</p>
     
 
-    <pre class="usage"><span class='co'># S3 method for ceteris_paribus_explainer</span>
+    <pre class="usage"><span class='co'># S3 method for local_fit_explainer</span>
 <span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
@@ -106,11 +106,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a ceteris_paribus explainer produced with the 'ceteris_paribus' function</p></td>
+      <td><p>a local fit explainer produced with the 'local_fit' function</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>other arguments that will be passed to head()</p></td>
+      <td><p>other arguments that will be passed to 'head' function</p></td>
     </tr>
     </table>
     
@@ -124,7 +124,8 @@
                      <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)
 <span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>, ]
 <span class='no'>new_apartment</span></div><div class='output co'>#&gt;      m2.price construction.year surface floor no.rooms    district
-#&gt; 1001     4644              1976     131     3        5 Srodmiescie</div></pre>
+#&gt; 1001     4644              1976     131     3        5 Srodmiescie</div><div class='input'><span class='no'>cr_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_fit.html'>local_fit</a></span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>, <span class='kw'>select_points</span> <span class='kw'>=</span> <span class='fl'>0.002</span>)
+<span class='no'>cr_rf</span></div><div class='output co'>#&gt; <span class='error'>Error in prit(head(x, ...)): could not find function "prit"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

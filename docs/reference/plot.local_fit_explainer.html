@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plots Ceteris Paribus Explanations — plot.ceteris_paribus_explainer • ceterisParibus</title>
+<title>Local Fit Plots / Wangkardu Explanations — plot.local_fit_explainer • ceterisParibus</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -48,7 +48,7 @@
 	  <a class = "navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src = "https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt = "MI2" height = 46 title = "MI2">
 	  </a>
-      <a class="navbar-brand navbar-mi2" href="../index.html">Plots Ceteris Paribus Explanations</a>
+      <a class="navbar-brand navbar-mi2" href="../index.html">Local Fit Plots / Wangkardu Explanations</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -91,39 +91,35 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plots Ceteris Paribus Explanations</h1>
+    <h1>Local Fit Plots / Wangkardu Explanations</h1>
     </div>
 
     
-    <p>Function 'plot.ceteris_paribus_explainer' plots Ceteris Paribus Plots (What-If Plots) for a single prediction / observation.</p>
+    <p>Function 'plot.local_fit_explainer' plots Local Fit Plots for a single prediction / observation.</p>
     
 
-    <pre class="usage"><span class='co'># S3 method for ceteris_paribus_explainer</span>
-<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>quantiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>"models"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"variables"</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for local_fit_explainer</span>
+<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>plot_residuals</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"default"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a ceteris paribus explainer produced with the 'ceteris_paribus' function</p></td>
+      <td><p>a local fir explainer produced with the 'local_fit' function</p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>other explainers that shall be plotted together</p></td>
     </tr>
     <tr>
-      <th>quantiles</th>
-      <td><p>if TRUE (default) then quantiles will be presented on OX axis. If FALSE then original values will be presented on OX axis</p></td>
+      <th>plot_residuals</th>
+      <td><p>if TRUE (default) then residuals are plotted as red/blue bars</p></td>
     </tr>
     <tr>
-      <th>split</th>
-      <td><p>a character, either 'models' or 'variables'. Sets the variable for faceting</p></td>
-    </tr>
-    <tr>
-      <th>color</th>
-      <td><p>a character, either 'models' or 'variables'. Sets the variable for coloring</p></td>
+      <th>palette</th>
+      <td><p>color palette. Currently the choice is limited to 'wangkardu' and 'default'</p></td>
     </tr>
     </table>
     
@@ -146,15 +142,19 @@
 <span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>, ]
 <span class='no'>new_apartment</span></div><div class='output co'>#&gt;      m2.price construction.year surface floor no.rooms    district
 #&gt; 1001     4644              1976     131     3        5 Srodmiescie</div><div class='input'>
-<span class='no'>wi_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ceteris_paribus.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>)
-<span class='no'>wi_rf</span></div><div class='output co'>#&gt;       y_hat new_x             vname   x_quant quant relative_quant        label
-#&gt; 0% 4255.354  1920 construction.year 0.6268889  0.00     -0.6268889 randomForest
-#&gt; 1% 4300.702  1921 construction.year 0.6268889  0.01     -0.6168889 randomForest
-#&gt; 2% 4301.926  1922 construction.year 0.6268889  0.02     -0.6068889 randomForest
-#&gt; 3% 4305.352  1923 construction.year 0.6268889  0.03     -0.5968889 randomForest
-#&gt; 4% 4305.352  1923 construction.year 0.6268889  0.04     -0.5868889 randomForest
-#&gt; 5% 4267.723  1924 construction.year 0.6268889  0.05     -0.5768889 randomForest</div><div class='input'>
-<span class='fu'>plot</span>(<span class='no'>wi_rf</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>"variables"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"variables"</span>)</div><div class='img'><img src='plot.ceteris_paribus_explainer-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>wi_rf</span>)</div><div class='img'><img src='plot.ceteris_paribus_explainer-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='no'>cr_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_fit.html'>local_fit</a></span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>, <span class='kw'>select_points</span> <span class='kw'>=</span> <span class='fl'>0.002</span>)
+<span class='fu'>plot</span>(<span class='no'>cr_rf</span>, <span class='kw'>plot_residuals</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='plot.local_fit_explainer-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>cr_rf</span>)</div><div class='img'><img src='plot.local_fit_explainer-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>cr_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_fit.html'>local_fit</a></span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>, <span class='kw'>select_points</span> <span class='kw'>=</span> <span class='fl'>0.002</span>)
+<span class='fu'>plot</span>(<span class='no'>cr_rf</span>, <span class='kw'>plot_residuals</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"wangkardu"</span>)</div><div class='img'><img src='plot.local_fit_explainer-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>cr_rf</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"wangkardu"</span>)</div><div class='img'><img src='plot.local_fit_explainer-4.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>10</span>, ]
+<span class='no'>cr_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_fit.html'>local_fit</a></span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>, <span class='kw'>select_points</span> <span class='kw'>=</span> <span class='fl'>0.002</span>)
+<span class='fu'>plot</span>(<span class='no'>cr_rf</span>, <span class='kw'>plot_residuals</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='plot.local_fit_explainer-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>cr_rf</span>)</div><div class='img'><img src='plot.local_fit_explainer-6.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>302</span>, ]
+<span class='no'>cr_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_fit.html'>local_fit</a></span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>, <span class='kw'>select_points</span> <span class='kw'>=</span> <span class='fl'>0.002</span>)
+<span class='fu'>plot</span>(<span class='no'>cr_rf</span>, <span class='kw'>plot_residuals</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='plot.local_fit_explainer-7.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>cr_rf</span>)</div><div class='img'><img src='plot.local_fit_explainer-8.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>720</span>, ]
+<span class='no'>cr_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_fit.html'>local_fit</a></span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>, <span class='kw'>select_points</span> <span class='kw'>=</span> <span class='fl'>0.002</span>)
+<span class='fu'>plot</span>(<span class='no'>cr_rf</span>, <span class='kw'>plot_residuals</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='plot.local_fit_explainer-9.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>cr_rf</span>)</div><div class='img'><img src='plot.local_fit_explainer-10.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

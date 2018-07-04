@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coral Plots • ceterisParibus</title>
+<title>Local Fit Plots / Wangkardu Explanations • ceterisParibus</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -47,7 +47,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/coral.html">Coral Plots</a>
+      <a href="../articles/coral.html">Local Fit Plots / Wangkardu Explanations</a>
     </li>
     <li>
       <a href="../articles/whatIf1d.html">Ceteris Paribus Plots</a>
@@ -67,7 +67,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Coral Plots</h1>
+      <h1>Local Fit Plots / Wangkardu Explanations</h1>
                         <h4 class="author">Przemyslaw Biecek</h4>
             
             <h4 class="date">2018-07-04</h4>
@@ -82,7 +82,7 @@
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>First, let’s create explainers for random Forest model and linear model</p>
+<p>First, let’s create explainers for random forest model and linear model</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"DALEX"</span>)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(<span class="st">"randomForest"</span>)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(<span class="st">"ceterisParibus"</span>)</a>
@@ -99,37 +99,62 @@
 <a class="sourceLine" id="cb1-14" data-line-number="14">explainer_lm &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/DALEX/topics/explain">explain</a></span>(apartments_lm_model, </a>
 <a class="sourceLine" id="cb1-15" data-line-number="15">                        <span class="dt">data =</span> apartmentsTest[,<span class="dv">2</span><span class="op">:</span><span class="dv">6</span>], <span class="dt">y =</span> apartmentsTest<span class="op">$</span>m2.price)</a></code></pre></div>
 </div>
-<div id="coral-plots" class="section level1">
+<div id="local-fit-explanations" class="section level1">
 <h1 class="hasAnchor">
-<a href="#coral-plots" class="anchor"></a>Coral Plots</h1>
-<p>Coral Plots are something between Ceteris Paribus Plots (profile for single observation) and Partial Dependency Plots (average from all profiles).</p>
-<p>Coral Plots show profiles for observations close to a selected point in feature space. Additionally they show also residuals for these neighbours. This way one can read how good the black box model is fitted around specific point.</p>
+<a href="#local-fit-explanations" class="anchor"></a>Local Fit Explanations</h1>
+<p>Local Fit Plots are something between Ceteris Paribus Plots (profile for single observation), ICEPlots (all profiles) and diagnostic plots.</p>
+<p>Local Fit Plots show profiles for observations close to a selected point in feature space. Additionally they show also residuals for these neighbours. This way one can read how good the black box model is fitted around specific point.</p>
 <p>Let’s see an example. We will explain prediction for first observation.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">new_apartment &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">1</span>, ]</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">new_apartment</a></code></pre></div>
 <pre><code>##      m2.price construction.year surface floor no.rooms    district
 ## 1001     4644              1976     131     3        5 Srodmiescie</code></pre>
 <p>The validation data has 9000 observations. We will use 0.2 percents (18 observations) to see local fit for selected observation. As you see below residuals for neighbouring observations are quite large. Locally the fit is pretty bad.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/coral_plots.html">coral_plots</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">plot</span>(cr_rf, <span class="dt">plot_residuals =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="coral_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">plot</span>(cr_rf)</a></code></pre></div>
 <p><img src="coral_files/figure-html/unnamed-chunk-3-2.png" width="672"></p>
 <p>How it looks for other points? Better, just see, now residuals are ore or less symmetric.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">new_apartment &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">10</span>, ]</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/coral_plots.html">coral_plots</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw">plot</span>(cr_rf, <span class="dt">plot_residuals =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="coral_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">plot</span>(cr_rf)</a></code></pre></div>
 <p><img src="coral_files/figure-html/unnamed-chunk-4-2.png" width="672"></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">new_apartment &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">302</span>, ]</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/coral_plots.html">coral_plots</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"> <span class="kw">plot</span>(cr_rf)</a></code></pre></div>
 <p><img src="coral_files/figure-html/unnamed-chunk-4-3.png" width="672"></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">new_apartment &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">720</span>, ]</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/coral_plots.html">coral_plots</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw">plot</span>(cr_rf)</a></code></pre></div>
 <p><img src="coral_files/figure-html/unnamed-chunk-4-4.png" width="672"></p>
+</div>
+<div id="wangkardu-explanations" class="section level1">
+<h1 class="hasAnchor">
+<a href="#wangkardu-explanations" class="anchor"></a>Wangkardu Explanations</h1>
+<p>Wangkardu Explanations are Local Fit Plots with changed color palette. Here colors are taken from Wangkardu paintings by Helicopter Tjungurrayi <a href="https://www.artgallery.nsw.gov.au/collection/works/4.2003/" class="uri">https://www.artgallery.nsw.gov.au/collection/works/4.2003/</a></p>
+<p>Let’s see some examples.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">plot</span>(cr_rf, <span class="dt">plot_residuals =</span> <span class="ot">FALSE</span>, <span class="dt">palette =</span> <span class="st">"wangkardu"</span>)</a></code></pre></div>
+<p><img src="coral_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">plot</span>(cr_rf, <span class="dt">palette =</span> <span class="st">"wangkardu"</span>)</a></code></pre></div>
+<p><img src="coral_files/figure-html/unnamed-chunk-5-2.png" width="672"></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">new_apartment &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">10</span>, ]</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="kw">plot</span>(cr_rf, <span class="dt">plot_residuals =</span> <span class="ot">FALSE</span>, <span class="dt">palette =</span> <span class="st">"wangkardu"</span>)</a></code></pre></div>
+<p><img src="coral_files/figure-html/unnamed-chunk-5-3.png" width="672"></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">plot</span>(cr_rf, <span class="dt">palette =</span> <span class="st">"wangkardu"</span>)</a></code></pre></div>
+<p><img src="coral_files/figure-html/unnamed-chunk-5-4.png" width="672"></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">new_apartment &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">302</span>, ]</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="kw">plot</span>(cr_rf, <span class="dt">palette =</span> <span class="st">"wangkardu"</span>)</a></code></pre></div>
+<p><img src="coral_files/figure-html/unnamed-chunk-5-5.png" width="672"></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">new_apartment &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">720</span>, ]</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="kw">plot</span>(cr_rf, <span class="dt">palette =</span> <span class="st">"wangkardu"</span>)</a></code></pre></div>
+<p><img src="coral_files/figure-html/unnamed-chunk-5-6.png" width="672"></p>
 </div>
   </div>
 
@@ -139,7 +164,8 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#introduction">Introduction</a></li>
-      <li><a href="#coral-plots">Coral Plots</a></li>
+      <li><a href="#local-fit-explanations">Local Fit Explanations</a></li>
+      <li><a href="#wangkardu-explanations">Wangkardu Explanations</a></li>
       </ul>
 </div>
       </div>
