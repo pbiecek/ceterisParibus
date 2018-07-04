@@ -7,6 +7,7 @@
 #' @param quantiles if TRUE (default) then quantiles will be presented on OX axis. If FALSE then original values will be presented on OX axis
 #' @param split a character, either 'models' or 'variables'. Sets the variable for faceting
 #' @param color a character, either 'models' or 'variables'. Sets the variable for coloring
+#' @param split_ncol number of columns for the 'facet_wrap'
 #'
 #' @return a ggplot2 object
 #' @export
@@ -32,7 +33,7 @@
 #'
 #' plot(wi_rf, split = "variables", color = "variables")
 #' plot(wi_rf)
-plot.ceteris_paribus_explainer <- function(x, ..., quantiles = TRUE, split = "models", color = "variables") {
+plot.ceteris_paribus_explainer <- function(x, ..., quantiles = TRUE, split = "models", split_ncol = NULL, color = "variables") {
   dfl <- c(list(x), list(...))
   all_responses <- do.call(rbind, dfl)
   class(all_responses) <- "data.frame"
@@ -61,9 +62,9 @@ plot.ceteris_paribus_explainer <- function(x, ..., quantiles = TRUE, split = "mo
   }
   # do we need faceting?
   if (split == "models") {
-    pl <- pl + facet_wrap(~label, scales = scales_x)
+    pl <- pl + facet_wrap(~label, scales = scales_x, ncol = split_ncol)
   } else {
-    pl <- pl + facet_wrap(~vname, scales = scales_x)
+    pl <- pl + facet_wrap(~vname, scales = scales_x, ncol = split_ncol)
   }
 
   pl <- pl +

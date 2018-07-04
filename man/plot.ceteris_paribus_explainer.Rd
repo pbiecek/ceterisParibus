@@ -5,7 +5,7 @@
 \title{Plots Ceteris Paribus Explanations}
 \usage{
 \method{plot}{ceteris_paribus_explainer}(x, ..., quantiles = TRUE,
-  split = "models", color = "variables")
+  split = "models", split_ncol = NULL, color = "variables")
 }
 \arguments{
 \item{x}{a ceteris paribus explainer produced with the 'ceteris_paribus' function}
@@ -15,6 +15,8 @@
 \item{quantiles}{if TRUE (default) then quantiles will be presented on OX axis. If FALSE then original values will be presented on OX axis}
 
 \item{split}{a character, either 'models' or 'variables'. Sets the variable for faceting}
+
+\item{split_ncol}{number of columns for the 'facet_wrap'}
 
 \item{color}{a character, either 'models' or 'variables'. Sets the variable for coloring}
 }
