@@ -1,5 +1,5 @@
 ---
-title: "Coral Plots"
+title: "Local Fit Plots / Wangkardu Explanations"
 author: "Przemyslaw Biecek"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -11,7 +11,7 @@ vignette: >
 
 # Introduction
 
-First, let's create explainers for random Forest model and linear model
+First, let's create explainers for random forest model and linear model
 
 ```{r, warning=FALSE, message=FALSE}
 library("DALEX")
@@ -31,11 +31,11 @@ explainer_lm <- explain(apartments_lm_model,
                         data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
 ```
 
-# Coral Plots
+# Local Fit Explanations
 
-Coral Plots are something between Ceteris Paribus Plots (profile for single observation) and Partial Dependency Plots (average from all profiles).
+Local Fit Plots are something between Ceteris Paribus Plots (profile for single observation), ICEPlots (all profiles) and diagnostic plots.
 
-Coral Plots show profiles for observations close to a selected point in feature space. Additionally they show also residuals for these neighbours.
+Local Fit Plots show profiles for observations close to a selected point in feature space. Additionally they show also residuals for these neighbours.
 This way one can read how good the black box model is fitted around specific point.
 
 Let's see an example.
@@ -50,7 +50,7 @@ The validation data has 9000 observations. We will use 0.2 percents (18 observat
 As you see below residuals for neighbouring observations are quite large. Locally the fit is pretty bad.
 
 ```{r, fig.width=7, fig.height=7}
-cr_rf <- coral_plots(explainer_rf, observation = new_apartment, select_points = 0.002)
+cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
 plot(cr_rf, plot_residuals = FALSE)
 plot(cr_rf)
 ```
@@ -59,15 +59,37 @@ How it looks for other points? Better, just see, now residuals are ore or less s
 
 ```{r, fig.width=7, fig.height=7}
 new_apartment <- apartmentsTest[10, ]
-cr_rf <- coral_plots(explainer_rf, observation = new_apartment, select_points = 0.002)
+cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
 plot(cr_rf, plot_residuals = FALSE)
 plot(cr_rf)
 new_apartment <- apartmentsTest[302, ]
-cr_rf <- coral_plots(explainer_rf, observation = new_apartment, select_points = 0.002)
+cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
  plot(cr_rf)
 new_apartment <- apartmentsTest[720, ]
-cr_rf <- coral_plots(explainer_rf, observation = new_apartment, select_points = 0.002)
+cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
 plot(cr_rf)
 ```
 
+# Wangkardu Explanations
+
+Wangkardu Explanations are Local Fit Plots with changed color palette. Here colors are taken from Wangkardu paintings by Helicopter Tjungurrayi https://www.artgallery.nsw.gov.au/collection/works/4.2003/
+
+Let's see some examples.
+
+```{r, fig.width=7, fig.height=7}
+cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
+plot(cr_rf, plot_residuals = FALSE, palette = "wangkardu")
+plot(cr_rf, palette = "wangkardu")
+
+new_apartment <- apartmentsTest[10, ]
+cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
+plot(cr_rf, plot_residuals = FALSE, palette = "wangkardu")
+plot(cr_rf, palette = "wangkardu")
+new_apartment <- apartmentsTest[302, ]
+cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
+plot(cr_rf, palette = "wangkardu")
+new_apartment <- apartmentsTest[720, ]
+cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
+plot(cr_rf, palette = "wangkardu")
+```
 

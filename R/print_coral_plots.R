@@ -1,7 +1,7 @@
-#' Prints Coral Plots Explainer Summary
+#' Prints Local Fit / Wangkardu Summary
 #'
-#' @param x a coral_plot explainer produced with the 'coral_plot' function
-#' @param ... other arguments that will be passed to head()
+#' @param x a local fit explainer produced with the 'local_fit' function
+#' @param ... other arguments that will be passed to 'head' function
 #'
 #' @export
 #'
@@ -14,8 +14,10 @@
 #'                      data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
 #' new_apartment <- apartmentsTest[1, ]
 #' new_apartment
+#' cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
+#' cr_rf
 
-print.coral_plot_explainer <- function(x, ...) {
+print.local_fit_explainer <- function(x, ...) {
   class(x) <- "data.frame"
-  print(head(x, ...))
+  prit(head(x, ...))
 }
