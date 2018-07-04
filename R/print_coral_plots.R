@@ -19,5 +19,5 @@
 
 print.local_fit_explainer <- function(x, ...) {
   class(x) <- "data.frame"
-  prit(head(x, ...))
+  print(head(x, ...))
 }

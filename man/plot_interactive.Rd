@@ -33,6 +33,7 @@ Function 'plot_interactive.ceteris_paribus_explainer' plots Ceteris Paribus Plot
 }
 \examples{
 library("DALEX")
+library("ggiraph")
 library("randomForest")
 set.seed(59)
 

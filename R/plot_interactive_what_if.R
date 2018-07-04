@@ -10,10 +10,10 @@
 #' @return a ggiraph object
 #' @name plot_interactive
 #' @export
-#' @import ggiraph
 #'
 #' @examples
 #' library("DALEX")
+#' library("ggiraph")
 #' library("randomForest")
 #' set.seed(59)
 #'
@@ -31,6 +31,10 @@
 #'
 #' plot_interactive(wi_rf, split = "variables", color = "variables")
 plot_interactive.ceteris_paribus_explainer <- function(x, ..., split = "models", color = "variables") {
+  if (!requireNamespace("ggiraph", quietly = TRUE)) {
+    stop("You have to first install library 'ggiraph'. ", call. = FALSE)
+  }
+
   dfl <- c(list(x), list(...))
   all_responses <- do.call(rbind, dfl)
   class(all_responses) <- "data.frame"
@@ -60,12 +64,12 @@ plot_interactive.ceteris_paribus_explainer <- function(x, ..., split = "models",
   pl <- pl +
     geom_vline(xintercept = 0, lty = 2) +
     geom_hline(data = all_predictions, aes(yintercept = prediction), lty = 2) +
-    geom_point_interactive() +
+    ggiraph::geom_point_interactive() +
     DALEX::theme_mi2() + ylab("Predicted y") + xlab("Relative percentile of X_i") + ggtitle("Interactive Ceteris Paribus Plot") +
     theme(legend.position = "bottom") +
     scale_x_continuous(breaks = seq(-1,1,0.2), labels=paste0(seq(-100,100,20),"%"))
 
-  ggiraph(code = print(pl), hover_css = "fill-opacity:.3;cursor:pointer;")
+  ggiraph::ggiraph(code = print(pl), hover_css = "fill-opacity:.3;cursor:pointer;")
 }
 
 #' @name plot_interactive
