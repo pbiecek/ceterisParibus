@@ -142,7 +142,13 @@ It's a data frame with calculated average responses.</p>
 <span class='no'>new_apartment</span></div><div class='output co'>#&gt;      m2.price construction.year surface floor no.rooms    district
 #&gt; 1001     4644              1976     131     3        5 Srodmiescie</div><div class='input'>
 <span class='no'>cr_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>local_fit</span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>, <span class='kw'>select_points</span> <span class='kw'>=</span> <span class='fl'>0.002</span>)
-<span class='no'>cr_rf</span></div><div class='output co'>#&gt; <span class='error'>Error in prit(head(x, ...)): could not find function "prit"</span></div></pre>
+<span class='no'>cr_rf</span></div><div class='output co'>#&gt;      y_hat new_x   vname quant obs_id        label
+#&gt; 1 4768.305    20 surface  0.00      0 randomForest
+#&gt; 2 4765.291    21 surface  0.01      0 randomForest
+#&gt; 3 4761.576    23 surface  0.02      0 randomForest
+#&gt; 4 4760.838    24 surface  0.03      0 randomForest
+#&gt; 5 4760.290    26 surface  0.04      0 randomForest
+#&gt; 6 4743.734    27 surface  0.05      0 randomForest</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

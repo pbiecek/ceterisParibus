@@ -39,6 +39,7 @@ new_apartment
 
 wi_rf <- ceteris_paribus(explainer_rf, observation = new_apartment)
 wi_rf
-wi_rf <- ceteris_paribus(explainer_rf, observation = new_apartment, selected_variables = c("surface", "floor", "no.rooms"))
+wi_rf <- ceteris_paribus(explainer_rf, observation = new_apartment,
+         selected_variables = c("surface", "floor", "no.rooms"))
 wi_rf
 }

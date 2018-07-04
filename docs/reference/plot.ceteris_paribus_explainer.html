@@ -100,7 +100,7 @@
 
     <pre class="usage"><span class='co'># S3 method for ceteris_paribus_explainer</span>
 <span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>quantiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>"models"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"variables"</span>)</pre>
+  <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>"models"</span>, <span class='kw'>split_ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"variables"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -120,6 +120,10 @@
     <tr>
       <th>split</th>
       <td><p>a character, either 'models' or 'variables'. Sets the variable for faceting</p></td>
+    </tr>
+    <tr>
+      <th>split_ncol</th>
+      <td><p>number of columns for the 'facet_wrap'</p></td>
     </tr>
     <tr>
       <th>color</th>

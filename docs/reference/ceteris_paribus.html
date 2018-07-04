@@ -98,7 +98,8 @@
     <p>Ceteris Paribus Plot</p>
     
 
-    <pre class="usage"><span class='fu'>ceteris_paribus</span>(<span class='no'>explainer</span>, <span class='no'>observation</span>, <span class='kw'>grid_points</span> <span class='kw'>=</span> <span class='fl'>101</span>)</pre>
+    <pre class="usage"><span class='fu'>ceteris_paribus</span>(<span class='no'>explainer</span>, <span class='no'>observation</span>, <span class='kw'>grid_points</span> <span class='kw'>=</span> <span class='fl'>101</span>,
+  <span class='kw'>selected_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -114,6 +115,10 @@
     <tr>
       <th>grid_points</th>
       <td><p>number of points used for response path</p></td>
+    </tr>
+    <tr>
+      <th>selected_variables</th>
+      <td><p>if specified, then only these variables will be explained</p></td>
     </tr>
     </table>
     
@@ -144,7 +149,15 @@ It's a data frame with calculated average responses.</p>
 #&gt; 2% 4301.926  1922 construction.year 0.6268889  0.02     -0.6068889 randomForest
 #&gt; 3% 4305.352  1923 construction.year 0.6268889  0.03     -0.5968889 randomForest
 #&gt; 4% 4305.352  1923 construction.year 0.6268889  0.04     -0.5868889 randomForest
-#&gt; 5% 4267.723  1924 construction.year 0.6268889  0.05     -0.5768889 randomForest</div></pre>
+#&gt; 5% 4267.723  1924 construction.year 0.6268889  0.05     -0.5768889 randomForest</div><div class='input'><span class='no'>wi_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>ceteris_paribus</span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>,
+         <span class='kw'>selected_variables</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"surface"</span>, <span class='st'>"floor"</span>, <span class='st'>"no.rooms"</span>))
+<span class='no'>wi_rf</span></div><div class='output co'>#&gt;       y_hat new_x   vname   x_quant quant relative_quant        label
+#&gt; 0% 4768.305    20 surface 0.8541111  0.00     -0.8541111 randomForest
+#&gt; 1% 4765.291    21 surface 0.8541111  0.01     -0.8441111 randomForest
+#&gt; 2% 4761.576    23 surface 0.8541111  0.02     -0.8341111 randomForest
+#&gt; 3% 4760.838    24 surface 0.8541111  0.03     -0.8241111 randomForest
+#&gt; 4% 4760.290    26 surface 0.8541111  0.04     -0.8141111 randomForest
+#&gt; 5% 4743.734    27 surface 0.8541111  0.05     -0.8041111 randomForest</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
