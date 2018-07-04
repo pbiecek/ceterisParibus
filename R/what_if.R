@@ -33,10 +33,10 @@ ceteris_paribus <- function(explainer, observation, grid_points = 101) {
   if (is.null(explainer$data))
     stop("The what_if() function requires explainers created with specified 'data' parameter.")
 
-  data <- explainer$data
+  data <- base::as.data.frame(explainer$data)
   model <- explainer$model
   predict_function <- explainer$predict_function
-  var_to_present <- which(sapply(explainer$data, is.numeric))
+  var_to_present <- which(apply(explainer$data, 2, is.numeric))
   names_to_present <- colnames(explainer$data)[var_to_present]
 
   responses <- lapply(names_to_present, function(vname) {
