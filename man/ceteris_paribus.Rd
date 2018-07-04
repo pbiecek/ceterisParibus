@@ -4,7 +4,8 @@
 \alias{ceteris_paribus}
 \title{Ceteris Paribus Plot}
 \usage{
-ceteris_paribus(explainer, observation, grid_points = 101)
+ceteris_paribus(explainer, observation, grid_points = 101,
+  selected_variables = NULL)
 }
 \arguments{
 \item{explainer}{a model to be explained, preprocessed by the 'DALEX::explain' function}
@@ -12,6 +13,8 @@ ceteris_paribus(explainer, observation, grid_points = 101)
 \item{observation}{a new observarvation for which predictions need to be explained}
 
 \item{grid_points}{number of points used for response path}
+
+\item{selected_variables}{if specified, then only these variables will be explained}
 }
 \value{
 An object of the class 'ceteris_paribus_explainer'.
@@ -35,5 +38,7 @@ new_apartment <- apartmentsTest[1, ]
 new_apartment
 
 wi_rf <- ceteris_paribus(explainer_rf, observation = new_apartment)
+wi_rf
+wi_rf <- ceteris_paribus(explainer_rf, observation = new_apartment, selected_variables = c("surface", "floor", "no.rooms"))
 wi_rf
 }
