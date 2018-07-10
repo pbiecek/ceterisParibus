@@ -50,7 +50,8 @@ The validation data has 9000 observations. We will use 0.2 percents (18 observat
 As you see below residuals for neighbouring observations are quite large. Locally the fit is pretty bad.
 
 ```{r, fig.width=7, fig.height=7}
-cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
+cr_rf <- local_fit(explainer_rf, observation = new_apartment, 
+                   select_points = 0.002, selected_variable = "surface")
 plot(cr_rf, plot_residuals = FALSE)
 plot(cr_rf)
 ```
@@ -59,14 +60,17 @@ How it looks for other points? Better, just see, now residuals are ore or less s
 
 ```{r, fig.width=7, fig.height=7}
 new_apartment <- apartmentsTest[10, ]
-cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
+cr_rf <- local_fit(explainer_rf, observation = new_apartment, 
+                   select_points = 0.002, selected_variable = "surface")
 plot(cr_rf, plot_residuals = FALSE)
 plot(cr_rf)
 new_apartment <- apartmentsTest[302, ]
-cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
+cr_rf <- local_fit(explainer_rf, observation = new_apartment, 
+                   select_points = 0.002, selected_variable = "surface")
  plot(cr_rf)
 new_apartment <- apartmentsTest[720, ]
-cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
+cr_rf <- local_fit(explainer_rf, observation = new_apartment, 
+                   select_points = 0.002, selected_variable = "surface")
 plot(cr_rf)
 ```
 
@@ -77,19 +81,23 @@ Wangkardu Explanations are Local Fit Plots with changed color palette. Here colo
 Let's see some examples.
 
 ```{r, fig.width=7, fig.height=7}
-cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
+cr_rf <- local_fit(explainer_rf, observation = new_apartment, 
+                   select_points = 0.002, selected_variable = "surface")
 plot(cr_rf, plot_residuals = FALSE, palette = "wangkardu")
 plot(cr_rf, palette = "wangkardu")
 
 new_apartment <- apartmentsTest[10, ]
-cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
+cr_rf <- local_fit(explainer_rf, observation = new_apartment, 
+                   select_points = 0.002, selected_variable = "surface")
 plot(cr_rf, plot_residuals = FALSE, palette = "wangkardu")
 plot(cr_rf, palette = "wangkardu")
 new_apartment <- apartmentsTest[302, ]
-cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
+cr_rf <- local_fit(explainer_rf, observation = new_apartment, 
+                   select_points = 0.002, selected_variable = "surface")
 plot(cr_rf, palette = "wangkardu")
 new_apartment <- apartmentsTest[720, ]
-cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
+cr_rf <- local_fit(explainer_rf, observation = new_apartment, 
+                   select_points = 0.002, selected_variable = "surface")
 plot(cr_rf, palette = "wangkardu")
 ```
 

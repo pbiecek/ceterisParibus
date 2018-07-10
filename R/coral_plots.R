@@ -26,7 +26,8 @@
 #' new_apartment <- apartmentsTest[1, ]
 #' new_apartment
 #'
-#' cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
+#' cr_rf <- local_fit(explainer_rf, observation = new_apartment,
+#'     select_points = 0.002, selected_variable = "surface")
 #' cr_rf
 local_fit <- function(explainer, observation, selected_variable, grid_points = 101, select_points = 0.1) {
   if (!("explainer" %in% class(explainer)))
