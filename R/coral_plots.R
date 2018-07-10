@@ -1,11 +1,12 @@
 #' Local Fit / Wangkardu Explanations
 #'
 #' @param explainer a model to be explained, preprocessed by the 'DALEX::explain' function
+#' @param selected_variable variable to be presented in the local fit plot
 #' @param observation a new observarvation for which predictions need to be explained
 #' @param grid_points number of points used for response path
-#' @param select_points number of points to present in local fit plots
+#' @param select_points fraction of points fromvalidation data to be presented in local fit plots
 #'
-#' @return An object of the class 'local_fir_explainer'.
+#' @return An object of the class 'local_fit_explainer'.
 #' It's a data frame with calculated average responses.
 #' @export
 #'
@@ -27,7 +28,7 @@
 #'
 #' cr_rf <- local_fit(explainer_rf, observation = new_apartment, select_points = 0.002)
 #' cr_rf
-local_fit <- function(explainer, observation, grid_points = 101, select_points = 0.1) {
+local_fit <- function(explainer, observation, selected_variable, grid_points = 101, select_points = 0.1) {
   if (!("explainer" %in% class(explainer)))
       stop("The what_if() function requires an object created with explain() function.")
   if (is.null(explainer$data))
@@ -40,7 +41,6 @@ local_fit <- function(explainer, observation, grid_points = 101, select_points =
 
   #
   # select common features in observation and data
-  selected_variable = "surface"
   vars_to_use <- setdiff(
                     intersect(colnames(observation),
                               colnames(data)),
