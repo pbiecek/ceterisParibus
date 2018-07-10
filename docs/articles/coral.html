@@ -110,25 +110,29 @@
 <pre><code>##      m2.price construction.year surface floor no.rooms    district
 ## 1001     4644              1976     131     3        5 Srodmiescie</code></pre>
 <p>The validation data has 9000 observations. We will use 0.2 percents (18 observations) to see local fit for selected observation. As you see below residuals for neighbouring observations are quite large. Locally the fit is pretty bad.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">plot</span>(cr_rf, <span class="dt">plot_residuals =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, </a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">                   <span class="dt">select_points =</span> <span class="fl">0.002</span>, <span class="dt">selected_variable =</span> <span class="st">"surface"</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw">plot</span>(cr_rf, <span class="dt">plot_residuals =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="coral_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">plot</span>(cr_rf)</a></code></pre></div>
 <p><img src="coral_files/figure-html/unnamed-chunk-3-2.png" width="672"></p>
 <p>How it looks for other points? Better, just see, now residuals are ore or less symmetric.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">new_apartment &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">10</span>, ]</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw">plot</span>(cr_rf, <span class="dt">plot_residuals =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb6-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, </a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">                   <span class="dt">select_points =</span> <span class="fl">0.002</span>, <span class="dt">selected_variable =</span> <span class="st">"surface"</span>)</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="kw">plot</span>(cr_rf, <span class="dt">plot_residuals =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="coral_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">plot</span>(cr_rf)</a></code></pre></div>
 <p><img src="coral_files/figure-html/unnamed-chunk-4-2.png" width="672"></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">new_apartment &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">302</span>, ]</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"> <span class="kw">plot</span>(cr_rf)</a></code></pre></div>
+<a class="sourceLine" id="cb8-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, </a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">                   <span class="dt">select_points =</span> <span class="fl">0.002</span>, <span class="dt">selected_variable =</span> <span class="st">"surface"</span>)</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"> <span class="kw">plot</span>(cr_rf)</a></code></pre></div>
 <p><img src="coral_files/figure-html/unnamed-chunk-4-3.png" width="672"></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">new_apartment &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">720</span>, ]</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw">plot</span>(cr_rf)</a></code></pre></div>
+<a class="sourceLine" id="cb9-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, </a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">                   <span class="dt">select_points =</span> <span class="fl">0.002</span>, <span class="dt">selected_variable =</span> <span class="st">"surface"</span>)</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw">plot</span>(cr_rf)</a></code></pre></div>
 <p><img src="coral_files/figure-html/unnamed-chunk-4-4.png" width="672"></p>
 </div>
 <div id="wangkardu-explanations" class="section level1">
@@ -136,24 +140,28 @@
 <a href="#wangkardu-explanations" class="anchor"></a>Wangkardu Explanations</h1>
 <p>Wangkardu Explanations are Local Fit Plots with changed color palette. Here colors are taken from Wangkardu paintings by Helicopter Tjungurrayi <a href="https://www.artgallery.nsw.gov.au/collection/works/4.2003/" class="uri">https://www.artgallery.nsw.gov.au/collection/works/4.2003/</a></p>
 <p>Let’s see some examples.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">plot</span>(cr_rf, <span class="dt">plot_residuals =</span> <span class="ot">FALSE</span>, <span class="dt">palette =</span> <span class="st">"wangkardu"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, </a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">                   <span class="dt">select_points =</span> <span class="fl">0.002</span>, <span class="dt">selected_variable =</span> <span class="st">"surface"</span>)</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw">plot</span>(cr_rf, <span class="dt">plot_residuals =</span> <span class="ot">FALSE</span>, <span class="dt">palette =</span> <span class="st">"wangkardu"</span>)</a></code></pre></div>
 <p><img src="coral_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">plot</span>(cr_rf, <span class="dt">palette =</span> <span class="st">"wangkardu"</span>)</a></code></pre></div>
 <p><img src="coral_files/figure-html/unnamed-chunk-5-2.png" width="672"></p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">new_apartment &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">10</span>, ]</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="kw">plot</span>(cr_rf, <span class="dt">plot_residuals =</span> <span class="ot">FALSE</span>, <span class="dt">palette =</span> <span class="st">"wangkardu"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb12-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, </a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">                   <span class="dt">select_points =</span> <span class="fl">0.002</span>, <span class="dt">selected_variable =</span> <span class="st">"surface"</span>)</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="kw">plot</span>(cr_rf, <span class="dt">plot_residuals =</span> <span class="ot">FALSE</span>, <span class="dt">palette =</span> <span class="st">"wangkardu"</span>)</a></code></pre></div>
 <p><img src="coral_files/figure-html/unnamed-chunk-5-3.png" width="672"></p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">plot</span>(cr_rf, <span class="dt">palette =</span> <span class="st">"wangkardu"</span>)</a></code></pre></div>
 <p><img src="coral_files/figure-html/unnamed-chunk-5-4.png" width="672"></p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">new_apartment &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">302</span>, ]</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="kw">plot</span>(cr_rf, <span class="dt">palette =</span> <span class="st">"wangkardu"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb14-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, </a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">                   <span class="dt">select_points =</span> <span class="fl">0.002</span>, <span class="dt">selected_variable =</span> <span class="st">"surface"</span>)</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="kw">plot</span>(cr_rf, <span class="dt">palette =</span> <span class="st">"wangkardu"</span>)</a></code></pre></div>
 <p><img src="coral_files/figure-html/unnamed-chunk-5-5.png" width="672"></p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">new_apartment &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">720</span>, ]</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, <span class="dt">select_points =</span> <span class="fl">0.002</span>)</a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="kw">plot</span>(cr_rf, <span class="dt">palette =</span> <span class="st">"wangkardu"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb15-2" data-line-number="2">cr_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_fit.html">local_fit</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment, </a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">                   <span class="dt">select_points =</span> <span class="fl">0.002</span>, <span class="dt">selected_variable =</span> <span class="st">"surface"</span>)</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="kw">plot</span>(cr_rf, <span class="dt">palette =</span> <span class="st">"wangkardu"</span>)</a></code></pre></div>
 <p><img src="coral_files/figure-html/unnamed-chunk-5-6.png" width="672"></p>
 </div>
   </div>
