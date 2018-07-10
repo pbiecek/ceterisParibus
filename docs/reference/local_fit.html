@@ -98,7 +98,8 @@
     <p>Local Fit / Wangkardu Explanations</p>
     
 
-    <pre class="usage"><span class='fu'>local_fit</span>(<span class='no'>explainer</span>, <span class='no'>observation</span>, <span class='kw'>grid_points</span> <span class='kw'>=</span> <span class='fl'>101</span>, <span class='kw'>select_points</span> <span class='kw'>=</span> <span class='fl'>0.1</span>)</pre>
+    <pre class="usage"><span class='fu'>local_fit</span>(<span class='no'>explainer</span>, <span class='no'>observation</span>, <span class='no'>selected_variable</span>, <span class='kw'>grid_points</span> <span class='kw'>=</span> <span class='fl'>101</span>,
+  <span class='kw'>select_points</span> <span class='kw'>=</span> <span class='fl'>0.1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -112,18 +113,22 @@
       <td><p>a new observarvation for which predictions need to be explained</p></td>
     </tr>
     <tr>
+      <th>selected_variable</th>
+      <td><p>variable to be presented in the local fit plot</p></td>
+    </tr>
+    <tr>
       <th>grid_points</th>
       <td><p>number of points used for response path</p></td>
     </tr>
     <tr>
       <th>select_points</th>
-      <td><p>number of points to present in local fit plots</p></td>
+      <td><p>fraction of points fromvalidation data to be presented in local fit plots</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of the class 'local_fir_explainer'.
+    <p>An object of the class 'local_fit_explainer'.
 It's a data frame with calculated average responses.</p>
     
 
@@ -141,14 +146,7 @@ It's a data frame with calculated average responses.</p>
 <span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>, ]
 <span class='no'>new_apartment</span></div><div class='output co'>#&gt;      m2.price construction.year surface floor no.rooms    district
 #&gt; 1001     4644              1976     131     3        5 Srodmiescie</div><div class='input'>
-<span class='no'>cr_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>local_fit</span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>, <span class='kw'>select_points</span> <span class='kw'>=</span> <span class='fl'>0.002</span>)
-<span class='no'>cr_rf</span></div><div class='output co'>#&gt;      y_hat new_x   vname quant obs_id        label
-#&gt; 1 4768.305    20 surface  0.00      0 randomForest
-#&gt; 2 4765.291    21 surface  0.01      0 randomForest
-#&gt; 3 4761.576    23 surface  0.02      0 randomForest
-#&gt; 4 4760.838    24 surface  0.03      0 randomForest
-#&gt; 5 4760.290    26 surface  0.04      0 randomForest
-#&gt; 6 4743.734    27 surface  0.05      0 randomForest</div></pre>
+<span class='no'>cr_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>local_fit</span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>, <span class='kw'>select_points</span> <span class='kw'>=</span> <span class='fl'>0.002</span>)</div><div class='output co'>#&gt; <span class='error'>Error in as.vector(y): argument "selected_variable" is missing, with no default</span></div><div class='input'><span class='no'>cr_rf</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'cr_rf' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

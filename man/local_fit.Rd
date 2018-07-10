@@ -4,19 +4,22 @@
 \alias{local_fit}
 \title{Local Fit / Wangkardu Explanations}
 \usage{
-local_fit(explainer, observation, grid_points = 101, select_points = 0.1)
+local_fit(explainer, observation, selected_variable, grid_points = 101,
+  select_points = 0.1)
 }
 \arguments{
 \item{explainer}{a model to be explained, preprocessed by the 'DALEX::explain' function}
 
 \item{observation}{a new observarvation for which predictions need to be explained}
 
+\item{selected_variable}{variable to be presented in the local fit plot}
+
 \item{grid_points}{number of points used for response path}
 
-\item{select_points}{number of points to present in local fit plots}
+\item{select_points}{fraction of points fromvalidation data to be presented in local fit plots}
 }
 \value{
-An object of the class 'local_fir_explainer'.
+An object of the class 'local_fit_explainer'.
 It's a data frame with calculated average responses.
 }
 \description{
