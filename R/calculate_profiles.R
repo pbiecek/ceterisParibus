@@ -32,13 +32,20 @@ calculate_profiles.default <- function(data, variable_splits, model, predict_fun
   profiles <- lapply(variables, function(variable) {
     split_points <- variable_splits[[variable]]
 
+    # remember ids of selected points
+    if (is.null(rownames(data))) {
+      ids <- rep(1:nrow(data), each = length(split_points))
+    } else {
+      ids <- rep(rownames(data), each = length(split_points))
+    }
     new_data <- data[rep(1:nrow(data), each = length(split_points)),]
     new_data[, variable] <- rep(split_points, nrow(data))
 
     yhat <- predict_function(model, new_data, ...)
     new_data <- cbind(new_data,
                       `_yhat_` = yhat,
-                      `_vname_` = variable)
+                      `_vname_` = variable,
+                      `_ids_` = ids)
     new_data
   })
   do.call(rbind, profiles)
