@@ -2,6 +2,10 @@
 #'
 #' This function calculates ceteris paribus profiles, i.e. series of predictions from a model calculated for observations with altered single coordinate.
 #'
+#' Note that \code{calculate_profiles} function is S3 generic.
+#' If you want to work on non standard data sources (like H2O ddf, external databases)
+#' you should overload it.
+#'
 #' @param data set of observations. Profile will be calculated for every observation (every row)
 #' @param variable_splits named list of vectors. Elements of the list are vectors with points in which profiles should be calculated. See an example for more details.
 #' @param predict_function function that takes data and model and returns numeric predictions. Note that the ... arguments will be passed to this function.
@@ -59,8 +63,8 @@ calculate_profiles.default <- function(data, variable_splits, model, predict_fun
 #' (in general uniform quantiles of the length grid_points).
 #' For all other variables splits are calculated as unique values.
 #'
-#' Note that \code{calculate_variable_splits} function is S3 generic,
-#' thus if you want to work on non standard data sources (like H2O ddf, external databases)
+#' Note that \code{calculate_variable_splits} function is S3 generic.
+#' If you want to work on non standard data sources (like H2O ddf, external databases)
 #' you should overload it.
 #'
 #' @param data validation dataset. Is used to determine distribution of observations.

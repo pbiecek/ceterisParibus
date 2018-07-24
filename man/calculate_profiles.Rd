@@ -24,6 +24,11 @@ a data frame with profiles for selected variables and selected observations
 \description{
 This function calculates ceteris paribus profiles, i.e. series of predictions from a model calculated for observations with altered single coordinate.
 }
+\details{
+Note that \code{calculate_profiles} function is S3 generic.
+If you want to work on non standard data sources (like H2O ddf, external databases)
+you should overload it.
+}
 \examples{
 library("DALEX")
 library("randomForest")

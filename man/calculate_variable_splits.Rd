@@ -24,8 +24,8 @@ For numerical variables splits are calculated as percentiles
 For all other variables splits are calculated as unique values.
 }
 \details{
-Note that \code{calculate_variable_splits} function is S3 generic,
-thus if you want to work on non standard data sources (like H2O ddf, external databases)
+Note that \code{calculate_variable_splits} function is S3 generic.
+If you want to work on non standard data sources (like H2O ddf, external databases)
 you should overload it.
 }
 \examples{
