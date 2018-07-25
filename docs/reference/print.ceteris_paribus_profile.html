@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate Ceteris Paribus Profiles — calculate_profiles • ceterisParibus</title>
+<title>Print Ceteris Paribus Profiles — print.ceteris_paribus_profile • ceterisParibus</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -48,7 +48,7 @@
 	  <a class = "navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src = "https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt = "MI2" height = 46 title = "MI2">
 	  </a>
-      <a class="navbar-brand navbar-mi2" href="../index.html">Calculate Ceteris Paribus Profiles</a>
+      <a class="navbar-brand navbar-mi2" href="../index.html">Print Ceteris Paribus Profiles</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -94,50 +94,28 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate Ceteris Paribus Profiles</h1>
+    <h1>Print Ceteris Paribus Profiles</h1>
     </div>
 
     
-    <p>This function calculates ceteris paribus profiles, i.e. series of predictions from a model calculated for observations with altered single coordinate.</p>
+    <p>Print Ceteris Paribus Profiles</p>
     
 
-    <pre class="usage"><span class='fu'>calculate_profiles</span>(<span class='no'>data</span>, <span class='no'>variable_splits</span>, <span class='no'>model</span>, <span class='kw'>predict_function</span> <span class='kw'>=</span> <span class='no'>predict</span>,
-  <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for ceteris_paribus_profile</span>
+<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data</th>
-      <td><p>set of observations. Profile will be calculated for every observation (every row)</p></td>
-    </tr>
-    <tr>
-      <th>variable_splits</th>
-      <td><p>named list of vectors. Elements of the list are vectors with points in which profiles should be calculated. See an example for more details.</p></td>
-    </tr>
-    <tr>
-      <th>model</th>
-      <td><p>a model that will be passed to the <code>predict_function</code></p></td>
-    </tr>
-    <tr>
-      <th>predict_function</th>
-      <td><p>function that takes data and model and returns numeric predictions. Note that the ... arguments will be passed to this function.</p></td>
+      <th>x</th>
+      <td><p>a ceteris paribus profile produced with the 'calculate_profiles' function</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>other parameters that will be passed to the <code>predict_function</code></p></td>
+      <td><p>other arguments that will be passed to head()</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>a data frame with profiles for selected variables and selected observations</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Note that <code>calculate_profiles</code> function is S3 generic.
-If you want to work on non standard data sources (like H2O ddf, external databases)
-you should overload it.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -149,7 +127,7 @@ you should overload it.</p>
 <span class='no'>vars</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"construction.year"</span>, <span class='st'>"surface"</span>, <span class='st'>"floor"</span>, <span class='st'>"no.rooms"</span>, <span class='st'>"district"</span>)
 <span class='no'>variable_splits</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='calculate_variable_splits.html'>calculate_variable_splits</a></span>(<span class='no'>apartments</span>, <span class='no'>vars</span>)
 <span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>:<span class='fl'>10</span>, ]
-<span class='no'>profiles</span> <span class='kw'>&lt;-</span> <span class='fu'>calculate_profiles</span>(<span class='no'>new_apartment</span>, <span class='no'>variable_splits</span>,
+<span class='no'>profiles</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='calculate_profiles.html'>calculate_profiles</a></span>(<span class='no'>new_apartment</span>, <span class='no'>variable_splits</span>,
                                <span class='no'>apartments_rf_model</span>)
 <span class='no'>profiles</span></div><div class='output co'>#&gt;        m2.price construction.year surface floor no.rooms    district   _yhat_
 #&gt; 1001       4644              1920     131     3        5 Srodmiescie 4255.354
@@ -177,7 +155,7 @@ you should overload it.</p>
 #&gt; 3167     5701              1971      55     1        3 Srodmiescie
 #&gt; 1902     2672              1977      98     6        3       Ursus
 #&gt; 5925     3916              1924      33     7        1      Bemowo
-#&gt; 4293     3474              1979     113     5        4     Mokotow</div><div class='input'><span class='no'>small_profiles</span> <span class='kw'>&lt;-</span> <span class='fu'>calculate_profiles</span>(<span class='no'>small_apartments</span>, <span class='no'>variable_splits</span>,
+#&gt; 4293     3474              1979     113     5        4     Mokotow</div><div class='input'><span class='no'>small_profiles</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='calculate_profiles.html'>calculate_profiles</a></span>(<span class='no'>small_apartments</span>, <span class='no'>variable_splits</span>,
                                <span class='no'>apartments_rf_model</span>)
 <span class='no'>small_profiles</span></div><div class='output co'>#&gt;        m2.price construction.year surface floor no.rooms district   _yhat_
 #&gt; 8946       2174              1920     123     8        4     Wola 2871.626
@@ -206,7 +184,7 @@ you should overload it.</p>
 #&gt; 1198     5821              1947      43     2        1 Srodmiescie
 #&gt; 6647     5952              1938      30     2        1 Srodmiescie
 #&gt; 4027     6457              1926      29     3        1 Srodmiescie
-#&gt; 2655     5596              1950      25     6        1 Srodmiescie</div><div class='input'><span class='no'>small_profiles</span> <span class='kw'>&lt;-</span> <span class='fu'>calculate_profiles</span>(<span class='no'>small_apartments</span>, <span class='no'>variable_splits</span>,
+#&gt; 2655     5596              1950      25     6        1 Srodmiescie</div><div class='input'><span class='no'>small_profiles</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='calculate_profiles.html'>calculate_profiles</a></span>(<span class='no'>small_apartments</span>, <span class='no'>variable_splits</span>,
                                <span class='no'>apartments_rf_model</span>)
 <span class='no'>new_apartment</span></div><div class='output co'>#&gt;   construction.year surface floor no.rooms    district
 #&gt; 1              1953      25     3        1 Srodmiescie</div><div class='input'><span class='no'>small_profiles</span></div><div class='output co'>#&gt;        m2.price construction.year surface floor no.rooms    district   _yhat_
@@ -228,11 +206,7 @@ you should overload it.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-      
+            
       <li><a href="#examples">Examples</a></li>
     </ul>
 

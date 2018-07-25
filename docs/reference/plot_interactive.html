@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plots Interactive Ceteris Paribus Explanations — plot_interactive • ceterisParibus</title>
+<title>Plots Interactive What-If Explanations — plot_interactive • ceterisParibus</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -48,7 +48,7 @@
 	  <a class = "navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src = "https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt = "MI2" height = 46 title = "MI2">
 	  </a>
-      <a class="navbar-brand navbar-mi2" href="../index.html">Plots Interactive Ceteris Paribus Explanations</a>
+      <a class="navbar-brand navbar-mi2" href="../index.html">Plots Interactive What-If Explanations</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -76,6 +76,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -91,14 +94,14 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plots Interactive Ceteris Paribus Explanations</h1>
+    <h1>Plots Interactive What-If Explanations</h1>
     </div>
 
     
-    <p>Function 'plot_interactive.ceteris_paribus_explainer' plots Ceteris Paribus Plots for a single prediction.</p>
+    <p>Function 'plot_interactive.what_if_explainer' plots Ceteris Paribus Plots for a single prediction.</p>
     
 
-    <pre class="usage"><span class='co'># S3 method for ceteris_paribus_explainer</span>
+    <pre class="usage"><span class='co'># S3 method for what_if_explainer</span>
 <span class='fu'>plot_interactive</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>"models"</span>,
   <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"variables"</span>)
 
@@ -149,7 +152,7 @@
 <span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>, ]
 <span class='no'>new_apartment</span></div><div class='output co'>#&gt;      m2.price construction.year surface floor no.rooms    district
 #&gt; 1001     4644              1976     131     3        5 Srodmiescie</div><div class='input'>
-<span class='no'>wi_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ceteris_paribus.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>)
+<span class='no'>wi_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>what_if</span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>)
 <span class='no'>wi_rf</span></div><div class='output co'>#&gt;       y_hat new_x             vname   x_quant quant relative_quant        label
 #&gt; 0% 4255.354  1920 construction.year 0.6268889  0.00     -0.6268889 randomForest
 #&gt; 1% 4300.702  1921 construction.year 0.6268889  0.01     -0.6168889 randomForest

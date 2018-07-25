@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • ceterisParibus</title>
+<title>Select Subset of Rows — select_sample • ceterisParibus</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -35,7 +35,7 @@
   </head>
 
   <body>
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top navbar-mi2" role="navigation">
   <div class="container">
@@ -48,7 +48,7 @@
 	  <a class = "navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src = "https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt = "MI2" height = 46 title = "MI2">
 	  </a>
-      <a class="navbar-brand navbar-mi2" href="../index.html"></a>
+      <a class="navbar-brand navbar-mi2" href="../index.html">Select Subset of Rows</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -94,18 +94,67 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Select Subset of Rows</h1>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
+    
+    <p>This function selects subset of rows from data set.
+This is usefull if data is large and we need just a sample to calculate profiles.</p>
+    
 
-      <ul>
-        <li><a href="coral.html">Local Fit Plots / Wangkardu Explanations</a></li>
-        <li><a href="whatIf1d.html">Ceteris Paribus Plots</a></li>
-      </ul>
-    </div>
+    <pre class="usage"><span class='fu'>select_sample</span>(<span class='no'>data</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1313</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>set of observations. Profile will be calculated for every observation (every row)</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>named list of vectors. Elements of the list are vectors with points in which profiles should be calculated. See an example for more details.</p></td>
+    </tr>
+    <tr>
+      <th>seed</th>
+      <td><p>seed for random number generator.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>a data frame with selected rows</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Note that <code>select_subsample</code> function is S3 generic.
+If you want to work on non standard data sources (like H2O ddf, external databases)
+you should overload it.</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX"</span>)
+<span class='no'>small_apartments</span> <span class='kw'>&lt;-</span> <span class='fu'>select_sample</span>(<span class='no'>apartmentsTest</span>)
+<span class='fu'>head</span>(<span class='no'>small_apartments</span>)</div><div class='output co'>#&gt;      m2.price construction.year surface floor no.rooms    district
+#&gt; 8946     2174              1959     123     8        4        Wola
+#&gt; 4458     4319              1927      68     8        2      Ochota
+#&gt; 7384     5501              1929      95     5        3 Srodmiescie
+#&gt; 5450     2810              1982     124    10        5      Ochota
+#&gt; 6744     1770              1982     143     9        6     Ursynow
+#&gt; 6688     2796              1938      75     7        3        Wola</div></pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
   </div>
 </div>
 
