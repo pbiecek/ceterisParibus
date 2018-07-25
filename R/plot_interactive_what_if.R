@@ -1,6 +1,6 @@
-#' Plots Interactive Ceteris Paribus Explanations
+#' Plots Interactive What-If Explanations
 #'
-#' Function 'plot_interactive.ceteris_paribus_explainer' plots Ceteris Paribus Plots for a single prediction.
+#' Function 'plot_interactive.what_if_explainer' plots Ceteris Paribus Plots for a single prediction.
 #'
 #' @param x a ceteris_paribus explainer produced with the 'ceteris_paribus' function
 #' @param ... other explainers that shall be plotted together
@@ -26,11 +26,11 @@
 #' new_apartment <- apartmentsTest[1, ]
 #' new_apartment
 #'
-#' wi_rf <- ceteris_paribus(explainer_rf, observation = new_apartment)
+#' wi_rf <- what_if(explainer_rf, observation = new_apartment)
 #' wi_rf
 #'
 #' plot_interactive(wi_rf, split = "variables", color = "variables")
-plot_interactive.ceteris_paribus_explainer <- function(x, ..., split = "models", color = "variables") {
+plot_interactive.what_if_explainer <- function(x, ..., split = "models", color = "variables") {
   if (!requireNamespace("ggiraph", quietly = TRUE)) {
     stop("You have to first install library 'ggiraph'. ", call. = FALSE)
   }
@@ -80,4 +80,4 @@ plot_interactive <- function (x, ...) {
 
 #' @name plot_interactive
 #' @export
-plot_interactive.default <- plot_interactive.ceteris_paribus_explainer
+plot_interactive.default <- plot_interactive.what_if_explainer

@@ -14,15 +14,15 @@
 #' @return a data frame with selected rows
 #' @examples
 #' library("DALEX")
-#' small_apartments <- select_subsample(apartmentsTest)
+#' small_apartments <- select_sample(apartmentsTest)
 #' head(small_apartments)
 #' @export
-select_subsample <- function(data, n = 100, seed = 1313) {
-  UseMethod("select_subsample")
+select_sample <- function(data, n = 100, seed = 1313) {
+  UseMethod("select_sample")
 }
 
 #' @export
-select_subsample.default <- function(data, n = 100, seed = 1313) {
+select_sample.default <- function(data, n = 100, seed = 1313) {
   set.seed(seed)
   ids <- sample.int(nrow(data), n, replace = TRUE)
   data[ids,]

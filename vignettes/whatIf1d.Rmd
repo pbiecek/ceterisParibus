@@ -39,13 +39,13 @@ We will explain prediction for
 new_apartment <- apartmentsTest[1, ]
 new_apartment
 
-wi_rf <- ceteris_paribus(explainer_rf, observation = new_apartment)
+wi_rf <- what_if(explainer_rf, observation = new_apartment)
 wi_rf
 plot(wi_rf, split = "variables", color = "variables", quantiles = FALSE)
 plot(wi_rf, split = "variables", color = "variables")
 plot(wi_rf)
 
-wi_lm <- ceteris_paribus(explainer_lm, observation = new_apartment)
+wi_lm <- what_if(explainer_lm, observation = new_apartment)
 wi_lm
 plot(wi_lm, split = "variables", color = "variables", quantiles = FALSE)
 plot(wi_lm, split = "variables", color = "variables")

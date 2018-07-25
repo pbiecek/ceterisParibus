@@ -1,8 +1,8 @@
-#' Plots Ceteris Paribus Explanations
+#' Plot What If Explanations
 #'
-#' Function 'plot.ceteris_paribus_explainer' plots Ceteris Paribus Plots (What-If Plots) for a single prediction / observation.
+#' Function 'plot.what_if_explainer' plots What-If Plots for a single prediction / observation.
 #'
-#' @param x a ceteris paribus explainer produced with the 'ceteris_paribus' function
+#' @param x a ceteris paribus explainer produced with the 'what_if' function
 #' @param ... other explainers that shall be plotted together
 #' @param quantiles if TRUE (default) then quantiles will be presented on OX axis. If FALSE then original values will be presented on OX axis
 #' @param split a character, either 'models' or 'variables'. Sets the variable for faceting
@@ -28,12 +28,12 @@
 #' new_apartment <- apartmentsTest[1, ]
 #' new_apartment
 #'
-#' wi_rf <- ceteris_paribus(explainer_rf, observation = new_apartment)
+#' wi_rf <- what_if(explainer_rf, observation = new_apartment)
 #' wi_rf
 #'
 #' plot(wi_rf, split = "variables", color = "variables")
 #' plot(wi_rf)
-plot.ceteris_paribus_explainer <- function(x, ..., quantiles = TRUE, split = "models", split_ncol = NULL, color = "variables") {
+plot.what_if_explainer <- function(x, ..., quantiles = TRUE, split = "models", split_ncol = NULL, color = "variables") {
   dfl <- c(list(x), list(...))
   all_responses <- do.call(rbind, dfl)
   class(all_responses) <- "data.frame"

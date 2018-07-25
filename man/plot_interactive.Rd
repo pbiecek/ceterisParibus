@@ -2,13 +2,13 @@
 % Please edit documentation in R/plot_interactive_what_if.R
 \name{plot_interactive}
 \alias{plot_interactive}
-\alias{plot_interactive.ceteris_paribus_explainer}
+\alias{plot_interactive.what_if_explainer}
 \alias{plot_interactive}
 \alias{plot_interactive}
 \alias{plot_interactive.default}
-\title{Plots Interactive Ceteris Paribus Explanations}
+\title{Plots Interactive What-If Explanations}
 \usage{
-\method{plot_interactive}{ceteris_paribus_explainer}(x, ..., split = "models",
+\method{plot_interactive}{what_if_explainer}(x, ..., split = "models",
   color = "variables")
 
 plot_interactive(x, ...)
@@ -29,7 +29,7 @@ plot_interactive(x, ...)
 a ggiraph object
 }
 \description{
-Function 'plot_interactive.ceteris_paribus_explainer' plots Ceteris Paribus Plots for a single prediction.
+Function 'plot_interactive.what_if_explainer' plots Ceteris Paribus Plots for a single prediction.
 }
 \examples{
 library("DALEX")
@@ -46,7 +46,7 @@ explainer_rf <- explain(apartments_rf_model,
 new_apartment <- apartmentsTest[1, ]
 new_apartment
 
-wi_rf <- ceteris_paribus(explainer_rf, observation = new_apartment)
+wi_rf <- what_if(explainer_rf, observation = new_apartment)
 wi_rf
 
 plot_interactive(wi_rf, split = "variables", color = "variables")
