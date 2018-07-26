@@ -1,0 +1,173 @@
+---
+title: "Ceteris Paribus Plots"
+author: "Przemyslaw Biecek"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteIndexEntry{Title of your vignette}
+  %\usepackage[UTF-8]{inputenc}
+---
+
+# Introduction
+
+First, let's create explainers for random Forest model and linear model
+
+```{r, warning=FALSE, message=FALSE}
+library("DALEX")
+library("randomForest")
+library("ceterisParibus")
+set.seed(59)
+
+apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
+                        no.rooms + district, 
+                        data = apartments)
+
+explainer_rf <- explain(apartments_rf_model,
+                        data = apartmentsTest[,2:6], 
+                        y = apartmentsTest$m2.price)
+```
+
+# Simple plots
+
+Let's start with plots for a single observation.
+
+```{r, warning=FALSE, message=FALSE}
+apartments_A <- apartmentsTest[958,]
+cp_rf_A <- ceteris_paribus(explainer_rf, apartments_A, y = apartments_A$m2.price)
+
+plot(cp_rf_A, show_profiles = TRUE, show_observations = TRUE, show_rugs = TRUE,
+     show_residuals = FALSE, color = "black",
+     alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5, alpha_rugs = 1,
+     size_points = 2, size_rugs = 0.5, as.gg = TRUE, selected_variables = c("surface","construction.year")) +
+  theme(text = element_text(size = 18))  + xlab("") + ylab("predictions")
+```
+
+Here are plots for neighbourse of this observation.
+
+```{r, warning=FALSE, message=FALSE}
+apartments_B <- select_neighbours(apartmentsTest, apartmentsTest[958,], n = 15)
+cp_rf_B <- ceteris_paribus(explainer_rf, apartments_B, y = apartments_B$m2.price)
+
+plot(cp_rf_B, show_profiles = TRUE, show_observations = TRUE, show_rugs = TRUE,
+     show_residuals = FALSE, color = "black",
+     alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5, alpha_rugs = 1,
+     size_points = 2, size_rugs = 0.5, as.gg = TRUE, selected_variables = c("surface","construction.year")) +
+  theme(text = element_text(size = 18))  + xlab("") + ylab("predictions")
+```
+
+Here we have an example for a subset of observations.
+
+```{r, warning=FALSE, message=FALSE}
+apartments_C <- select_sample(apartmentsTest, n = 15)
+cp_rf_C <- ceteris_paribus(explainer_rf, apartments_C, y = apartments_C$m2.price)
+
+plot(cp_rf_C, show_profiles = FALSE, show_observations = TRUE, show_rugs = TRUE,
+     show_residuals = FALSE, color = "black",
+     alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5, alpha_rugs = 1,
+     size_points = 2, size_rugs = 0.5, as.gg = TRUE, selected_variables = c("surface","construction.year")) +
+  theme(text = element_text(size = 18))  + xlab("") + ylab("predictions")
+```
+
+Colors correspon to surface.
+
+```{r, warning=FALSE, message=FALSE}
+plot(cp_rf_C, show_profiles = TRUE, show_observations = TRUE, show_rugs = FALSE,
+     show_residuals = FALSE, color = "surface",
+     alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5, alpha_rugs = 1,
+     size_points = 2, size_rugs = 0.5, as.gg = TRUE, selected_variables = c("surface","construction.year")) +
+  theme(text = element_text(size = 18))  + xlab("") + ylab("predictions")
+```
+
+Observations without rugs.
+
+```{r, warning=FALSE, message=FALSE}
+plot(cp_rf_C, show_profiles = TRUE, show_observations = TRUE, show_rugs = FALSE,
+     show_residuals = FALSE, color = "black",
+     alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5, alpha_rugs = 1,
+     size_points = 2, size_rugs = 0.5, as.gg = TRUE, selected_variables = c("surface","construction.year")) +
+  theme(text = element_text(size = 18))  + xlab("") + ylab("predictions")
+```
+
+Only profiles.
+
+```{r, warning=FALSE, message=FALSE}
+plot(cp_rf_C, show_profiles = TRUE, show_observations = FALSE, show_rugs = FALSE,
+     show_residuals = FALSE, color = "black", aggregate_profiles = mean, size=2,
+     alpha = 1, alpha_points = 1, alpha_residuals = 0.5, alpha_rugs = 1,
+     size_points = 2, size_rugs = 0.5, as.gg = TRUE, selected_variables = c("surface","construction.year")) +
+  theme(text = element_text(size = 18))  + xlab("") + ylab("predictions")
+```
+
+Different colors for different elements.
+
+```{r, warning=FALSE, message=FALSE}
+plot(cp_rf_C, show_profiles = TRUE, show_observations = TRUE, show_rugs = TRUE,
+     show_residuals = TRUE, color = "blue", color_points = "orange", color_residuals = "red", color_rugs = "green",
+     alpha = 0.3, alpha_points = 0.3, alpha_residuals = 0.5, alpha_rugs = 1,
+     size_points = 4, size_rugs = 0.5, as.gg = TRUE, selected_variables = c("surface","construction.year")) +
+  theme(text = element_text(size = 18))  + xlab("") + ylab("predictions")
+```
+
+# Complex plots
+
+Here we are going to mix two or more layers.
+
+First one presents individual profiles and the average between profiles.
+
+```{r, warning=FALSE, message=FALSE}
+# mixtures
+
+plot(cp_rf_C, show_profiles = TRUE, show_observations = FALSE, show_rugs = TRUE,
+     color = "black", show_residuals = TRUE, color_residuals = "red", size_residuals = 2,
+     alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5, alpha_rugs = 1,
+     size_points = 2, size_rugs = 0.5, selected_variables = c("surface","construction.year")) +
+  ceteris_paribus_layer(cp_rf_C, show_profiles = TRUE, show_observations = FALSE, show_rugs = FALSE,
+       show_residuals = FALSE, color = "black", aggregate_profiles = mean, size=2,
+       alpha = 1, alpha_points = 1, alpha_residuals = 0.5, alpha_rugs = 1,
+       size_points = 2, size_rugs = 0.5, as.gg = TRUE, selected_variables = c("surface","construction.year")) +
+  theme(text = element_text(size = 18))  + xlab("") + ylab("predictions")
+```
+
+Neighbourings for two observations.
+
+```{r, warning=FALSE, message=FALSE}
+apartments_D <- select_neighbours(apartmentsTest, apartmentsTest[348,], n = 15)
+cp_rf_D <- ceteris_paribus(explainer_rf, apartments_D, y = apartments_D$m2.price)
+
+plot(cp_rf_B, show_profiles = TRUE, show_observations = FALSE,
+     show_residuals = TRUE, color = "black", color_residuals = "blue",
+     alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5,
+     size_points = 2, size_rugs = 0.5, selected_variables = c("surface","construction.year")) +
+  ceteris_paribus_layer(cp_rf_D, show_profiles = TRUE, show_observations = FALSE,
+                        show_residuals = TRUE, color = "orange", color_residuals = "red",
+                        alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5,
+                        size_points = 2, size_rugs = 0.5, as.gg = TRUE, selected_variables = c("surface","construction.year")) +
+  theme(text = element_text(size = 18)) + xlab("") + ylab("predictions")
+```
+
+Profiles for two models: random forest and SVM.
+
+```{r, warning=FALSE, message=FALSE}
+
+library("e1071")
+apartments_svm_model <- svm(m2.price ~ construction.year + surface + floor + 
+                              no.rooms + district, data = apartments)
+
+explainer_svm <- explain(apartments_svm_model, 
+                         data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
+
+apartments_E <- apartmentsTest[958,]
+cp_rf_E <- ceteris_paribus(explainer_svm, apartments_E, y = apartments_E$m2.price)
+
+plot(cp_rf_A, show_profiles = TRUE, show_observations = FALSE, show_rugs = TRUE,
+     show_residuals = TRUE, color = "black", color_residuals = "blue",
+     alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5,
+     size_points = 2, size_rugs = 0.5, selected_variables = c("surface","construction.year")) +
+  ceteris_paribus_layer(cp_rf_E, show_profiles = TRUE, show_observations = FALSE, show_rugs = TRUE,
+                        show_residuals = TRUE, color = "orange", color_residuals = "red",
+                        alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5,
+                        size_points = 2, size_rugs = 0.5, as.gg = TRUE, selected_variables = c("surface","construction.year")) +
+  theme(text = element_text(size = 18)) + xlab("") + ylab("predictions")
+
+```

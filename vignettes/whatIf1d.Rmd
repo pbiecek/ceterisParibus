@@ -1,5 +1,5 @@
 ---
-title: "Ceteris Paribus Plots"
+title: "What If Plots"
 author: "Przemyslaw Biecek"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
