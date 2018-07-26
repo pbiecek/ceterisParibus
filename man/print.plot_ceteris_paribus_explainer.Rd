@@ -9,8 +9,8 @@
 \arguments{
 \item{x}{a gg object to plot}
 
-\item{...}{other arguments that will be passed to `print.gg()`}
+\item{...}{other arguments that will be passed to `print.ggplot()`}
 }
 \description{
-Print Ceteris Paribus Explainer Summary
+See more examples in the \code{ceteris_paribus_layer} function
 }

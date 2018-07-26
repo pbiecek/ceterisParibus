@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_ceteris_paribus.R
 \name{+.plot_ceteris_paribus_explainer}
 \alias{+.plot_ceteris_paribus_explainer}
-\title{Add components to a plot}
+\title{Add More Layers to a Ceteris Paribus Plot}
 \usage{
 \method{+}{plot_ceteris_paribus_explainer}(e1, e2)
 }
@@ -12,5 +12,5 @@
 \item{e2}{A plot component}
 }
 \description{
-Add components to a plot
+Add More Layers to a Ceteris Paribus Plot
 }
