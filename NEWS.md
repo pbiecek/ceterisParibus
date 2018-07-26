@@ -10,3 +10,5 @@ Please note, that `what_if()` and `local_fit()` functions are	remainders from ve
 They will not be avaliable in version 1.0. 
 From version 0.3 the recommended way to create explainers is through the function `ceteris_paribus()`.
 
+Please note, that `plot_interactive()` function will be deprecated in version 0.4.
+It will not be avaliable in version 1.0. 

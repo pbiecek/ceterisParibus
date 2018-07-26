@@ -1,6 +1,6 @@
 #' Print What If Explainer Summary
 #'
-#' @param x a ceteris_paribus explainer produced with the 'ceteris_paribus' function
+#' @param x a what_if explainer produced with the 'what_if' function
 #' @param ... other arguments that will be passed to head()
 #'
 #' @export

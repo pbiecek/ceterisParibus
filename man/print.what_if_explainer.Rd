@@ -7,7 +7,7 @@
 \method{print}{what_if_explainer}(x, ...)
 }
 \arguments{
-\item{x}{a ceteris_paribus explainer produced with the 'ceteris_paribus' function}
+\item{x}{a what_if explainer produced with the 'what_if' function}
 
 \item{...}{other arguments that will be passed to head()}
 }

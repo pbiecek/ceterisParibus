@@ -3,8 +3,9 @@
 #' This function calculate ceteris paribus profiles for selected data points.
 #'
 #' @param explainer a model to be explained, preprocessed by function `DALEX::explain()`.
-#' @param variable_splits named list of splits for variables, in most cases created with `calculate_variable_splits()`. If NULL then it will be calculated based on validation data avaliable in the `explainer`.
 #' @param observations set of observarvation for which profiles are to be calculated
+#' @param y true labels for `observations`. If specified then will be added to ceteris paribus plots.
+#' @param variable_splits named list of splits for variables, in most cases created with `calculate_variable_splits()`. If NULL then it will be calculated based on validation data avaliable in the `explainer`.
 #' @param grid_points number of points for profile. Will be passed to `calculate_variable_splits()`.
 #' @param variables names of variables for which profiles shall be calculated. Will be passed to `calculate_variable_splits()`. If NULL then all variables from the validation data will be used.
 #'
@@ -27,7 +28,10 @@
 #'
 #' cp_rf <- ceteris_paribus(explainer_rf, apartments_small)
 #' cp_rf
-ceteris_paribus <- function(explainer, observations, variable_splits = NULL, variables = NULL, grid_points = 101) {
+#'
+#' cp_rf <- ceteris_paribus(explainer_rf, apartments_small, y = apartments_small$m2.price)
+#' cp_rf
+ceteris_paribus <- function(explainer, observations, y = NULL, variable_splits = NULL, variables = NULL, grid_points = 101) {
   if (!("explainer" %in% class(explainer)))
       stop("The ceteris_paribus() function requires an object created with explain() function.")
 
@@ -53,6 +57,8 @@ ceteris_paribus <- function(explainer, observations, variable_splits = NULL, var
 
   # add points of interests
   observations$`_yhat_` <- predict_function(model, observations)
+  if (!is.null(y)) observations$`_y_` <- y
+  observations$`_label_` <- explainer$label
 
   # prepare final object
   attr(profiles, "observations") <- observations

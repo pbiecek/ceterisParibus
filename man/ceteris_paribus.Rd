@@ -4,13 +4,15 @@
 \alias{ceteris_paribus}
 \title{Ceteris Paribus Explainer}
 \usage{
-ceteris_paribus(explainer, observations, variable_splits = NULL,
+ceteris_paribus(explainer, observations, y = NULL, variable_splits = NULL,
   variables = NULL, grid_points = 101)
 }
 \arguments{
 \item{explainer}{a model to be explained, preprocessed by function `DALEX::explain()`.}
 
 \item{observations}{set of observarvation for which profiles are to be calculated}
+
+\item{y}{true labels for `observations`. If specified then will be added to ceteris paribus plots.}
 
 \item{variable_splits}{named list of splits for variables, in most cases created with `calculate_variable_splits()`. If NULL then it will be calculated based on validation data avaliable in the `explainer`.}
 
@@ -39,5 +41,8 @@ explainer_rf <- explain(apartments_rf_model,
 apartments_small <- select_sample(apartmentsTest, 10)
 
 cp_rf <- ceteris_paribus(explainer_rf, apartments_small)
+cp_rf
+
+cp_rf <- ceteris_paribus(explainer_rf, apartments_small, y = apartments_small$m2.price)
 cp_rf
 }
