@@ -152,7 +152,7 @@
 <span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>, ]
 <span class='no'>new_apartment</span></div><div class='output co'>#&gt;      m2.price construction.year surface floor no.rooms    district
 #&gt; 1001     4644              1976     131     3        5 Srodmiescie</div><div class='input'>
-<span class='no'>wi_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>what_if</span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>)
+<span class='no'>wi_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='what_if.html'>what_if</a></span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>)
 <span class='no'>wi_rf</span></div><div class='output co'>#&gt;       y_hat new_x             vname   x_quant quant relative_quant        label
 #&gt; 0% 4255.354  1920 construction.year 0.6268889  0.00     -0.6268889 randomForest
 #&gt; 1% 4300.702  1921 construction.year 0.6268889  0.01     -0.6168889 randomForest

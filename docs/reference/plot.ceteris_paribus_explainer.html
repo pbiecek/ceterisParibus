@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plots Ceteris Paribus Explanations — plot.ceteris_paribus_explainer • ceterisParibus</title>
+<title>Plot Ceteris Paribus Explanations — plot.ceteris_paribus_explainer • ceterisParibus</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -48,7 +48,7 @@
 	  <a class = "navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src = "https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt = "MI2" height = 46 title = "MI2">
 	  </a>
-      <a class="navbar-brand navbar-mi2" href="../index.html">Plots Ceteris Paribus Explanations</a>
+      <a class="navbar-brand navbar-mi2" href="../index.html">Plot Ceteris Paribus Explanations</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -76,6 +76,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -91,43 +94,118 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plots Ceteris Paribus Explanations</h1>
+    <h1>Plot Ceteris Paribus Explanations</h1>
     </div>
 
     
-    <p>Function 'plot.ceteris_paribus_explainer' plots Ceteris Paribus Plots (What-If Plots) for a single prediction / observation.</p>
+    <p>Function 'plot.ceteris_paribus_explainer' plots Ceteris Paribus Plots for selected observations.
+Various parameters help to decide what should be plotted, profiles, aggregated profiles, points or rugs.</p>
     
 
     <pre class="usage"><span class='co'># S3 method for ceteris_paribus_explainer</span>
-<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>quantiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>"models"</span>, <span class='kw'>split_ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"variables"</span>)</pre>
+<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.3</span>,
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>size_points</span> <span class='kw'>=</span> <span class='no'>size</span>, <span class='kw'>alpha_points</span> <span class='kw'>=</span> <span class='no'>alpha</span>,
+  <span class='kw'>color_points</span> <span class='kw'>=</span> <span class='no'>color</span>, <span class='kw'>size_rugs</span> <span class='kw'>=</span> <span class='no'>size</span>, <span class='kw'>alpha_rugs</span> <span class='kw'>=</span> <span class='no'>alpha</span>,
+  <span class='kw'>color_rugs</span> <span class='kw'>=</span> <span class='no'>color</span>, <span class='kw'>size_residuals</span> <span class='kw'>=</span> <span class='no'>size</span>, <span class='kw'>alpha_residuals</span> <span class='kw'>=</span> <span class='no'>alpha</span>,
+  <span class='kw'>color_residuals</span> <span class='kw'>=</span> <span class='no'>color</span>, <span class='kw'>only_numerical</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>show_observations</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_rugs</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_residuals</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>aggregate_profiles</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>as.gg</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>facet_ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>selected_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a ceteris paribus explainer produced with the 'ceteris_paribus' function</p></td>
+      <td><p>a ceteris paribus explainer produced with function `ceteris_paribus()`</p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>other explainers that shall be plotted together</p></td>
     </tr>
     <tr>
-      <th>quantiles</th>
-      <td><p>if TRUE (default) then quantiles will be presented on OX axis. If FALSE then original values will be presented on OX axis</p></td>
+      <th>size</th>
+      <td><p>a numeric. Size of lines to be plotted</p></td>
     </tr>
     <tr>
-      <th>split</th>
-      <td><p>a character, either 'models' or 'variables'. Sets the variable for faceting</p></td>
-    </tr>
-    <tr>
-      <th>split_ncol</th>
-      <td><p>number of columns for the 'facet_wrap'</p></td>
+      <th>alpha</th>
+      <td><p>a numeric between 0 and 1. Opacity of lines</p></td>
     </tr>
     <tr>
       <th>color</th>
-      <td><p>a character, either 'models' or 'variables'. Sets the variable for coloring</p></td>
+      <td><p>a character. Either name of a color or name of a variable that should be used for coloring</p></td>
+    </tr>
+    <tr>
+      <th>size_points</th>
+      <td><p>a numeric. Size of points to be plotted</p></td>
+    </tr>
+    <tr>
+      <th>alpha_points</th>
+      <td><p>a numeric between 0 and 1. Opacity of points</p></td>
+    </tr>
+    <tr>
+      <th>color_points</th>
+      <td><p>a character. Either name of a color or name of a variable that should be used for coloring</p></td>
+    </tr>
+    <tr>
+      <th>size_rugs</th>
+      <td><p>a numeric. Size of rugs to be plotted</p></td>
+    </tr>
+    <tr>
+      <th>alpha_rugs</th>
+      <td><p>a numeric between 0 and 1. Opacity of rugs</p></td>
+    </tr>
+    <tr>
+      <th>color_rugs</th>
+      <td><p>a character. Either name of a color or name of a variable that should be used for coloring</p></td>
+    </tr>
+    <tr>
+      <th>size_residuals</th>
+      <td><p>a numeric. Size of line and points to be plotted for residuals</p></td>
+    </tr>
+    <tr>
+      <th>alpha_residuals</th>
+      <td><p>a numeric between 0 and 1. Opacity of points and lines for residuals</p></td>
+    </tr>
+    <tr>
+      <th>color_residuals</th>
+      <td><p>a character. Either name of a color or name of a variable that should be used for coloring for residuals</p></td>
+    </tr>
+    <tr>
+      <th>only_numerical</th>
+      <td><p>a logical. If TRUE then only numerical variables will be plotted. If FALSE then only categorical variables will be plotted.</p></td>
+    </tr>
+    <tr>
+      <th>show_profiles</th>
+      <td><p>a logical. If TRUE then profiles will be plotted. Either individual or aggregate (see `aggregate_profiles`)</p></td>
+    </tr>
+    <tr>
+      <th>show_observations</th>
+      <td><p>a logical. If TRUE then individual observations will be marked as points</p></td>
+    </tr>
+    <tr>
+      <th>show_rugs</th>
+      <td><p>a logical. If TRUE then individual observations will be marked as rugs</p></td>
+    </tr>
+    <tr>
+      <th>show_residuals</th>
+      <td><p>a logical. If TRUE then residuals will be plotted as a line ended with a point</p></td>
+    </tr>
+    <tr>
+      <th>aggregate_profiles</th>
+      <td><p>function. If NULL (default) then individual profiles will be plotted. If a function (e.g. mean or median) then profiles will be aggregated and only the aggregate profile will be plotted</p></td>
+    </tr>
+    <tr>
+      <th>as.gg</th>
+      <td><p>if TRUE then returning plot will have gg class</p></td>
+    </tr>
+    <tr>
+      <th>facet_ncol</th>
+      <td><p>number of columns for the `facet_wrap()`</p></td>
+    </tr>
+    <tr>
+      <th>selected_variables</th>
+      <td><p>if not NULL then only `selected_variables` will be presented</p></td>
     </tr>
     </table>
     
@@ -147,18 +225,77 @@
 <span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DALEX/topics/explain'>explain</a></span>(<span class='no'>apartments_rf_model</span>,
       <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)
 
-<span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>, ]
-<span class='no'>new_apartment</span></div><div class='output co'>#&gt;      m2.price construction.year surface floor no.rooms    district
-#&gt; 1001     4644              1976     131     3        5 Srodmiescie</div><div class='input'>
-<span class='no'>wi_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ceteris_paribus.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>)
-<span class='no'>wi_rf</span></div><div class='output co'>#&gt;       y_hat new_x             vname   x_quant quant relative_quant        label
-#&gt; 0% 4255.354  1920 construction.year 0.6268889  0.00     -0.6268889 randomForest
-#&gt; 1% 4300.702  1921 construction.year 0.6268889  0.01     -0.6168889 randomForest
-#&gt; 2% 4301.926  1922 construction.year 0.6268889  0.02     -0.6068889 randomForest
-#&gt; 3% 4305.352  1923 construction.year 0.6268889  0.03     -0.5968889 randomForest
-#&gt; 4% 4305.352  1923 construction.year 0.6268889  0.04     -0.5868889 randomForest
-#&gt; 5% 4267.723  1924 construction.year 0.6268889  0.05     -0.5768889 randomForest</div><div class='input'>
-<span class='fu'>plot</span>(<span class='no'>wi_rf</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>"variables"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"variables"</span>)</div><div class='img'><img src='plot.ceteris_paribus_explainer-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>wi_rf</span>)</div><div class='img'><img src='plot.ceteris_paribus_explainer-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='no'>apartments_small</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>:<span class='fl'>20</span>,]
+<span class='no'>apartments_small_1</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>,]
+<span class='no'>apartments_small_2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='select_sample.html'>select_sample</a></span>(<span class='no'>apartmentsTest</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>20</span>)
+<span class='no'>apartments_small_3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='select_neighbours.html'>select_neighbours</a></span>(<span class='no'>apartmentsTest</span>, <span class='no'>apartments_small_1</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>20</span>)
+
+<span class='no'>cp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ceteris_paribus.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small</span>)
+<span class='no'>cp_rf_1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ceteris_paribus.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small_1</span>)
+<span class='no'>cp_rf_2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ceteris_paribus.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small_2</span>)
+<span class='no'>cp_rf_3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ceteris_paribus.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small_3</span>)
+<span class='no'>cp_rf</span></div><div class='output co'>#&gt; Top profiles    : 
+#&gt;        m2.price construction.year surface floor no.rooms    district   _yhat_
+#&gt; 1001       4644              1920     131     3        5 Srodmiescie 4255.354
+#&gt; 1001.1     4644              1921     131     3        5 Srodmiescie 4300.702
+#&gt; 1001.2     4644              1922     131     3        5 Srodmiescie 4301.926
+#&gt; 1001.3     4644              1923     131     3        5 Srodmiescie 4305.352
+#&gt; 1001.4     4644              1923     131     3        5 Srodmiescie 4305.352
+#&gt; 1001.5     4644              1924     131     3        5 Srodmiescie 4267.723
+#&gt;                  _vname_ _ids_      _label_
+#&gt; 1001   construction.year  1001 randomForest
+#&gt; 1001.1 construction.year  1001 randomForest
+#&gt; 1001.2 construction.year  1001 randomForest
+#&gt; 1001.3 construction.year  1001 randomForest
+#&gt; 1001.4 construction.year  1001 randomForest
+#&gt; 1001.5 construction.year  1001 randomForest
+#&gt; 
+#&gt; 
+#&gt; Top observations:
+#&gt;      m2.price construction.year surface floor no.rooms    district   _yhat_
+#&gt; 1001     4644              1976     131     3        5 Srodmiescie 4160.840
+#&gt; 1002     3082              1978     112     9        4     Mokotow 3208.201
+#&gt; 1003     2498              1958     100     7        4     Bielany 2708.745
+#&gt; 1004     2735              1951     112     3        5        Wola 2719.604
+#&gt; 1005     2781              1978     102     4        4      Bemowo 2939.989
+#&gt; 1006     2936              2001     116     7        4      Bemowo 2995.042
+#&gt;           _label_
+#&gt; 1001 randomForest
+#&gt; 1002 randomForest
+#&gt; 1003 randomForest
+#&gt; 1004 randomForest
+#&gt; 1005 randomForest
+#&gt; 1006 randomForest</div><div class='input'>
+<span class='no'>cp_rf_y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ceteris_paribus.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments_small</span>$<span class='no'>m2.price</span>)
+<span class='no'>cp_rf_y1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ceteris_paribus.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small_1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments_small_1</span>$<span class='no'>m2.price</span>)
+<span class='no'>cp_rf_y2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ceteris_paribus.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small_2</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments_small_2</span>$<span class='no'>m2.price</span>)
+<span class='no'>cp_rf_y3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ceteris_paribus.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small_3</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments_small_3</span>$<span class='no'>m2.price</span>)
+
+<span class='fu'>plot</span>(<span class='no'>cp_rf_y</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_observations</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+               <span class='kw'>show_residuals</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
+               <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.3</span>, <span class='kw'>alpha_points</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>alpha_residuals</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+               <span class='kw'>size_points</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>size_rugs</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</div><div class='img'><img src='plot.ceteris_paribus_explainer-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>cp_rf_y</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_observations</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+               <span class='kw'>show_residuals</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
+               <span class='kw'>selected_variables</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"construction.year"</span>, <span class='st'>"surface"</span>),
+               <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.3</span>, <span class='kw'>alpha_points</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>alpha_residuals</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+               <span class='kw'>size_points</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>size_rugs</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</div><div class='img'><img src='plot.ceteris_paribus_explainer-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>cp_rf_y1</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_observations</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_rugs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+               <span class='kw'>show_residuals</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>size_points</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+               <span class='kw'>alpha_points</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>size_rugs</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</div><div class='img'><img src='plot.ceteris_paribus_explainer-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>cp_rf_y2</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_observations</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_rugs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+               <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>alpha_points</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>size_rugs</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</div><div class='img'><img src='plot.ceteris_paribus_explainer-4.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>cp_rf_y3</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_rugs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+               <span class='kw'>show_residuals</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>color_residuals</span> <span class='kw'>=</span> <span class='st'>"orange"</span>, <span class='kw'>size_rugs</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</div><div class='img'><img src='plot.ceteris_paribus_explainer-5.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>cp_rf_y</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_observations</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_rugs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>size_rugs</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+               <span class='kw'>show_residuals</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"surface"</span>, <span class='kw'>as.gg</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) +
+               <span class='fu'>scale_color_gradient</span>(<span class='kw'>low</span> <span class='kw'>=</span> <span class='st'>"darkblue"</span>, <span class='kw'>high</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>)</div><div class='img'><img src='plot.ceteris_paribus_explainer-6.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>cp_rf_y1</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_observations</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_rugs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+               <span class='kw'>show_residuals</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"surface"</span>, <span class='kw'>size_points</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='img'><img src='plot.ceteris_paribus_explainer-7.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>cp_rf_y2</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_observations</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_rugs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+               <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"surface"</span>)</div><div class='img'><img src='plot.ceteris_paribus_explainer-8.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>cp_rf_y</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_rugs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>size_rugs</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+               <span class='kw'>show_residuals</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>aggregate_profiles</span> <span class='kw'>=</span> <span class='no'>mean</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkblue"</span>)</div><div class='img'><img src='plot.ceteris_paribus_explainer-9.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -73,7 +73,7 @@
       <h1>Ceteris Paribus Plots</h1>
                         <h4 class="author">Przemyslaw Biecek</h4>
             
-            <h4 class="date">2018-07-25</h4>
+            <h4 class="date">2018-07-26</h4>
       
       
       <div class="hidden name"><code>whatIf1d.Rmd</code></div>
@@ -110,7 +110,7 @@
 <a class="sourceLine" id="cb2-2" data-line-number="2">new_apartment</a></code></pre></div>
 <pre><code>##      m2.price construction.year surface floor no.rooms    district
 ## 1001     4644              1976     131     3        5 Srodmiescie</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">wi_rf &lt;-<span class="st"> </span><span class="kw">what_if</span>(explainer_rf, <span class="dt">observation =</span> new_apartment)</a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">wi_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/what_if.html">what_if</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">wi_rf</a></code></pre></div>
 <pre><code>##       y_hat new_x             vname   x_quant quant relative_quant
 ## 0% 4255.354  1920 construction.year 0.6268889  0.00     -0.6268889
@@ -132,7 +132,7 @@
 <p><img src="whatIf1d_files/figure-html/unnamed-chunk-2-2.png" width="672"></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">plot</span>(wi_rf)</a></code></pre></div>
 <p><img src="whatIf1d_files/figure-html/unnamed-chunk-2-3.png" width="672"></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">wi_lm &lt;-<span class="st"> </span><span class="kw">what_if</span>(explainer_lm, <span class="dt">observation =</span> new_apartment)</a>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">wi_lm &lt;-<span class="st"> </span><span class="kw"><a href="../reference/what_if.html">what_if</a></span>(explainer_lm, <span class="dt">observation =</span> new_apartment)</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">wi_lm</a></code></pre></div>
 <pre><code>##           y_hat new_x             vname   x_quant quant relative_quant
 ## 1001   4832.833  1920 construction.year 0.6268889  0.00     -0.6268889

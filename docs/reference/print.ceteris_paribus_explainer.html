@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Prints Ceteris Paribus Explainer Summary — print.ceteris_paribus_explainer • ceterisParibus</title>
+<title>Print Ceteris Paribus Explainer Summary — print.ceteris_paribus_explainer • ceterisParibus</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -48,7 +48,7 @@
 	  <a class = "navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src = "https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt = "MI2" height = 46 title = "MI2">
 	  </a>
-      <a class="navbar-brand navbar-mi2" href="../index.html">Prints Ceteris Paribus Explainer Summary</a>
+      <a class="navbar-brand navbar-mi2" href="../index.html">Print Ceteris Paribus Explainer Summary</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -76,6 +76,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -91,11 +94,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Prints Ceteris Paribus Explainer Summary</h1>
+    <h1>Print Ceteris Paribus Explainer Summary</h1>
     </div>
 
     
-    <p>Prints Ceteris Paribus Explainer Summary</p>
+    <p>Print Ceteris Paribus Explainer Summary</p>
     
 
     <pre class="usage"><span class='co'># S3 method for ceteris_paribus_explainer</span>
@@ -106,11 +109,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a ceteris_paribus explainer produced with the 'ceteris_paribus' function</p></td>
+      <td><p>a ceteris_paribus explainer produced with the `ceteris_paribus()` function</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>other arguments that will be passed to head()</p></td>
+      <td><p>other arguments that will be passed to `head()`</p></td>
     </tr>
     </table>
     
@@ -118,13 +121,49 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX"</span>)
 <span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
+<span class='fu'>set.seed</span>(<span class='fl'>59</span>)
+
 <span class='no'>apartments_rf_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> + <span class='no'>floor</span> +
-                     <span class='no'>no.rooms</span> + <span class='no'>district</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
+      <span class='no'>no.rooms</span> + <span class='no'>district</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
+
 <span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DALEX/topics/explain'>explain</a></span>(<span class='no'>apartments_rf_model</span>,
-                     <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)
-<span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>, ]
-<span class='no'>new_apartment</span></div><div class='output co'>#&gt;      m2.price construction.year surface floor no.rooms    district
-#&gt; 1001     4644              1976     131     3        5 Srodmiescie</div></pre>
+      <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)
+
+<span class='no'>apartments_small</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='select_sample.html'>select_sample</a></span>(<span class='no'>apartmentsTest</span>, <span class='fl'>10</span>)
+
+<span class='no'>cp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ceteris_paribus.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small</span>)
+<span class='no'>cp_rf</span></div><div class='output co'>#&gt; Top profiles    : 
+#&gt;        m2.price construction.year surface floor no.rooms district   _yhat_
+#&gt; 8946       2174              1920     123     8        4     Wola 2871.626
+#&gt; 8946.1     2174              1921     123     8        4     Wola 2896.045
+#&gt; 8946.2     2174              1922     123     8        4     Wola 2901.677
+#&gt; 8946.3     2174              1923     123     8        4     Wola 2891.101
+#&gt; 8946.4     2174              1923     123     8        4     Wola 2891.101
+#&gt; 8946.5     2174              1924     123     8        4     Wola 2890.361
+#&gt;                  _vname_ _ids_      _label_
+#&gt; 8946   construction.year  8946 randomForest
+#&gt; 8946.1 construction.year  8946 randomForest
+#&gt; 8946.2 construction.year  8946 randomForest
+#&gt; 8946.3 construction.year  8946 randomForest
+#&gt; 8946.4 construction.year  8946 randomForest
+#&gt; 8946.5 construction.year  8946 randomForest
+#&gt; 
+#&gt; 
+#&gt; Top observations:
+#&gt;      m2.price construction.year surface floor no.rooms    district   _yhat_
+#&gt; 8946     2174              1959     123     8        4        Wola 2386.002
+#&gt; 4458     4319              1927      68     8        2      Ochota 4222.164
+#&gt; 7384     5501              1929      95     5        3 Srodmiescie 4646.023
+#&gt; 5450     2810              1982     124    10        5      Ochota 3062.748
+#&gt; 6744     1770              1982     143     9        6     Ursynow 2171.529
+#&gt; 6688     2796              1938      75     7        3        Wola 3045.947
+#&gt;           _label_
+#&gt; 8946 randomForest
+#&gt; 4458 randomForest
+#&gt; 7384 randomForest
+#&gt; 5450 randomForest
+#&gt; 6744 randomForest
+#&gt; 6688 randomForest</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
