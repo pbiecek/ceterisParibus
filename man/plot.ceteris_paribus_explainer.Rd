@@ -10,7 +10,8 @@
   color_rugs = color, size_residuals = size, alpha_residuals = alpha,
   color_residuals = color, only_numerical = TRUE, show_profiles = TRUE,
   show_observations = TRUE, show_rugs = FALSE, show_residuals = FALSE,
-  aggregate_profiles = NULL, facet_ncol = NULL, selected_variables = NULL)
+  aggregate_profiles = NULL, as.gg = FALSE, facet_ncol = NULL,
+  selected_variables = NULL)
 }
 \arguments{
 \item{x}{a ceteris paribus explainer produced with function `ceteris_paribus()`}
@@ -52,6 +53,8 @@
 \item{show_residuals}{a logical. If TRUE then residuals will be plotted as a line ended with a point}
 
 \item{aggregate_profiles}{function. If NULL (default) then individual profiles will be plotted. If a function (e.g. mean or median) then profiles will be aggregated and only the aggregate profile will be plotted}
+
+\item{as.gg}{if TRUE then returning plot will have gg class}
 
 \item{facet_ncol}{number of columns for the `facet_wrap()`}
 
@@ -113,7 +116,7 @@ plot(cp_rf_y3, show_profiles = TRUE, show_rugs = TRUE,
                show_residuals = TRUE, alpha = 0.2, color_residuals = "orange", size_rugs = 0.5)
 
 plot(cp_rf_y, show_profiles = TRUE, show_observations = TRUE, show_rugs = TRUE, size_rugs = 0.5,
-               show_residuals = TRUE, alpha = 0.5, color = "surface") +
+               show_residuals = TRUE, alpha = 0.5, color = "surface", as.gg = TRUE) +
                scale_color_gradient(low = "darkblue", high = "darkred")
 
 plot(cp_rf_y1, show_profiles = TRUE, show_observations = TRUE, show_rugs = TRUE,

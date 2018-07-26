@@ -25,6 +25,7 @@
 #' @param show_residuals a logical. If TRUE then residuals will be plotted as a line ended with a point
 #' @param facet_ncol number of columns for the `facet_wrap()`
 #' @param selected_variables if not NULL then only `selected_variables` will be presented
+#' @param as.gg if TRUE then returning plot will have gg class
 #'
 #' @return a ggplot2 object
 #' @export
@@ -81,7 +82,7 @@
 #'                show_residuals = TRUE, alpha = 0.2, color_residuals = "orange", size_rugs = 0.5)
 #'
 #' plot(cp_rf_y, show_profiles = TRUE, show_observations = TRUE, show_rugs = TRUE, size_rugs = 0.5,
-#'                show_residuals = TRUE, alpha = 0.5, color = "surface") +
+#'                show_residuals = TRUE, alpha = 0.5, color = "surface", as.gg = TRUE) +
 #'                scale_color_gradient(low = "darkblue", high = "darkred")
 #'
 #' plot(cp_rf_y1, show_profiles = TRUE, show_observations = TRUE, show_rugs = TRUE,
@@ -114,7 +115,7 @@ plot.ceteris_paribus_explainer <- function(x, ...,
    show_rugs = FALSE,
    show_residuals = FALSE,
    aggregate_profiles = NULL,
-
+   as.gg = FALSE,
    facet_ncol = NULL, selected_variables = NULL) {
   ceteris_paribus_layer(x = x, ...,
       size = size, alpha = alpha, color = color,
@@ -125,7 +126,7 @@ plot.ceteris_paribus_explainer <- function(x, ...,
       show_profiles = show_profiles, show_observations = show_observations, show_rugs = show_rugs, show_residuals = show_residuals,
       aggregate_profiles = aggregate_profiles,
       facet_ncol = facet_ncol, selected_variables = selected_variables,
-      init_plot = TRUE)(NULL)
+      init_plot = TRUE, as.gg = as.gg)(NULL)
 }
 
 #' Add Layer to the Ceteris Paribus Plot
@@ -156,6 +157,7 @@ plot.ceteris_paribus_explainer <- function(x, ...,
 #' @param facet_ncol number of columns for the `facet_wrap()`.
 #' @param selected_variables if not NULL then only `selected_variables` will be presented
 #' @param init_plot technical parameter, do not use.
+#' @param as.gg if TRUE then returning plot will have gg class
 #'
 #' @return a ggplot2 object
 #' @export
@@ -225,7 +227,7 @@ ceteris_paribus_layer <- function(x, ...,
        show_rugs = FALSE,
        show_residuals = FALSE,
        aggregate_profiles = NULL,
-
+       as.gg = FALSE,
       facet_ncol = NULL, selected_variables = NULL, init_plot = FALSE) {
 
   function(pl) {
@@ -341,7 +343,9 @@ ceteris_paribus_layer <- function(x, ...,
       pl <- pl + theme_mi2()
     }
 
-    class(pl) <- c("plot_ceteris_paribus_explainer", class(pl))
+    if (!as.gg) {
+      class(pl) <- c("plot_ceteris_paribus_explainer", class(pl))
+    }
     pl
   }
 }
@@ -358,7 +362,11 @@ ceteris_paribus_layer <- function(x, ...,
   }
 
   class(e1) <- class(e1)[-1]
-  tmp <- e2(e1)
+  if (class(e2) == "function") { # working as plot_ceteris_paribus_explainer
+    tmp <- e2(e1)
+  } else { # should act as a +.gg
+    tmp <- e1 + e2
+  }
   tmp
 }
 
@@ -366,7 +374,7 @@ ceteris_paribus_layer <- function(x, ...,
 #'
 #' See more examples in the \code{ceteris_paribus_layer} function
 #'
-#' @param x a gg object to plot
+#' @param x a plot_ceteris_paribus_explainer object to plot
 #' @param ... other arguments that will be passed to `print.ggplot()`
 #' @export
 "print.plot_ceteris_paribus_explainer" <- function(x, ...) {

@@ -7,7 +7,7 @@
 \method{print}{plot_ceteris_paribus_explainer}(x, ...)
 }
 \arguments{
-\item{x}{a gg object to plot}
+\item{x}{a plot_ceteris_paribus_explainer object to plot}
 
 \item{...}{other arguments that will be passed to `print.ggplot()`}
 }

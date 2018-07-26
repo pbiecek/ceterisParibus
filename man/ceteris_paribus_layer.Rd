@@ -10,7 +10,8 @@ ceteris_paribus_layer(x, ..., size = 1, alpha = 0.3, color = "black",
   size_residuals = size, alpha_residuals = alpha, color_residuals = color,
   only_numerical = TRUE, show_profiles = TRUE, show_observations = TRUE,
   show_rugs = FALSE, show_residuals = FALSE, aggregate_profiles = NULL,
-  facet_ncol = NULL, selected_variables = NULL, init_plot = FALSE)
+  as.gg = FALSE, facet_ncol = NULL, selected_variables = NULL,
+  init_plot = FALSE)
 }
 \arguments{
 \item{x}{a ceteris paribus explainer produced with function `ceteris_paribus()`}
@@ -52,6 +53,8 @@ ceteris_paribus_layer(x, ..., size = 1, alpha = 0.3, color = "black",
 \item{show_residuals}{a logical. If TRUE then residuals will be plotted as a line ended with a point}
 
 \item{aggregate_profiles}{function. If NULL (default) then individual profiles will be plotted. If a function (e.g. mean or median) then profiles will be aggregated and only the aggregate profile will be plotted}
+
+\item{as.gg}{if TRUE then returning plot will have gg class}
 
 \item{facet_ncol}{number of columns for the `facet_wrap()`.}
 
