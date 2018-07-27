@@ -43,7 +43,7 @@ plot(cp_rf_A, show_profiles = TRUE, show_observations = TRUE, show_rugs = TRUE,
   theme(text = element_text(size = 18))  + xlab("") + ylab("predictions")
 ```
 
-Here are plots for neighbourse of this observation.
+Here are plots for neighbours of this observation.
 
 ```{r, warning=FALSE, message=FALSE}
 apartments_B <- select_neighbours(apartmentsTest, apartmentsTest[958,], n = 15)
@@ -56,20 +56,70 @@ plot(cp_rf_B, show_profiles = TRUE, show_observations = TRUE, show_rugs = TRUE,
   theme(text = element_text(size = 18))  + xlab("") + ylab("predictions")
 ```
 
-Here we have an example for a subset of observations.
+Here we have an example for a subset of observations and only points.
 
 ```{r, warning=FALSE, message=FALSE}
 apartments_C <- select_sample(apartmentsTest, n = 15)
 cp_rf_C <- ceteris_paribus(explainer_rf, apartments_C, y = apartments_C$m2.price)
 
-plot(cp_rf_C, show_profiles = FALSE, show_observations = TRUE, show_rugs = TRUE,
+plot(cp_rf_C, show_profiles = FALSE, show_observations = TRUE, show_rugs = FALSE,
      show_residuals = FALSE, color = "black",
      alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5, alpha_rugs = 1,
      size_points = 2, size_rugs = 0.5, as.gg = TRUE, selected_variables = c("surface","construction.year")) +
   theme(text = element_text(size = 18))  + xlab("") + ylab("predictions")
 ```
 
-Colors correspon to surface.
+Only rugs
+
+```{r, warning=FALSE, message=FALSE}
+plot(cp_rf_C, show_profiles = FALSE, show_observations = FALSE, show_rugs = TRUE,
+     show_residuals = FALSE, color = "black",
+     alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5, alpha_rugs = 1,
+     size_points = 2, size_rugs = 0.5, as.gg = TRUE, selected_variables = c("surface","construction.year")) +
+  theme(text = element_text(size = 18))  + xlab("") + ylab("predictions")
+```
+
+Only profiles
+
+```{r, warning=FALSE, message=FALSE}
+plot(cp_rf_C, show_profiles = TRUE, show_observations = FALSE, show_rugs = FALSE,
+     show_residuals = FALSE, color = "black",
+     alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5, alpha_rugs = 1,
+     size_points = 2, size_rugs = 0.5, as.gg = TRUE, selected_variables = c("surface","construction.year")) +
+  theme(text = element_text(size = 18))  + xlab("") + ylab("predictions")
+```
+
+Only residuals
+
+```{r, warning=FALSE, message=FALSE}
+plot(cp_rf_C, show_profiles = FALSE, show_observations = FALSE, show_rugs = FALSE,
+     show_residuals = TRUE, color = "black",
+     alpha = 0.3, alpha_points = 1, alpha_residuals = 0.5, alpha_rugs = 1,
+     size_points = 2, size_rugs = 0.5, as.gg = TRUE, selected_variables = c("surface","construction.year")) +
+  theme(text = element_text(size = 18))  + xlab("") + ylab("predictions")
+```
+
+Only average profile
+
+```{r, warning=FALSE, message=FALSE}
+plot(cp_rf_C, show_profiles = TRUE, show_observations = FALSE, show_rugs = FALSE,
+     show_residuals = FALSE, color = "black", aggregate_profiles = mean,
+     alpha = 1, alpha_points = 1, alpha_residuals = 0.5, alpha_rugs = 1,
+     size_points = 2, size_rugs = 0.5, as.gg = TRUE, selected_variables = c("surface","construction.year")) +
+  theme(text = element_text(size = 18))  + xlab("") + ylab("predictions")
+```
+
+Colors correspond to district
+
+```{r, warning=FALSE, message=FALSE}
+plot(cp_rf_C, show_profiles = TRUE, show_observations = FALSE, show_rugs = FALSE,
+     show_residuals = FALSE, color = "district",
+     alpha = 1, alpha_points = 1, alpha_residuals = 0.5, alpha_rugs = 1,
+     size_points = 2, size_rugs = 0.5, as.gg = TRUE, selected_variables = c("surface","construction.year", "district")) +
+  theme(text = element_text(size = 18))  + xlab("") + ylab("predictions")
+```
+
+Colors correspond to surface.
 
 ```{r, warning=FALSE, message=FALSE}
 plot(cp_rf_C, show_profiles = TRUE, show_observations = TRUE, show_rugs = FALSE,
