@@ -301,7 +301,7 @@ ceteris_paribus_layer <- function(x, ...,
       })
       all_observations_long <- do.call(rbind, tmp)
       colnames(all_observations_long) <- c("_x_", "_vname_", "_yhat_", "_y_", "_color_", "_ids_", "_label_")
-      if (is_color_points_a_variable | is_color_rugs_a_variable) colnames(all_observations_long)[5] = color_points
+      if ((is_color_points_a_variable | is_color_rugs_a_variable) & !(color_points %in% colnames(all_observations_long))) colnames(all_observations_long)[5] = color_points
 
       # show observations
       if (show_observations) {
