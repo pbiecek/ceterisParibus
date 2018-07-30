@@ -243,12 +243,14 @@ ceteris_paribus_layer <- function(x, ...,
 
     # variables to use
     all_variables <- na.omit(as.character(unique(all_profiles$`_vname_`)))
-    if (!is.null(selected_variables))
+    if (!is.null(selected_variables)) {
       all_variables <- intersect(all_variables, selected_variables)
+      if (length(all_variables) == 0) stop(paste0("selected_variables do not overlap with ", paste(all_variables, collapse = ", ")))
+    }
     # is color a variable or literal?
     is_color_a_variable <- color %in% c(all_variables, "_label_", "_vname_")
     # only numerical or only factors?
-    is_numeric <- sapply(all_profiles[, all_variables], is.numeric)
+    is_numeric <- sapply(all_profiles[, all_variables, drop = FALSE], is.numeric)
     if (only_numerical) {
       vnames <- names(which(is_numeric))
       if (length(vnames) == 0) stop("There are no numerical variables")
