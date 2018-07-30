@@ -269,16 +269,16 @@ ceteris_paribus_layer <- function(x, ...,
     }
 
     # prepare plot
-    `_x_` <- `_y_` <- `_yhat_` <- `_ids_` <- NULL
+    `_x_` <- `_y_` <- `_yhat_` <- `_ids_` <- `_label_` <- NULL
     if (init_plot) {
-      pl <- ggplot(all_profiles, aes(`_x_`, `_yhat_`, group = `_ids_`)) +
+      pl <- ggplot(all_profiles, aes(`_x_`, `_yhat_`, group = paste(`_ids_`, `_label_`))) +
         facet_wrap(~ `_vname_`, scales = "free_x", ncol = facet_ncol)
     }
 
     # show profiles without aggregation
     if (show_profiles & is.null(aggregate_profiles)) {
       if (is_color_a_variable) {
-        pl <- pl + geom_line(data = all_profiles, aes_string(color = color), size = size, alpha = alpha)
+        pl <- pl + geom_line(data = all_profiles, aes_string(color = paste0("`",color,"`")), size = size, alpha = alpha)
       } else {
         pl <- pl + geom_line(data = all_profiles, size = size, alpha = alpha, color = color)
       }
@@ -296,16 +296,17 @@ ceteris_paribus_layer <- function(x, ...,
                    `_yhat_`  = all_observations$`_yhat_`,
                    `_y_`     = if (is.null(all_observations$`_y_`)) NA else all_observations$`_y_`,
                    `_color_` = if (!is_color_points_a_variable) NA else all_observations[,color_points],
-                   0)
+                   0,
+                   `_label_`  = all_observations$`_label_`)
       })
       all_observations_long <- do.call(rbind, tmp)
-      colnames(all_observations_long) <- c("_x_", "_vname_", "_yhat_", "_y_", "_color_", "_ids_")
+      colnames(all_observations_long) <- c("_x_", "_vname_", "_yhat_", "_y_", "_color_", "_ids_", "_label_")
       if (is_color_points_a_variable | is_color_rugs_a_variable) colnames(all_observations_long)[5] = color_points
 
       # show observations
       if (show_observations) {
         if (is_color_points_a_variable) {
-          pl <- pl + geom_point(data = all_observations_long, aes_string(color = color_points), size = size_points, alpha = alpha_points)
+          pl <- pl + geom_point(data = all_observations_long, aes_string(color = paste0("`",color_points,"`")), size = size_points, alpha = alpha_points)
         } else {
           pl <- pl + geom_point(data = all_observations_long, size = size_points, alpha = alpha_points, color = color_points)
         }
@@ -314,7 +315,7 @@ ceteris_paribus_layer <- function(x, ...,
       # show rugs
       if (show_rugs) {
         if (is_color_rugs_a_variable) {
-          pl <- pl + geom_rug(data = all_observations_long, aes_string(color = color_rugs), size = size_rugs, alpha = alpha_rugs)
+          pl <- pl + geom_rug(data = all_observations_long, aes_string(color = paste0("`",color_rugs,"`")), size = size_rugs, alpha = alpha_rugs)
         } else {
           pl <- pl + geom_rug(data = all_observations_long, size = size_rugs, alpha = alpha_rugs, color = color_rugs)
         }
@@ -322,8 +323,8 @@ ceteris_paribus_layer <- function(x, ...,
 
       if (show_residuals) {
         if (is_color_residuals_a_variable) {
-          pl <- pl + geom_linerange(data = all_observations_long, aes_string(ymin = "`_y_`", ymax = "`_yhat_`", color = color_residuals), size = size_residuals, alpha = alpha_residuals) +
-            geom_point(data = all_observations_long, aes_string(y = "`_y_`", color = color_residuals), size = size_residuals, alpha = alpha_residuals)
+          pl <- pl + geom_linerange(data = all_observations_long, aes_string(ymin = "`_y_`", ymax = "`_yhat_`", color = paste0("`",color_residuals,"`")), size = size_residuals, alpha = alpha_residuals) +
+            geom_point(data = all_observations_long, aes_string(y = "`_y_`", color = paste0("`",color_residuals,"`")), size = size_residuals, alpha = alpha_residuals)
         } else {
           pl <- pl + geom_linerange(data = all_observations_long, aes_string(ymin = "`_y_`", ymax = "`_yhat_`"), size = size, alpha = alpha_residuals, color = color_residuals) +
             geom_point(data = all_observations_long, aes(y = `_y_`), size = size_residuals, alpha = alpha_residuals, color = color_residuals)
