@@ -197,3 +197,13 @@ plot(cp_rf_A,
           selected_variables = c("surface","construction.year"))
 
 ```
+
+Both models in a single layer
+
+```{r, warning=FALSE, message=FALSE}
+plot(cp_rf_A, cp_rf_E, 
+     color = "_label_", 
+    selected_variables = c("surface","construction.year"))
+
+```
+

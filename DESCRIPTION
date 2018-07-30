@@ -12,7 +12,8 @@ Depends: R (>= 3.3),
     ggplot2, 
     gower
 Suggests: randomForest,
-    ggiraph
+    ggiraph,
+    e1071
 Imports: DALEX,
     knitr
 License: GPL-2

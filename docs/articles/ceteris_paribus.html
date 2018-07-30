@@ -76,7 +76,7 @@
       <h1>Ceteris Paribus Plots</h1>
                         <h4 class="author">Przemyslaw Biecek</h4>
             
-            <h4 class="date">2018-07-27</h4>
+            <h4 class="date">2018-07-30</h4>
       
       
       <div class="hidden name"><code>ceteris_paribus.Rmd</code></div>
@@ -191,7 +191,7 @@
 <a class="sourceLine" id="cb13-4" data-line-number="4">     <span class="dt">show_observations =</span> <span class="ot">FALSE</span>, <span class="dt">show_rugs =</span> <span class="ot">TRUE</span>,</a>
 <a class="sourceLine" id="cb13-5" data-line-number="5">     <span class="dt">show_residuals =</span> <span class="ot">TRUE</span>, <span class="dt">color_residuals =</span> <span class="st">"red"</span>, <span class="dt">size_residuals =</span> <span class="dv">2</span>,</a>
 <a class="sourceLine" id="cb13-6" data-line-number="6">     <span class="dt">selected_variables =</span> <span class="kw">c</span>(<span class="st">"surface"</span>,<span class="st">"construction.year"</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="st">  </span><span class="kw">ceteris_paribus_layer</span>(cp_rf_C, </a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="../reference/ceteris_paribus_layer.html">ceteris_paribus_layer</a></span>(cp_rf_C, </a>
 <a class="sourceLine" id="cb13-8" data-line-number="8">            <span class="dt">show_observations =</span> <span class="ot">FALSE</span>, <span class="dt">show_rugs =</span> <span class="ot">FALSE</span>,</a>
 <a class="sourceLine" id="cb13-9" data-line-number="9">            <span class="dt">aggregate_profiles =</span> mean, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="dv">1</span>,</a>
 <a class="sourceLine" id="cb13-10" data-line-number="10">            <span class="dt">selected_variables =</span> <span class="kw">c</span>(<span class="st">"surface"</span>,<span class="st">"construction.year"</span>)) </a></code></pre></div>
@@ -204,7 +204,7 @@
 <a class="sourceLine" id="cb14-5" data-line-number="5">     <span class="dt">show_observations =</span> <span class="ot">FALSE</span>, <span class="dt">show_residuals =</span> <span class="ot">TRUE</span>, </a>
 <a class="sourceLine" id="cb14-6" data-line-number="6">     <span class="dt">color_residuals =</span> <span class="st">"blue"</span>,</a>
 <a class="sourceLine" id="cb14-7" data-line-number="7">     <span class="dt">selected_variables =</span> <span class="kw">c</span>(<span class="st">"surface"</span>,<span class="st">"construction.year"</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="st">  </span><span class="kw">ceteris_paribus_layer</span>(cp_rf_D, </a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="../reference/ceteris_paribus_layer.html">ceteris_paribus_layer</a></span>(cp_rf_D, </a>
 <a class="sourceLine" id="cb14-9" data-line-number="9">          <span class="dt">show_observations =</span> <span class="ot">FALSE</span>, <span class="dt">show_residuals =</span> <span class="ot">TRUE</span>, </a>
 <a class="sourceLine" id="cb14-10" data-line-number="10">          <span class="dt">color =</span> <span class="st">"orange"</span>, <span class="dt">color_residuals =</span> <span class="st">"red"</span>,</a>
 <a class="sourceLine" id="cb14-11" data-line-number="11">          <span class="dt">selected_variables =</span> <span class="kw">c</span>(<span class="st">"surface"</span>,<span class="st">"construction.year"</span>)) </a></code></pre></div>
@@ -224,11 +224,16 @@
 <a class="sourceLine" id="cb15-12" data-line-number="12">     <span class="dt">show_observations =</span> <span class="ot">FALSE</span>, <span class="dt">show_rugs =</span> <span class="ot">TRUE</span>, <span class="dt">show_residuals =</span> <span class="ot">TRUE</span>, </a>
 <a class="sourceLine" id="cb15-13" data-line-number="13">     <span class="dt">color_residuals =</span> <span class="st">"blue"</span>,</a>
 <a class="sourceLine" id="cb15-14" data-line-number="14">     <span class="dt">selected_variables =</span> <span class="kw">c</span>(<span class="st">"surface"</span>,<span class="st">"construction.year"</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-15" data-line-number="15"><span class="st">  </span><span class="kw">ceteris_paribus_layer</span>(cp_rf_E, </a>
+<a class="sourceLine" id="cb15-15" data-line-number="15"><span class="st">  </span><span class="kw"><a href="../reference/ceteris_paribus_layer.html">ceteris_paribus_layer</a></span>(cp_rf_E, </a>
 <a class="sourceLine" id="cb15-16" data-line-number="16">          <span class="dt">show_observations =</span> <span class="ot">FALSE</span>, <span class="dt">show_rugs =</span> <span class="ot">TRUE</span>, <span class="dt">show_residuals =</span> <span class="ot">TRUE</span>, </a>
 <a class="sourceLine" id="cb15-17" data-line-number="17">          <span class="dt">color =</span> <span class="st">"orange"</span>, <span class="dt">color_residuals =</span> <span class="st">"red"</span>,</a>
 <a class="sourceLine" id="cb15-18" data-line-number="18">          <span class="dt">selected_variables =</span> <span class="kw">c</span>(<span class="st">"surface"</span>,<span class="st">"construction.year"</span>))</a></code></pre></div>
 <p><img src="ceteris_paribus_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
+<p>Both models in a single layer</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">plot</span>(cp_rf_A, cp_rf_E, </a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">     <span class="dt">color =</span> <span class="st">"_label_"</span>, </a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">    <span class="dt">selected_variables =</span> <span class="kw">c</span>(<span class="st">"surface"</span>,<span class="st">"construction.year"</span>))</a></code></pre></div>
+<p><img src="ceteris_paribus_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
 </div>
   </div>
 
