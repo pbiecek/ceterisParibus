@@ -339,7 +339,11 @@ ceteris_paribus_layer <- function(x, ...,
       colnames(aggregated_profiles) <- c("_vname_", "_label_", "_x_", "_yhat_")
       aggregated_profiles$`_ids_` <- 0
 
-      pl <- pl + geom_line(data = aggregated_profiles, aes(y = `_yhat_`), size = size, alpha = alpha, color = color)
+      if (is_color_a_variable) {
+        pl <- pl + geom_line(data = aggregated_profiles, aes_string(y = "`_yhat_`", color = paste0("`",color,"`")), size = size, alpha = alpha)
+      } else {
+        pl <- pl + geom_line(data = aggregated_profiles, aes(y = `_yhat_`), size = size, alpha = alpha, color = color)
+      }
     }
 
     if (init_plot) {
