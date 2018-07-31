@@ -13,7 +13,8 @@ Depends: R (>= 3.3),
     gower
 Suggests: randomForest,
     ggiraph,
-    e1071
+    e1071,
+    testthat
 Imports: DALEX,
     knitr
 License: GPL-2
