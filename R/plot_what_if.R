@@ -80,7 +80,7 @@ plot.what_if_explainer <- function(x, ..., quantiles = TRUE, split = "models", s
       xlab("Relative percentile") +
       scale_x_continuous(breaks = seq(-1,1,0.2), labels = paste0(seq(-100,100,20),"%"))
   } else {
-    numericals <- attr(x, "prediction")$observation[,levels(all_responses$vname)]
+    numericals <- attr(x, "prediction")$observation[,levels(all_responses$vname), drop = FALSE]
     true_x <- data.frame(vname = colnames(numericals), values = unlist(numericals))
     pl <- pl +
       xlab("") +
