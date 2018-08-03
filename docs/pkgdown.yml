@@ -3,6 +3,7 @@ pkgdown: 1.0.0
 pkgdown_sha: ~
 articles:
   ceteris_paribus: ceteris_paribus.html
+  ceteris_paribus_HR: ceteris_paribus_HR.html
   coral: coral.html
   whatIf1d: whatIf1d.html
 

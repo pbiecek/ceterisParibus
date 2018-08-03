@@ -1,0 +1,103 @@
+---
+title: "Ceteris Paribus Plots for classification"
+author: "Przemyslaw Biecek"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteIndexEntry{Title of your vignette}
+  %\usepackage[UTF-8]{inputenc}
+---
+
+# Introduction
+
+Here we present an example for classification. 
+The `status` variable in the `HR` dataset is a factor that takes three values `fired`/`ok`/`promoted`. We will create a model for this variable and then we present explainers for this model.
+
+```{r, warning=FALSE, message=FALSE}
+library("DALEX")
+head(HR)
+```
+
+Here we create a random forest model for this dataset.
+
+```{r, warning=FALSE, message=FALSE}
+library("randomForest")
+library("ceterisParibus")
+set.seed(59)
+
+model <- randomForest(status ~ gender + age + hours + evaluation + salary, data = HR)
+```
+
+By default the `predict.randomForest()` function returns classes not scores. This is why we use user-specific `predict()` function. Here we use two explainers, one will explainer the `fired` class while the second will take care about the `promoted` class.
+
+```{r, warning=FALSE, message=FALSE}
+pred1 <- function(m, x)   predict(m, x, type = "prob")[,1]
+pred3 <- function(m, x)   predict(m, x, type = "prob")[,3]
+
+explainer_rf_fired <- explain(model, data = HR[,1:5], 
+                              y = HR$status == "fired", 
+                              predict_function = pred1, label = "fired")
+explainer_rf_promoted <- explain(model, data = HR[,1:5], 
+                               y = HR$status == "promoted", 
+                               predict_function = pred3, label = "promoted")
+```
+
+# Individial curves
+
+The `explainer_rf_fired` explainer is focused on class `fired`. Let's see Ceteris Paribus profiles for first 10 individuals.
+
+They are colored with the `gender` variable. It's useful since in the model there is an interaction between age and gender. Can you spot it?
+
+```{r, warning=FALSE, message=FALSE}
+cp_rf_fired <- ceteris_paribus(explainer_rf_fired, HR[1:10,])
+
+plot(cp_rf_fired, color = "gender")
+```
+
+# Partial Dependency Plots
+
+We can plot explainers for two classes (fired and promoted) in the same plot. Here is an example how to do this.
+
+The `hours` variable is an interesting one. People with low average working hours are on average more likely to be fired not promoted. Also the `salary` seems to be related with probability of being `fired` but not `promoted`.
+
+
+```{r, warning=FALSE, message=FALSE}
+cp_rf1 <- ceteris_paribus(explainer_rf_fired, HR[1:100,])
+cp_rf3 <- ceteris_paribus(explainer_rf_promoted, HR[1:100,])
+
+plot(cp_rf1, cp_rf3, 
+     aggregate_profiles = mean, 
+     alpha = 1, show_observations = FALSE, color="_label_")
+```
+
+# Partial Dependency Plots for groups of obervations
+
+Here we will compare the explainer (probability of being fired) across two genders.
+We know that there is an interaction between `gender` and `age` variables. It will be easy to read this interaction from the plot.
+
+In the plot below we will see that both genders behave in all panels except age.
+For the `age` variable it looks like younger woman are more likely to be fired while for males the older age is a risk factor. 
+
+Is it because employers are afraid of maternity leaves? Maybe, but please note, that this dataset is an artificial/simulated one.
+
+```{r, warning=FALSE, message=FALSE}
+cp_rfF <- ceteris_paribus(explainer_rf_fired, 
+                          HR[which(HR$gender == "female")[1:100],])
+cp_rfF$`_label_` = "Fired Female"
+cp_rfM <- ceteris_paribus(explainer_rf_fired, 
+                          HR[which(HR$gender == "male")[1:100],])
+cp_rfM$`_label_` = "Fired Male"
+
+plot(cp_rfM, cp_rfF, 
+     aggregate_profiles = mean, 
+     alpha = 1, show_observations = FALSE, color="_label_")
+```
+
+
+# Session info
+
+```{r, warning=FALSE, message=FALSE}
+devtools::session_info()
+```
+
