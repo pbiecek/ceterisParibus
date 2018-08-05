@@ -79,7 +79,7 @@
       <h1>Ceteris Paribus Plots for classification</h1>
                         <h4 class="author">Przemyslaw Biecek</h4>
             
-            <h4 class="date">2018-08-04</h4>
+            <h4 class="date">2018-08-05</h4>
       
       
       <div class="hidden name"><code>ceteris_paribus_HR.Rmd</code></div>
@@ -109,37 +109,54 @@
 <a class="sourceLine" id="cb3-5" data-line-number="5">model &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/randomForest/topics/randomForest">randomForest</a></span>(status <span class="op">~</span><span class="st"> </span>gender <span class="op">+</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>hours <span class="op">+</span><span class="st"> </span>evaluation <span class="op">+</span><span class="st"> </span>salary, <span class="dt">data =</span> HR)</a></code></pre></div>
 <p>By default the <code><a href="http://www.rdocumentation.org/packages/randomForest/topics/predict.randomForest">predict.randomForest()</a></code> function returns classes not scores. This is why we use user-specific <code>predict()</code> function. Here we use two explainers, one will explainer the <code>fired</code> class while the second will take care about the <code>promoted</code> class.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">pred1 &lt;-<span class="st"> </span><span class="cf">function</span>(m, x)   <span class="kw">predict</span>(m, x, <span class="dt">type =</span> <span class="st">"prob"</span>)[,<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">pred3 &lt;-<span class="st"> </span><span class="cf">function</span>(m, x)   <span class="kw">predict</span>(m, x, <span class="dt">type =</span> <span class="st">"prob"</span>)[,<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">explainer_rf_fired &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/DALEX/topics/explain">explain</a></span>(model, <span class="dt">data =</span> HR[,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], </a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">                              <span class="dt">y =</span> HR<span class="op">$</span>status <span class="op">==</span><span class="st"> "fired"</span>, </a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">                              <span class="dt">predict_function =</span> pred1, <span class="dt">label =</span> <span class="st">"fired"</span>)</a>
-<a class="sourceLine" id="cb4-7" data-line-number="7">explainer_rf_promoted &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/DALEX/topics/explain">explain</a></span>(model, <span class="dt">data =</span> HR[,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], </a>
-<a class="sourceLine" id="cb4-8" data-line-number="8">                               <span class="dt">y =</span> HR<span class="op">$</span>status <span class="op">==</span><span class="st"> "promoted"</span>, </a>
-<a class="sourceLine" id="cb4-9" data-line-number="9">                               <span class="dt">predict_function =</span> pred3, <span class="dt">label =</span> <span class="st">"promoted"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb4-2" data-line-number="2">pred2 &lt;-<span class="st"> </span><span class="cf">function</span>(m, x)   <span class="kw">predict</span>(m, x, <span class="dt">type =</span> <span class="st">"prob"</span>)[,<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">pred3 &lt;-<span class="st"> </span><span class="cf">function</span>(m, x)   <span class="kw">predict</span>(m, x, <span class="dt">type =</span> <span class="st">"prob"</span>)[,<span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">explainer_rf_fired &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/DALEX/topics/explain">explain</a></span>(model, <span class="dt">data =</span> HR[,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], </a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">                              <span class="dt">y =</span> HR<span class="op">$</span>status <span class="op">==</span><span class="st"> "fired"</span>, </a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">                              <span class="dt">predict_function =</span> pred1, <span class="dt">label =</span> <span class="st">"fired"</span>)</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">explainer_rf_ok &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/DALEX/topics/explain">explain</a></span>(model, <span class="dt">data =</span> HR[,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], </a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">                              <span class="dt">y =</span> HR<span class="op">$</span>status <span class="op">==</span><span class="st"> "ok"</span>, </a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">                              <span class="dt">predict_function =</span> pred2, <span class="dt">label =</span> <span class="st">"ok"</span>)</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">explainer_rf_promoted &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/DALEX/topics/explain">explain</a></span>(model, <span class="dt">data =</span> HR[,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], </a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">                               <span class="dt">y =</span> HR<span class="op">$</span>status <span class="op">==</span><span class="st"> "promoted"</span>, </a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">                               <span class="dt">predict_function =</span> pred3, <span class="dt">label =</span> <span class="st">"promoted"</span>)</a></code></pre></div>
+</div>
+<div id="multiclass" class="section level1">
+<h1 class="hasAnchor">
+<a href="#multiclass" class="anchor"></a>Multiclass</h1>
+<p>Ceteris Paribus package can plot many explainers in a single panel. This will be useful for multiclass classification. You can simply create an explainer for each class and plot all these explainers together.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">cp_rf1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf_fired, HR[<span class="dv">1</span>,])</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">cp_rf2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf_ok, HR[<span class="dv">1</span>,])</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">cp_rf3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf_promoted, HR[<span class="dv">1</span>,])</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw">plot</span>(cp_rf1, cp_rf2, cp_rf3, </a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">     <span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">color=</span><span class="st">"_label_"</span>, <span class="dt">size_points =</span> <span class="dv">4</span>)</a></code></pre></div>
+<p><img src="ceteris_paribus_HR_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 </div>
 <div id="individial-curves" class="section level1">
 <h1 class="hasAnchor">
 <a href="#individial-curves" class="anchor"></a>Individial curves</h1>
 <p>The <code>explainer_rf_fired</code> explainer is focused on class <code>fired</code>. Let’s see Ceteris Paribus profiles for first 10 individuals.</p>
 <p>They are colored with the <code>gender</code> variable. It’s useful since in the model there is an interaction between age and gender. Can you spot it?</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">cp_rf_fired &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf_fired, HR[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,])</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw">plot</span>(cp_rf_fired, <span class="dt">color =</span> <span class="st">"gender"</span>)</a></code></pre></div>
-<p><img src="ceteris_paribus_HR_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">cp_rf_fired &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf_fired, HR[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,])</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw">plot</span>(cp_rf_fired, <span class="dt">color =</span> <span class="st">"gender"</span>)</a></code></pre></div>
+<p><img src="ceteris_paribus_HR_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 </div>
 <div id="partial-dependency-plots" class="section level1">
 <h1 class="hasAnchor">
 <a href="#partial-dependency-plots" class="anchor"></a>Partial Dependency Plots</h1>
 <p>We can plot explainers for two classes (fired and promoted) in the same plot. Here is an example how to do this.</p>
 <p>The <code>hours</code> variable is an interesting one. People with low average working hours are on average more likely to be fired not promoted. Also the <code>salary</code> seems to be related with probability of being <code>fired</code> but not <code>promoted</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">cp_rf1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf_fired, HR[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>,])</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">cp_rf3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf_promoted, HR[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>,])</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="kw">plot</span>(cp_rf1, cp_rf3, </a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">     <span class="dt">aggregate_profiles =</span> mean, </a>
-<a class="sourceLine" id="cb6-6" data-line-number="6">     <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">show_observations =</span> <span class="ot">FALSE</span>, <span class="dt">color=</span><span class="st">"_label_"</span>)</a></code></pre></div>
-<p><img src="ceteris_paribus_HR_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">cp_rf1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf_fired, HR[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>,])</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">cp_rf2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf_ok, HR[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>,])</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">cp_rf3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf_promoted, HR[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>,])</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw">plot</span>(cp_rf1, cp_rf2, cp_rf3, </a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">     <span class="dt">aggregate_profiles =</span> mean, </a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">     <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">show_observations =</span> <span class="ot">FALSE</span>, <span class="dt">color=</span><span class="st">"_label_"</span>)</a></code></pre></div>
+<p><img src="ceteris_paribus_HR_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 </div>
 <div id="partial-dependency-plots-for-groups-of-obervations" class="section level1">
 <h1 class="hasAnchor">
@@ -147,22 +164,22 @@
 <p>Here we will compare the explainer (probability of being fired) across two genders. We know that there is an interaction between <code>gender</code> and <code>age</code> variables. It will be easy to read this interaction from the plot.</p>
 <p>In the plot below we will see that both genders behave in all panels except age. For the <code>age</code> variable it looks like younger woman are more likely to be fired while for males the older age is a risk factor.</p>
 <p>Is it because employers are afraid of maternity leaves? Maybe, but please note, that this dataset is an artificial/simulated one.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">cp_rfF &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf_fired, </a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">                          HR[<span class="kw">which</span>(HR<span class="op">$</span>gender <span class="op">==</span><span class="st"> "female"</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>],])</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">cp_rfF<span class="op">$</span><span class="st">`</span><span class="dt">_label_</span><span class="st">`</span> =<span class="st"> "Fired Female"</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">cp_rfM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf_fired, </a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">                          HR[<span class="kw">which</span>(HR<span class="op">$</span>gender <span class="op">==</span><span class="st"> "male"</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>],])</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">cp_rfM<span class="op">$</span><span class="st">`</span><span class="dt">_label_</span><span class="st">`</span> =<span class="st"> "Fired Male"</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="kw">plot</span>(cp_rfM, cp_rfF, </a>
-<a class="sourceLine" id="cb7-9" data-line-number="9">     <span class="dt">aggregate_profiles =</span> mean, </a>
-<a class="sourceLine" id="cb7-10" data-line-number="10">     <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">show_observations =</span> <span class="ot">FALSE</span>, <span class="dt">color=</span><span class="st">"_label_"</span>)</a></code></pre></div>
-<p><img src="ceteris_paribus_HR_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">cp_rfF &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf_fired, </a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">                          HR[<span class="kw">which</span>(HR<span class="op">$</span>gender <span class="op">==</span><span class="st"> "female"</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>],])</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">cp_rfF<span class="op">$</span><span class="st">`</span><span class="dt">_label_</span><span class="st">`</span> =<span class="st"> "Fired Female"</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">cp_rfM &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf_fired, </a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">                          HR[<span class="kw">which</span>(HR<span class="op">$</span>gender <span class="op">==</span><span class="st"> "male"</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>],])</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">cp_rfM<span class="op">$</span><span class="st">`</span><span class="dt">_label_</span><span class="st">`</span> =<span class="st"> "Fired Male"</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="kw">plot</span>(cp_rfM, cp_rfF, </a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">     <span class="dt">aggregate_profiles =</span> mean, </a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">     <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">show_observations =</span> <span class="ot">FALSE</span>, <span class="dt">color=</span><span class="st">"_label_"</span>)</a></code></pre></div>
+<p><img src="ceteris_paribus_HR_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 </div>
 <div id="session-info" class="section level1">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session info</h1>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/session_info">session_info</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/session_info">session_info</a></span>()</a></code></pre></div>
 <pre><code>##  setting  value                       
 ##  version  R version 3.5.0 (2018-04-23)
 ##  system   x86_64, darwin15.6.0        
@@ -170,7 +187,7 @@
 ##  language (EN)                        
 ##  collate  en_US.UTF-8                 
 ##  tz       Europe/Warsaw               
-##  date     2018-08-04                  
+##  date     2018-08-05                  
 ## 
 ##  package        * version date       source                        
 ##  agricolae        1.2-8   2017-09-12 CRAN (R 3.5.0)                
@@ -280,6 +297,7 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#multiclass">Multiclass</a></li>
       <li><a href="#individial-curves">Individial curves</a></li>
       <li><a href="#partial-dependency-plots">Partial Dependency Plots</a></li>
       <li><a href="#partial-dependency-plots-for-groups-of-obervations">Partial Dependency Plots for groups of obervations</a></li>
