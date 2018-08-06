@@ -172,7 +172,7 @@ And we can plot profiles for this observations. Note that both SVM and RF captur
 
 ```{r, warning=FALSE, message=FALSE}
 plot(cp_rf, cp_glm, cp_svm,
-     alpha = 1, show_observations = FALSE, color="_label_")
+     alpha = 0.5, size_points = 3, color="_label_")
 ```
 
 Now we can calculate average profile for global explanations. Here the average will be calculated based on 100 observations.
