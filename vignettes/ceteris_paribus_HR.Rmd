@@ -113,6 +113,81 @@ plot(cp_rfM, cp_rfF,
      alpha = 1, show_observations = FALSE, color="_label_")
 ```
 
+# More models
+
+Here we have examples for three classification models: random forest, support vector machines, generalized linear model. We focus only on the 'fired' class.
+
+
+Let's start with examples for a single observation. We need to train models first. Note that predictions are calculated in a different way for different functions, thus we need to prepare moedl specific predict functions.
+
+Here is for the random forest.
+
+```{r, warning=FALSE, message=FALSE}
+library("ceterisParibus")
+library("e1071")
+
+model_rf <- randomForest(status ~ gender + age + hours + evaluation + salary, data = HR)
+pred_rf_fired <- function(m, x)   predict(m, x, type = "prob")[,1]
+
+explainer_rf_fired <- explain(model, data = HR[,1:5], 
+                              y = HR$status == "fired", 
+                              predict_function = pred_rf_fired)
+```
+
+Here is for generalized linear model.
+
+```{r, warning=FALSE, message=FALSE}
+model_fired <- glm(status == "fired" ~ gender + age + hours + evaluation + salary, data = HR, family = "binomial")
+
+pred_glm_fired <- function(m, x)   predict.glm(m, x, type = "response")
+
+explainer_glm_fired <- explain(model_fired, data = HR[,1:5], 
+                              y = HR$status == "fired", 
+                              predict_function = pred_glm_fired)
+```
+
+And here is one for support vector machines.
+
+```{r, warning=FALSE, message=FALSE}
+model_svm_fired <- svm(status ~ gender + age + hours + evaluation + salary, data = HR, probability = TRUE)
+
+pred_svm_fired <- function(m, x) attr(predict(m, x, probability = TRUE), "probabilities")[,1]
+
+explainer_svm_fired <- explain(model_svm_fired, data = HR[,1:5], 
+                              y = HR$status == "fired", 
+                              predict_function = pred_svm_fired)
+```
+
+Having explainers, we can now create Ceteris Paribus profiles for a selected single observation.
+
+```{r, warning=FALSE, message=FALSE}
+new_obs <- HR[1,]
+
+cp_rf <- ceteris_paribus(explainer_rf_fired, new_obs)
+cp_glm <- ceteris_paribus(explainer_glm_fired, new_obs)
+cp_svm <- ceteris_paribus(explainer_svm_fired, new_obs)
+```
+
+And we can plot profiles for this observations. Note that both SVM and RF captured the interaction between gender and age. Also they captured the nonlinear relation for salary.
+
+```{r, warning=FALSE, message=FALSE}
+plot(cp_rf, cp_glm, cp_svm,
+     alpha = 1, show_observations = FALSE, color="_label_")
+```
+
+Now we can calculate average profile for global explanations. Here the average will be calculated based on 100 observations.
+Note that since age and gender are in interaction, on average there is no relation between score and the age.
+
+```{r, warning=FALSE, message=FALSE}
+cp_rf <- ceteris_paribus(explainer_rf_fired, HR[1:100,])
+cp_glm <- ceteris_paribus(explainer_glm_fired, HR[1:100,])
+cp_svm <- ceteris_paribus(explainer_svm_fired, HR[1:100,])
+
+plot(cp_rf, cp_glm, cp_svm,
+     aggregate_profiles = mean, 
+     alpha = 1, show_observations = FALSE, color="_label_")
+```
+
 
 # Session info
 
