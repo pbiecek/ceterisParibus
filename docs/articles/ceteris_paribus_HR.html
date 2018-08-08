@@ -79,7 +79,7 @@
       <h1>Ceteris Paribus Plots for classification</h1>
                         <h4 class="author">Przemyslaw Biecek</h4>
             
-            <h4 class="date">2018-08-06</h4>
+            <h4 class="date">2018-08-08</h4>
       
       
       <div class="hidden name"><code>ceteris_paribus_HR.Rmd</code></div>
@@ -227,120 +227,78 @@
 <a class="sourceLine" id="cb14-7" data-line-number="7">     <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">show_observations =</span> <span class="ot">FALSE</span>, <span class="dt">color=</span><span class="st">"_label_"</span>)</a></code></pre></div>
 <p><img src="ceteris_paribus_HR_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
 </div>
+<div id="cheatsheet" class="section level1">
+<h1 class="hasAnchor">
+<a href="#cheatsheet" class="anchor"></a>Cheatsheet</h1>
+<p>Images and codes used in the cheatsheet</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">data_<span class="dv">1</span> &lt;-<span class="st"> </span>HR[<span class="dv">1</span>,]</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">cp_rf3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf_promoted, data_<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="kw">plot</span>(cp_rf3, </a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">     <span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">size_points =</span> <span class="dv">4</span>, <span class="dt">selected_variables =</span> <span class="st">"hours"</span>, </a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">     <span class="dt">as.gg =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">""</span>) <span class="op">+</span><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">name =</span> <span class="st">"Pr(promoted)"</span>, <span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span><span class="st"> </span><span class="kw">theme_light</span>()</a></code></pre></div>
+<p><img src="ceteris_paribus_HR_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">cp_rf1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf_fired, HR[<span class="dv">1</span>,])</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">cp_rf2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf_ok, HR[<span class="dv">1</span>,])</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">cp_rf3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf_promoted, HR[<span class="dv">1</span>,])</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="kw">plot</span>(cp_rf1, cp_rf2, cp_rf3, </a>
+<a class="sourceLine" id="cb16-6" data-line-number="6">     <span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">color=</span><span class="st">"_label_"</span>, <span class="dt">size_points =</span> <span class="dv">4</span>, <span class="dt">selected_variables =</span> <span class="st">"hours"</span>, </a>
+<a class="sourceLine" id="cb16-7" data-line-number="7">     <span class="dt">as.gg =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">""</span>) <span class="op">+</span><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">name =</span> <span class="st">"Pr(promoted)"</span>, <span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span><span class="st"> </span><span class="kw">theme_light</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">"class"</span>)</a></code></pre></div>
+<p><img src="ceteris_paribus_HR_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
+</div>
 <div id="session-info" class="section level1">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session info</h1>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/session_info">session_info</a></span>()</a></code></pre></div>
-<pre><code>##  setting  value                       
-##  version  R version 3.5.0 (2018-04-23)
-##  system   x86_64, darwin15.6.0        
-##  ui       X11                         
-##  language (EN)                        
-##  collate  en_US.UTF-8                 
-##  tz       Europe/Warsaw               
-##  date     2018-08-06                  
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">sessionInfo</span>()</a></code></pre></div>
+<pre><code>## R version 3.5.0 (2018-04-23)
+## Platform: x86_64-apple-darwin15.6.0 (64-bit)
+## Running under: macOS Sierra 10.12.6
 ## 
-##  package        * version date       source                        
-##  agricolae        1.2-8   2017-09-12 CRAN (R 3.5.0)                
-##  ALEPlot          1.1     2018-05-24 CRAN (R 3.5.0)                
-##  AlgDesign        1.1-7.3 2014-10-15 CRAN (R 3.5.0)                
-##  assertthat       0.2.0   2017-04-11 CRAN (R 3.5.0)                
-##  backports        1.1.2   2017-12-13 CRAN (R 3.5.0)                
-##  base           * 3.5.0   2018-04-24 local                         
-##  bindr            0.1.1   2018-03-13 CRAN (R 3.5.0)                
-##  bindrcpp         0.2.2   2018-03-29 CRAN (R 3.5.0)                
-##  boot             1.3-20  2017-08-06 CRAN (R 3.5.0)                
-##  breakDown        0.1.6   2018-06-14 CRAN (R 3.5.0)                
-##  ceterisParibus * 0.3.0   2018-07-31 local (pbiecek/WhatIfPlots@NA)
-##  class            7.3-14  2015-08-30 CRAN (R 3.5.0)                
-##  cluster          2.0.7-1 2018-04-13 CRAN (R 3.5.0)                
-##  coda             0.19-1  2016-12-08 CRAN (R 3.5.0)                
-##  colorspace       1.3-2   2016-12-14 CRAN (R 3.5.0)                
-##  combinat         0.0-8   2012-10-29 CRAN (R 3.5.0)                
-##  commonmark       1.5     2018-04-28 CRAN (R 3.5.0)                
-##  compiler         3.5.0   2018-04-24 local                         
-##  crayon           1.3.4   2017-09-16 CRAN (R 3.5.0)                
-##  DALEX          * 0.2.4   2018-08-05 local (pbiecek/DALEX@NA)      
-##  datasets       * 3.5.0   2018-04-24 local                         
-##  deldir           0.1-15  2018-04-01 CRAN (R 3.5.0)                
-##  desc             1.2.0   2018-05-01 CRAN (R 3.5.0)                
-##  devtools         1.13.5  2018-02-18 CRAN (R 3.5.0)                
-##  digest           0.6.15  2018-01-28 CRAN (R 3.5.0)                
-##  dplyr            0.7.6   2018-06-29 cran (@0.7.6)                 
-##  e1071          * 1.6-8   2017-02-02 CRAN (R 3.5.0)                
-##  evaluate         0.10.1  2017-06-24 CRAN (R 3.5.0)                
-##  expm             0.999-2 2017-03-29 CRAN (R 3.5.0)                
-##  factorMerger     0.3.6   2018-04-04 CRAN (R 3.5.0)                
-##  fs               1.2.2   2018-03-21 CRAN (R 3.5.0)                
-##  gdata            2.18.0  2017-06-06 CRAN (R 3.5.0)                
-##  ggplot2        * 3.0.0   2018-07-03 CRAN (R 3.5.0)                
-##  ggpubr           0.1.7   2018-06-23 cran (@0.1.7)                 
-##  glue             1.2.0   2017-10-29 CRAN (R 3.5.0)                
-##  gmodels          2.16.2  2015-07-22 CRAN (R 3.5.0)                
-##  gower          * 0.1.2   2017-02-23 CRAN (R 3.5.0)                
-##  graphics       * 3.5.0   2018-04-24 local                         
-##  grDevices      * 3.5.0   2018-04-24 local                         
-##  grid             3.5.0   2018-04-24 local                         
-##  gridExtra        2.3     2017-09-09 CRAN (R 3.5.0)                
-##  gtable           0.2.0   2016-02-26 CRAN (R 3.5.0)                
-##  gtools           3.5.0   2015-05-29 CRAN (R 3.5.0)                
-##  highr            0.6     2016-05-09 CRAN (R 3.5.0)                
-##  htmltools        0.3.6   2017-04-28 CRAN (R 3.5.0)                
-##  httpuv           1.4.3   2018-05-10 CRAN (R 3.5.0)                
-##  klaR             0.6-14  2018-03-19 CRAN (R 3.5.0)                
-##  knitr            1.20    2018-02-20 CRAN (R 3.5.0)                
-##  labeling         0.3     2014-08-23 CRAN (R 3.5.0)                
-##  later            0.7.2   2018-05-01 CRAN (R 3.5.0)                
-##  lattice          0.20-35 2017-03-25 CRAN (R 3.5.0)                
-##  lazyeval         0.2.1   2017-10-29 CRAN (R 3.5.0)                
-##  LearnBayes       2.15.1  2018-03-18 CRAN (R 3.5.0)                
-##  magrittr         1.5     2014-11-22 CRAN (R 3.5.0)                
-##  MASS             7.3-49  2018-02-23 CRAN (R 3.5.0)                
-##  Matrix           1.2-14  2018-04-13 CRAN (R 3.5.0)                
-##  memoise          1.1.0   2017-04-21 CRAN (R 3.5.0)                
-##  methods        * 3.5.0   2018-04-24 local                         
-##  mime             0.5     2016-07-07 CRAN (R 3.5.0)                
-##  miniUI           0.1.1.1 2018-05-18 CRAN (R 3.5.0)                
-##  munsell          0.4.3   2016-02-13 CRAN (R 3.5.0)                
-##  mvtnorm          1.0-7   2018-01-26 CRAN (R 3.5.0)                
-##  nlme             3.1-137 2018-04-07 CRAN (R 3.5.0)                
-##  pdp              0.6.0   2017-07-20 CRAN (R 3.5.0)                
-##  pillar           1.2.3   2018-05-25 CRAN (R 3.5.0)                
-##  pkgconfig        2.0.1   2017-03-21 CRAN (R 3.5.0)                
-##  pkgdown          1.0.0   2018-05-03 CRAN (R 3.5.0)                
-##  plyr             1.8.4   2016-06-08 CRAN (R 3.5.0)                
-##  promises         1.0.1   2018-04-13 CRAN (R 3.5.0)                
-##  proxy            0.4-22  2018-04-08 CRAN (R 3.5.0)                
-##  purrr            0.2.5   2018-05-29 CRAN (R 3.5.0)                
-##  questionr        0.6.2   2017-11-01 CRAN (R 3.5.0)                
-##  R6               2.2.2   2017-06-17 CRAN (R 3.5.0)                
-##  randomForest   * 4.6-14  2018-03-25 CRAN (R 3.5.0)                
-##  Rcpp             0.12.17 2018-05-18 CRAN (R 3.5.0)                
-##  reshape2         1.4.3   2017-12-11 CRAN (R 3.5.0)                
-##  rlang            0.2.1   2018-05-30 CRAN (R 3.5.0)                
-##  rmarkdown        1.10    2018-06-11 cran (@1.10)                  
-##  roxygen2         6.0.1   2017-02-06 CRAN (R 3.5.0)                
-##  rprojroot        1.3-2   2018-01-03 CRAN (R 3.5.0)                
-##  rstudioapi       0.7     2017-09-07 CRAN (R 3.5.0)                
-##  scales           0.5.0   2017-08-24 CRAN (R 3.5.0)                
-##  shiny            1.1.0   2018-05-17 CRAN (R 3.5.0)                
-##  sp               1.2-7   2018-01-19 CRAN (R 3.5.0)                
-##  spData           0.2.8.3 2018-03-25 CRAN (R 3.5.0)                
-##  spdep            0.7-7   2018-04-03 CRAN (R 3.5.0)                
-##  splines          3.5.0   2018-04-24 local                         
-##  stats          * 3.5.0   2018-04-24 local                         
-##  stringi          1.2.3   2018-06-12 cran (@1.2.3)                 
-##  stringr          1.3.1   2018-05-10 CRAN (R 3.5.0)                
-##  survival         2.41-3  2017-04-04 CRAN (R 3.5.0)                
-##  tibble           1.4.2   2018-01-22 CRAN (R 3.5.0)                
-##  tidyselect       0.2.4   2018-02-26 CRAN (R 3.5.0)                
-##  tools            3.5.0   2018-04-24 local                         
-##  utils          * 3.5.0   2018-04-24 local                         
-##  withr            2.1.2   2018-03-15 CRAN (R 3.5.0)                
-##  xml2             1.2.0   2018-01-24 CRAN (R 3.5.0)                
-##  xtable           1.8-2   2016-02-05 CRAN (R 3.5.0)                
-##  yaImpute         1.0-29  2017-12-10 CRAN (R 3.5.0)                
-##  yaml             2.1.19  2018-05-01 CRAN (R 3.5.0)</code></pre>
+## Matrix products: default
+## BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
+## 
+## locale:
+## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+## [1] e1071_1.6-8          ceterisParibus_0.3.0 gower_0.1.2         
+## [4] ggplot2_3.0.0        randomForest_4.6-14  DALEX_0.2.4         
+## 
+## loaded via a namespace (and not attached):
+##  [1] splines_3.5.0      gtools_3.5.0       shiny_1.1.0       
+##  [4] assertthat_0.2.0   expm_0.999-2       sp_1.2-7          
+##  [7] highr_0.6          pdp_0.6.0          yaml_2.1.19       
+## [10] LearnBayes_2.15.1  pillar_1.2.3       backports_1.1.2   
+## [13] lattice_0.20-35    glue_1.2.0         digest_0.6.15     
+## [16] promises_1.0.1     colorspace_1.3-2   htmltools_0.3.6   
+## [19] httpuv_1.4.3       Matrix_1.2-14      plyr_1.8.4        
+## [22] klaR_0.6-14        pkgconfig_2.0.1    breakDown_0.1.6   
+## [25] questionr_0.6.2    gmodels_2.16.2     purrr_0.2.5       
+## [28] xtable_1.8-2       mvtnorm_1.0-7      scales_0.5.0      
+## [31] gdata_2.18.0       later_0.7.2        proxy_0.4-22      
+## [34] tibble_1.4.2       combinat_0.0-8     ggpubr_0.1.7      
+## [37] withr_2.1.2        ALEPlot_1.1        agricolae_1.2-8   
+## [40] lazyeval_0.2.1     survival_2.41-3    magrittr_1.5      
+## [43] crayon_1.3.4       mime_0.5           deldir_0.1-15     
+## [46] memoise_1.1.0      evaluate_0.10.1    fs_1.2.2          
+## [49] nlme_3.1-137       MASS_7.3-49        class_7.3-14      
+## [52] xml2_1.2.0         tools_3.5.0        stringr_1.3.1     
+## [55] munsell_0.4.3      cluster_2.0.7-1    bindrcpp_0.2.2    
+## [58] compiler_3.5.0     pkgdown_1.0.0      rlang_0.2.1       
+## [61] grid_3.5.0         rstudioapi_0.7     miniUI_0.1.1.1    
+## [64] labeling_0.3       rmarkdown_1.10     boot_1.3-20       
+## [67] gtable_0.2.0       roxygen2_6.0.1     reshape2_1.4.3    
+## [70] R6_2.2.2           AlgDesign_1.1-7.3  gridExtra_2.3     
+## [73] yaImpute_1.0-29    knitr_1.20         dplyr_0.7.6       
+## [76] bindr_0.1.1        commonmark_1.5     factorMerger_0.3.6
+## [79] rprojroot_1.3-2    spdep_0.7-7        desc_1.2.0        
+## [82] stringi_1.2.3      Rcpp_0.12.17       spData_0.2.8.3    
+## [85] tidyselect_0.2.4   coda_0.19-1</code></pre>
 </div>
   </div>
 
@@ -355,6 +313,7 @@
       <li><a href="#partial-dependency-plots">Partial Dependency Plots</a></li>
       <li><a href="#partial-dependency-plots-for-groups-of-obervations">Partial Dependency Plots for groups of obervations</a></li>
       <li><a href="#more-models">More models</a></li>
+      <li><a href="#cheatsheet">Cheatsheet</a></li>
       <li><a href="#session-info">Session info</a></li>
       </ul>
 </div>

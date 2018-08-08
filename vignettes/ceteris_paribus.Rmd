@@ -181,11 +181,19 @@ library("e1071")
 apartments_svm_model <- svm(m2.price ~ construction.year + surface + floor + 
                               no.rooms + district, data = apartments)
 
+apartments_rpart_model <- best.rpart(m2.price ~ construction.year + surface + floor + no.rooms + district, data = apartments)
+
 explainer_svm <- explain(apartments_svm_model, 
+                         data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
+
+explainer_rpart <- explain(apartments_rpart_model, 
                          data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
 
 apartments_E <- apartmentsTest[958,]
 cp_rf_E <- ceteris_paribus(explainer_svm, apartments_E, y = apartments_E$m2.price)
+
+apartments_F <- apartmentsTest[958,]
+cp_rpart_F <- ceteris_paribus(explainer_rpart, apartments_F, y = apartments_F$m2.price)
 
 plot(cp_rf_A, 
      show_observations = FALSE, show_rugs = TRUE, show_residuals = TRUE, 
@@ -201,9 +209,84 @@ plot(cp_rf_A,
 Both models in a single layer
 
 ```{r, warning=FALSE, message=FALSE}
-plot(cp_rf_A, cp_rf_E, 
+plot(cp_rf_A, cp_rf_E, cp_rpart_F,
      color = "_label_", 
     selected_variables = c("surface","construction.year"))
 
+```
+
+# Cheatsheet
+
+Images and codes used in the cheatsheet
+
+```{r, warning=FALSE, message=FALSE}
+apartments_A <- apartmentsTest[2,]
+cp_rf_A <- ceteris_paribus(explainer_rf, apartments_A, y = apartments_A$m2.price)
+
+plot(cp_rf_A,
+     alpha = 0.5, size_points = 4, 
+     selected_variables = "surface", 
+     as.gg = TRUE) + xlab("") + ylab("price [EUR]") + theme_light()
+
+
+
+
+apartments_B <- select_neighbours(apartmentsTest, apartments[1,], n = 10)
+cp_rf_B <- ceteris_paribus(explainer_rf, apartments_B, y = apartments_B$m2.price)
+
+plot(cp_rf_B, 
+     show_rugs = TRUE, show_residuals = TRUE,
+     selected_variables = "surface", color_residuals = "red", size = 0.5,
+     as.gg = TRUE) + xlab("") + ylab("price [EUR]") + theme_light() 
+
+
+apartments_C <- select_sample(apartmentsTest, n = 15)
+cp_rf_C <- ceteris_paribus(explainer_rf, apartments_C, y = apartments_C$m2.price)
+
+plot(cp_rf_C, 
+     show_observations = TRUE, show_rugs = TRUE, size = 0.3, size_points = 0.5,
+     selected_variables = "surface") +
+  ceteris_paribus_layer(cp_rf_C, 
+            show_observations = FALSE, 
+            aggregate_profiles = mean, size = 2, alpha = 1,
+            selected_variables = "surface",
+     as.gg = TRUE) + xlab("") + ylab("price [EUR]") + theme_light() 
+
+
+
+apartments_D <- select_neighbours(apartmentsTest, apartmentsTest[348,], n = 15)
+cp_rf_D <- ceteris_paribus(explainer_rf, apartments_D, y = apartments_D$m2.price)
+
+plot(cp_rf_B, 
+     show_observations = FALSE, show_residuals = TRUE, 
+     color_residuals = "blue", alpha = 0.5, size = 0.5, 
+     selected_variables = "surface") +
+  ceteris_paribus_layer(cp_rf_D, 
+          show_observations = FALSE, show_residuals = TRUE, 
+          color = "orange", color_residuals = "red", alpha = 0.5, size = 0.5,
+          selected_variables = "surface", 
+     as.gg = TRUE) + xlab("") +  theme_light() + ylab("price [EUR]")
+
+```
+
+```{r, warning=FALSE, message=FALSE}
+plot(cp_rf_A, cp_rf_E, cp_rpart_F,
+     color = "_label_", alpha = 0.5, size_points = 4, 
+     selected_variables = "surface", 
+     as.gg = TRUE) + xlab("") + ylab("price [EUR]") + theme_light() + scale_color_discrete(name="")
+
+plot(cp_rf_C[as.numeric(cp_rf_C$district) < 8,], 
+     show_profiles = TRUE, show_observations = FALSE, 
+     color = "district", alpha = 1,
+     selected_variables = c("surface", "district"), 
+     as.gg = TRUE) + xlab("") + ylab("price [EUR]") + theme_light() 
+
+```
+
+```{r, warning=FALSE, message=FALSE}
+
+plot(cp_rf_A,
+     alpha = 0.5, size_points = 4, 
+     as.gg = TRUE) + xlab("") + ylab("price [EUR]") + theme_light()
 ```
 

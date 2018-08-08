@@ -23,7 +23,13 @@ Find more about Ceteris Paribus Profiles in this [Gentle introduction to DALEX w
 
 ## Installation
 
-To get started, install the latest version of **ceterisParibus** from GitHub:
+To get started, install the latest version of **ceterisParibus** from CRAN
+
+```
+install.packages("ceterisParibus")
+```
+
+or from GitHub:
 
 ```
 devtools::install_github("pbiecek/ceterisParibus")

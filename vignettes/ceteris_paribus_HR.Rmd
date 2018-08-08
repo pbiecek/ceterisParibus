@@ -189,9 +189,34 @@ plot(cp_rf, cp_glm, cp_svm,
 ```
 
 
+# Cheatsheet
+
+Images and codes used in the cheatsheet
+
+```{r, warning=FALSE, message=FALSE}
+data_1 <- HR[1,]
+cp_rf3 <- ceteris_paribus(explainer_rf_promoted, data_1)
+
+plot(cp_rf3, 
+     alpha = 0.5, size_points = 4, selected_variables = "hours", 
+     as.gg = TRUE) + xlab("") +  scale_y_continuous(limits=c(0,1), name = "Pr(promoted)", labels = scales::percent) + theme_light()
+
+```
+```{r, warning=FALSE, message=FALSE}
+cp_rf1 <- ceteris_paribus(explainer_rf_fired, HR[1,])
+cp_rf2 <- ceteris_paribus(explainer_rf_ok, HR[1,])
+cp_rf3 <- ceteris_paribus(explainer_rf_promoted, HR[1,])
+
+plot(cp_rf1, cp_rf2, cp_rf3, 
+     alpha = 0.5, color="_label_", size_points = 4, selected_variables = "hours", 
+     as.gg = TRUE) + xlab("") +  scale_y_continuous(limits=c(0,1), name = "Pr(promoted)", labels = scales::percent) + theme_light() + scale_color_discrete(name = "class")
+
+```
+
+
 # Session info
 
 ```{r, warning=FALSE, message=FALSE}
-devtools::session_info()
+sessionInfo()
 ```
 
