@@ -14,7 +14,8 @@ Depends: R (>= 3.3),
 Suggests: randomForest,
     ggiraph,
     e1071,
-    testthat
+    testthat,
+    rpart
 Imports: DALEX,
     knitr
 License: GPL-2

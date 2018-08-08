@@ -176,7 +176,7 @@ plot(cp_rf_B,
 Profiles for two models: random forest and SVM.
 
 ```{r, warning=FALSE, message=FALSE}
-
+library("rpart")
 library("e1071")
 apartments_svm_model <- svm(m2.price ~ construction.year + surface + floor + 
                               no.rooms + district, data = apartments)

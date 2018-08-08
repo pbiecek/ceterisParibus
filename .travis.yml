@@ -10,8 +10,10 @@ notifications:
 r_packages:
   - archivist
   - ggplot2
+  - rpart
+  - DALEX
   - covr
 
 after_success:
   - Rscript -e 'library(covr); codecov()'
-  
+
