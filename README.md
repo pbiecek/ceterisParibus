@@ -17,6 +17,10 @@ Ceteris Paribus Plots show possible scenarios for model predictions allowing for
 
 Find more about Ceteris Paribus Profiles in this [Gentle introduction to DALEX with examples](https://pbiecek.github.io/DALEX_docs/5-ceterisParibus.html#ceterisParibus).
 
+<a href="cheatsheets/CeterisParibusCheatsheet.pdf">
+![Cheatsheet for Ceteris Paribus](cheatsheets/CeterisParibusCheatsheet.png)
+</a>
+
 ## Installation
 
 To get started, install the latest version of **ceterisParibus** from GitHub:
