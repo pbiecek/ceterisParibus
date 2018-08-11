@@ -79,7 +79,7 @@
       <h1>Ceteris Paribus Plots</h1>
                         <h4 class="author">Przemyslaw Biecek</h4>
             
-            <h4 class="date">2018-08-08</h4>
+            <h4 class="date">2018-08-11</h4>
       
       
       <div class="hidden name"><code>ceteris_paribus.Rmd</code></div>
@@ -213,32 +213,33 @@
 <a class="sourceLine" id="cb14-11" data-line-number="11">          <span class="dt">selected_variables =</span> <span class="kw">c</span>(<span class="st">"surface"</span>,<span class="st">"construction.year"</span>)) </a></code></pre></div>
 <p><img src="ceteris_paribus_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
 <p>Profiles for two models: random forest and SVM.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"e1071"</span>)</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">apartments_svm_model &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/e1071/topics/svm">svm</a></span>(m2.price <span class="op">~</span><span class="st"> </span>construction.year <span class="op">+</span><span class="st"> </span>surface <span class="op">+</span><span class="st"> </span>floor <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="st">                              </span>no.rooms <span class="op">+</span><span class="st"> </span>district, <span class="dt">data =</span> apartments)</a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5">apartments_rpart_model &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/e1071/topics/tune.wrapper">best.rpart</a></span>(m2.price <span class="op">~</span><span class="st"> </span>construction.year <span class="op">+</span><span class="st"> </span>surface <span class="op">+</span><span class="st"> </span>floor <span class="op">+</span><span class="st"> </span>no.rooms <span class="op">+</span><span class="st"> </span>district, <span class="dt">data =</span> apartments)</a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7">explainer_svm &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/DALEX/topics/explain">explain</a></span>(apartments_svm_model, </a>
-<a class="sourceLine" id="cb15-8" data-line-number="8">                         <span class="dt">data =</span> apartmentsTest[,<span class="dv">2</span><span class="op">:</span><span class="dv">6</span>], <span class="dt">y =</span> apartmentsTest<span class="op">$</span>m2.price)</a>
-<a class="sourceLine" id="cb15-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb15-10" data-line-number="10">explainer_rpart &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/DALEX/topics/explain">explain</a></span>(apartments_rpart_model, </a>
-<a class="sourceLine" id="cb15-11" data-line-number="11">                         <span class="dt">data =</span> apartmentsTest[,<span class="dv">2</span><span class="op">:</span><span class="dv">6</span>], <span class="dt">y =</span> apartmentsTest<span class="op">$</span>m2.price)</a>
-<a class="sourceLine" id="cb15-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb15-13" data-line-number="13">apartments_E &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">958</span>,]</a>
-<a class="sourceLine" id="cb15-14" data-line-number="14">cp_rf_E &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_svm, apartments_E, <span class="dt">y =</span> apartments_E<span class="op">$</span>m2.price)</a>
-<a class="sourceLine" id="cb15-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb15-16" data-line-number="16">apartments_F &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">958</span>,]</a>
-<a class="sourceLine" id="cb15-17" data-line-number="17">cp_rpart_F &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rpart, apartments_F, <span class="dt">y =</span> apartments_F<span class="op">$</span>m2.price)</a>
-<a class="sourceLine" id="cb15-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb15-19" data-line-number="19"><span class="kw">plot</span>(cp_rf_A, </a>
-<a class="sourceLine" id="cb15-20" data-line-number="20">     <span class="dt">show_observations =</span> <span class="ot">FALSE</span>, <span class="dt">show_rugs =</span> <span class="ot">TRUE</span>, <span class="dt">show_residuals =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb15-21" data-line-number="21">     <span class="dt">color_residuals =</span> <span class="st">"blue"</span>,</a>
-<a class="sourceLine" id="cb15-22" data-line-number="22">     <span class="dt">selected_variables =</span> <span class="kw">c</span>(<span class="st">"surface"</span>,<span class="st">"construction.year"</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-23" data-line-number="23"><span class="st">  </span><span class="kw"><a href="../reference/ceteris_paribus_layer.html">ceteris_paribus_layer</a></span>(cp_rf_E, </a>
-<a class="sourceLine" id="cb15-24" data-line-number="24">          <span class="dt">show_observations =</span> <span class="ot">FALSE</span>, <span class="dt">show_rugs =</span> <span class="ot">TRUE</span>, <span class="dt">show_residuals =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb15-25" data-line-number="25">          <span class="dt">color =</span> <span class="st">"orange"</span>, <span class="dt">color_residuals =</span> <span class="st">"red"</span>,</a>
-<a class="sourceLine" id="cb15-26" data-line-number="26">          <span class="dt">selected_variables =</span> <span class="kw">c</span>(<span class="st">"surface"</span>,<span class="st">"construction.year"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"rpart"</span>)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw">library</span>(<span class="st">"e1071"</span>)</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">apartments_svm_model &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/e1071/topics/svm">svm</a></span>(m2.price <span class="op">~</span><span class="st"> </span>construction.year <span class="op">+</span><span class="st"> </span>surface <span class="op">+</span><span class="st"> </span>floor <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="st">                              </span>no.rooms <span class="op">+</span><span class="st"> </span>district, <span class="dt">data =</span> apartments)</a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">apartments_rpart_model &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/e1071/topics/tune.wrapper">best.rpart</a></span>(m2.price <span class="op">~</span><span class="st"> </span>construction.year <span class="op">+</span><span class="st"> </span>surface <span class="op">+</span><span class="st"> </span>floor <span class="op">+</span><span class="st"> </span>no.rooms <span class="op">+</span><span class="st"> </span>district, <span class="dt">data =</span> apartments)</a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8">explainer_svm &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/DALEX/topics/explain">explain</a></span>(apartments_svm_model, </a>
+<a class="sourceLine" id="cb15-9" data-line-number="9">                         <span class="dt">data =</span> apartmentsTest[,<span class="dv">2</span><span class="op">:</span><span class="dv">6</span>], <span class="dt">y =</span> apartmentsTest<span class="op">$</span>m2.price)</a>
+<a class="sourceLine" id="cb15-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb15-11" data-line-number="11">explainer_rpart &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/DALEX/topics/explain">explain</a></span>(apartments_rpart_model, </a>
+<a class="sourceLine" id="cb15-12" data-line-number="12">                         <span class="dt">data =</span> apartmentsTest[,<span class="dv">2</span><span class="op">:</span><span class="dv">6</span>], <span class="dt">y =</span> apartmentsTest<span class="op">$</span>m2.price)</a>
+<a class="sourceLine" id="cb15-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb15-14" data-line-number="14">apartments_E &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">958</span>,]</a>
+<a class="sourceLine" id="cb15-15" data-line-number="15">cp_rf_E &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_svm, apartments_E, <span class="dt">y =</span> apartments_E<span class="op">$</span>m2.price)</a>
+<a class="sourceLine" id="cb15-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb15-17" data-line-number="17">apartments_F &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">958</span>,]</a>
+<a class="sourceLine" id="cb15-18" data-line-number="18">cp_rpart_F &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rpart, apartments_F, <span class="dt">y =</span> apartments_F<span class="op">$</span>m2.price)</a>
+<a class="sourceLine" id="cb15-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb15-20" data-line-number="20"><span class="kw">plot</span>(cp_rf_A, </a>
+<a class="sourceLine" id="cb15-21" data-line-number="21">     <span class="dt">show_observations =</span> <span class="ot">FALSE</span>, <span class="dt">show_rugs =</span> <span class="ot">TRUE</span>, <span class="dt">show_residuals =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb15-22" data-line-number="22">     <span class="dt">color_residuals =</span> <span class="st">"blue"</span>,</a>
+<a class="sourceLine" id="cb15-23" data-line-number="23">     <span class="dt">selected_variables =</span> <span class="kw">c</span>(<span class="st">"surface"</span>,<span class="st">"construction.year"</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-24" data-line-number="24"><span class="st">  </span><span class="kw"><a href="../reference/ceteris_paribus_layer.html">ceteris_paribus_layer</a></span>(cp_rf_E, </a>
+<a class="sourceLine" id="cb15-25" data-line-number="25">          <span class="dt">show_observations =</span> <span class="ot">FALSE</span>, <span class="dt">show_rugs =</span> <span class="ot">TRUE</span>, <span class="dt">show_residuals =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb15-26" data-line-number="26">          <span class="dt">color =</span> <span class="st">"orange"</span>, <span class="dt">color_residuals =</span> <span class="st">"red"</span>,</a>
+<a class="sourceLine" id="cb15-27" data-line-number="27">          <span class="dt">selected_variables =</span> <span class="kw">c</span>(<span class="st">"surface"</span>,<span class="st">"construction.year"</span>))</a></code></pre></div>
 <p><img src="ceteris_paribus_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
 <p>Both models in a single layer</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">plot</span>(cp_rf_A, cp_rf_E, cp_rpart_F,</a>

@@ -15,6 +15,10 @@ Imagine a scenario in which a client gets low credit score and is wondering why 
 
 Ceteris Paribus Plots show possible scenarios for model predictions allowing for changes in a single dimension keeping all other features constant (the *ceteris paribus* principle).
 
+See a short 100 secs introduction to the package [on YouTube](https://youtu.be/ya1SEWFXN08).
+
+[![Ceteris Paribus 100 sec introduction](misc/ceterisParibus100sec.png)](https://youtu.be/ya1SEWFXN08 "100 sec into ceterisParobis package")
+
 Find more about Ceteris Paribus Profiles in this [Gentle introduction to DALEX with examples](https://pbiecek.github.io/DALEX_docs/5-ceterisParibus.html#ceterisParibus) or in the cheatsheet presented below.
 
 <a href="cheatsheets/CeterisParibusCheatsheet.pdf">
