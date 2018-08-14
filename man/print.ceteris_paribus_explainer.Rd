@@ -16,6 +16,7 @@ Print Ceteris Paribus Explainer Summary
 }
 \examples{
 library("DALEX")
+ \dontrun{
 library("randomForest")
 set.seed(59)
 
@@ -29,4 +30,5 @@ apartments_small <- select_sample(apartmentsTest, 10)
 
 cp_rf <- ceteris_paribus(explainer_rf, apartments_small)
 cp_rf
+}
 }

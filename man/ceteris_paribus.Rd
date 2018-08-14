@@ -29,6 +29,7 @@ This function calculate ceteris paribus profiles for selected data points.
 }
 \examples{
 library("DALEX")
+ \dontrun{
 library("randomForest")
 set.seed(59)
 
@@ -45,4 +46,5 @@ cp_rf
 
 cp_rf <- ceteris_paribus(explainer_rf, apartments_small, y = apartments_small$m2.price)
 cp_rf
+}
 }

@@ -25,6 +25,7 @@ What-If Plot
 }
 \examples{
 library("DALEX")
+ \dontrun{
 library("randomForest")
 set.seed(59)
 
@@ -42,4 +43,5 @@ wi_rf
 wi_rf <- what_if(explainer_rf, observation = new_apartment,
          selected_variables = c("surface", "floor", "no.rooms"))
 wi_rf
+}
 }

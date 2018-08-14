@@ -14,6 +14,7 @@
 #'
 #' @examples
 #' library("DALEX")
+#'  \dontrun{
 #' library("randomForest")
 #' set.seed(59)
 #'
@@ -31,6 +32,7 @@
 #' wi_rf <- what_if(explainer_rf, observation = new_apartment,
 #'          selected_variables = c("surface", "floor", "no.rooms"))
 #' wi_rf
+#' }
 what_if <- function(explainer, observation, grid_points = 101, selected_variables = NULL) {
   if (!("explainer" %in% class(explainer)))
       stop("The what_if() function requires an object created with explain() function.")

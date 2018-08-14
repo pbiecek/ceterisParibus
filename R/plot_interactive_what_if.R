@@ -13,6 +13,7 @@
 #'
 #' @examples
 #' library("DALEX")
+#'  \dontrun{
 #' library("ggiraph")
 #' library("randomForest")
 #' set.seed(59)
@@ -30,6 +31,7 @@
 #' wi_rf
 #'
 #' plot_interactive(wi_rf, split = "variables", color = "variables")
+#' }
 plot_interactive.what_if_explainer <- function(x, ..., split = "models", color = "variables") {
   if (!requireNamespace("ggiraph", quietly = TRUE)) {
     stop("You have to first install library 'ggiraph'. ", call. = FALSE)

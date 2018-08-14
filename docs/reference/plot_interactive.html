@@ -144,7 +144,7 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX"</span>)
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX"</span>)</div><span class='co'># NOT RUN {</span>
 <span class='fu'>library</span>(<span class='st'>"ggiraph"</span>)
 <span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
 <span class='fu'>set.seed</span>(<span class='fl'>59</span>)
@@ -156,17 +156,13 @@
       <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)
 
 <span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>, ]
-<span class='no'>new_apartment</span></div><div class='output co'>#&gt;      m2.price construction.year surface floor no.rooms    district
-#&gt; 1001     4644              1976     131     3        5 Srodmiescie</div><div class='input'>
+<span class='no'>new_apartment</span>
+
 <span class='no'>wi_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='what_if.html'>what_if</a></span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>)
-<span class='no'>wi_rf</span></div><div class='output co'>#&gt;       y_hat new_x             vname   x_quant quant relative_quant        label
-#&gt; 0% 4255.354  1920 construction.year 0.6268889  0.00     -0.6268889 randomForest
-#&gt; 1% 4300.702  1921 construction.year 0.6268889  0.01     -0.6168889 randomForest
-#&gt; 2% 4301.926  1922 construction.year 0.6268889  0.02     -0.6068889 randomForest
-#&gt; 3% 4305.352  1923 construction.year 0.6268889  0.03     -0.5968889 randomForest
-#&gt; 4% 4305.352  1923 construction.year 0.6268889  0.04     -0.5868889 randomForest
-#&gt; 5% 4267.723  1924 construction.year 0.6268889  0.05     -0.5768889 randomForest</div><div class='input'>
-<span class='fu'>plot_interactive</span>(<span class='no'>wi_rf</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>"variables"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"variables"</span>)</div></pre>
+<span class='no'>wi_rf</span>
+
+<span class='fu'>plot_interactive</span>(<span class='no'>wi_rf</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>"variables"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"variables"</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

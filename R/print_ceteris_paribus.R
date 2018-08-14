@@ -7,6 +7,7 @@
 #'
 #' @examples
 #' library("DALEX")
+#'  \dontrun{
 #' library("randomForest")
 #' set.seed(59)
 #'
@@ -20,6 +21,7 @@
 #'
 #' cp_rf <- ceteris_paribus(explainer_rf, apartments_small)
 #' cp_rf
+#' }
 print.ceteris_paribus_explainer <- function(x, ...) {
   cat("Top profiles    : \n")
   class(x) <- "data.frame"

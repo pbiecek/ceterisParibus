@@ -35,6 +35,7 @@
 #'
 #' @examples
 #' library("DALEX")
+#'  \dontrun{
 #' library("randomForest")
 #' set.seed(59)
 #'
@@ -93,7 +94,7 @@
 #'
 #' plot(cp_rf_y, show_profiles = TRUE, show_rugs = TRUE, size_rugs = 0.5,
 #'                show_residuals = FALSE, aggregate_profiles = mean, color = "darkblue")
-
+#' }
 plot.ceteris_paribus_explainer <- function(x, ...,
    size = 1,
    alpha = 0.3,
@@ -166,6 +167,7 @@ plot.ceteris_paribus_explainer <- function(x, ...,
 #'
 #' @examples
 #' library("DALEX")
+#'  \dontrun{
 #' library("randomForest")
 #' set.seed(59)
 #'
@@ -205,7 +207,7 @@ plot.ceteris_paribus_explainer <- function(x, ...,
 #'                alpha = 1, size = 2, color = "blue", aggregate_profiles = mean) +
 #'   ceteris_paribus_layer(cp_rf_y1, show_profiles = TRUE, show_observations = FALSE,
 #'                alpha = 1, size = 2, color = "red", aggregate_profiles = mean)
-#'
+#' }
 ceteris_paribus_layer <- function(x, ...,
       size = 1,
       alpha = 0.3,
@@ -295,7 +297,9 @@ ceteris_paribus_layer <- function(x, ...,
                    `_vname_` = var,
                    `_yhat_`  = all_observations$`_yhat_`,
                    `_y_`     = if (is.null(all_observations$`_y_`)) NA else all_observations$`_y_`,
-                   `_color_` = if (!is_color_points_a_variable) NA else all_observations[,color_points],
+                   `_color_` = if (!is_color_points_a_variable) NA else {
+                     if (color_points == "_vname_") var else all_observations[,color_points]
+                   },
                    0,
                    `_label_`  = all_observations$`_label_`)
       })

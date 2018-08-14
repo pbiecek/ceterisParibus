@@ -28,6 +28,7 @@ Function 'plot.what_if_explainer' plots What-If Plots for a single prediction / 
 }
 \examples{
 library("DALEX")
+ \dontrun{
 library("randomForest")
 set.seed(59)
 
@@ -45,4 +46,5 @@ wi_rf
 
 plot(wi_rf, split = "variables", color = "variables")
 plot(wi_rf)
+}
 }

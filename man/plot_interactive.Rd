@@ -33,6 +33,7 @@ Function 'plot_interactive.what_if_explainer' plots Ceteris Paribus Plots for a 
 }
 \examples{
 library("DALEX")
+ \dontrun{
 library("ggiraph")
 library("randomForest")
 set.seed(59)
@@ -50,4 +51,5 @@ wi_rf <- what_if(explainer_rf, observation = new_apartment)
 wi_rf
 
 plot_interactive(wi_rf, split = "variables", color = "variables")
+}
 }

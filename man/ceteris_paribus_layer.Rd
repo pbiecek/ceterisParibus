@@ -71,6 +71,7 @@ Various parameters help to decide what should be plotted, profiles, aggregated p
 }
 \examples{
 library("DALEX")
+ \dontrun{
 library("randomForest")
 set.seed(59)
 
@@ -110,5 +111,5 @@ tmp +
                alpha = 1, size = 2, color = "blue", aggregate_profiles = mean) +
   ceteris_paribus_layer(cp_rf_y1, show_profiles = TRUE, show_observations = FALSE,
                alpha = 1, size = 2, color = "red", aggregate_profiles = mean)
-
+}
 }

@@ -30,11 +30,12 @@ you should overload it.
 }
 \examples{
 library("DALEX")
+ \dontrun{
 library("randomForest")
 set.seed(59)
 apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
                                       no.rooms + district, data = apartments)
 vars <- c("construction.year", "surface", "floor", "no.rooms", "district")
 calculate_variable_splits(apartments, vars)
-
+}
 }

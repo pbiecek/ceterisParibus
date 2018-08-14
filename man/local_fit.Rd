@@ -27,6 +27,7 @@ Local Fit / Wangkardu Explanations
 }
 \examples{
 library("DALEX")
+ \dontrun{
 library("randomForest")
 set.seed(59)
 
@@ -42,4 +43,5 @@ new_apartment
 cr_rf <- local_fit(explainer_rf, observation = new_apartment,
     select_points = 0.002, selected_variable = "surface")
 cr_rf
+}
 }

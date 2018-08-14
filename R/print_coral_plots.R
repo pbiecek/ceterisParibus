@@ -7,6 +7,7 @@
 #'
 #' @examples
 #' library("DALEX")
+#'  \dontrun{
 #' library("randomForest")
 #' apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
 #'                      no.rooms + district, data = apartments)
@@ -17,7 +18,7 @@
 #' cr_rf <- local_fit(explainer_rf, observation = new_apartment,
 #'     select_points = 0.002, selected_variable = "surface")
 #' cr_rf
-
+#' }
 print.local_fit_explainer <- function(x, ...) {
   class(x) <- "data.frame"
   print(head(x, ...))

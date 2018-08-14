@@ -7,6 +7,7 @@
 #'
 #' @examples
 #' library("DALEX")
+#'  \dontrun{
 #' library("randomForest")
 #' apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
 #'                      no.rooms + district, data = apartments)
@@ -14,7 +15,7 @@
 #'                      data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
 #' new_apartment <- apartmentsTest[1, ]
 #' new_apartment
-
+#' }
 print.what_if_explainer <- function(x, ...) {
   class(x) <- "data.frame"
   print(head(x, ...))

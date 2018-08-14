@@ -7,6 +7,7 @@
 #'
 #' @examples
 #' library("DALEX")
+#'  \dontrun{
 #' library("randomForest")
 #' set.seed(59)
 #' apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
@@ -33,7 +34,7 @@
 #'                                apartments_rf_model)
 #' new_apartment
 #' small_profiles
-
+#' }
 print.ceteris_paribus_profile <- function(x, ...) {
   class(x) <- "data.frame"
   print(head(x, ...))

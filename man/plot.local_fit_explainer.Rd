@@ -24,6 +24,7 @@ Function 'plot.local_fit_explainer' plots Local Fit Plots for a single predictio
 }
 \examples{
 library("DALEX")
+ \dontrun{
 library("randomForest")
 set.seed(59)
 
@@ -63,4 +64,5 @@ cr_rf <- local_fit(explainer_rf, observation = new_apartment,
          select_points = 0.002, selected_variable = "surface")
 plot(cr_rf, plot_residuals = FALSE)
 plot(cr_rf)
+}
 }

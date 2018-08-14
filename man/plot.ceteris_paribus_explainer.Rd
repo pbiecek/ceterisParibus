@@ -69,6 +69,7 @@ Various parameters help to decide what should be plotted, profiles, aggregated p
 }
 \examples{
 library("DALEX")
+ \dontrun{
 library("randomForest")
 set.seed(59)
 
@@ -127,4 +128,5 @@ plot(cp_rf_y2, show_profiles = TRUE, show_observations = TRUE, show_rugs = TRUE,
 
 plot(cp_rf_y, show_profiles = TRUE, show_rugs = TRUE, size_rugs = 0.5,
                show_residuals = FALSE, aggregate_profiles = mean, color = "darkblue")
+}
 }

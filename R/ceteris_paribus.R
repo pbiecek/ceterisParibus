@@ -15,6 +15,7 @@
 #'
 #' @examples
 #' library("DALEX")
+#'  \dontrun{
 #' library("randomForest")
 #' set.seed(59)
 #'
@@ -31,6 +32,7 @@
 #'
 #' cp_rf <- ceteris_paribus(explainer_rf, apartments_small, y = apartments_small$m2.price)
 #' cp_rf
+#' }
 ceteris_paribus <- function(explainer, observations, y = NULL, variable_splits = NULL, variables = NULL, grid_points = 101) {
   if (!("explainer" %in% class(explainer)))
       stop("The ceteris_paribus() function requires an object created with explain() function.")

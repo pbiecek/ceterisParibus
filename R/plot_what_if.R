@@ -16,6 +16,7 @@
 #'
 #' @examples
 #' library("DALEX")
+#'  \dontrun{
 #' library("randomForest")
 #' set.seed(59)
 #'
@@ -33,6 +34,7 @@
 #'
 #' plot(wi_rf, split = "variables", color = "variables")
 #' plot(wi_rf)
+#' }
 plot.what_if_explainer <- function(x, ..., quantiles = TRUE, split = "models", split_ncol = NULL, color = "variables") {
   dfl <- c(list(x), list(...))
   all_responses <- do.call(rbind, dfl)

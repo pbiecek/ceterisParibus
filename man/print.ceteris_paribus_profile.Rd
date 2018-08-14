@@ -16,6 +16,7 @@ Print Ceteris Paribus Profiles
 }
 \examples{
 library("DALEX")
+ \dontrun{
 library("randomForest")
 set.seed(59)
 apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
@@ -42,4 +43,5 @@ small_profiles <- calculate_profiles(small_apartments, variable_splits,
                                apartments_rf_model)
 new_apartment
 small_profiles
+}
 }

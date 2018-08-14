@@ -15,6 +15,7 @@
 #' @return a data frame with profiles for selected variables and selected observations
 #' @examples
 #' library("DALEX")
+#'  \dontrun{
 #' library("randomForest")
 #' set.seed(59)
 #' apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
@@ -41,8 +42,8 @@
 #'                                apartments_rf_model)
 #' new_apartment
 #' small_profiles
+#' }
 #' @export
-#'
 calculate_profiles <- function(data, variable_splits, model, predict_function = predict, ...) {
   UseMethod("calculate_profiles")
 }
@@ -93,13 +94,14 @@ calculate_profiles.default <- function(data, variable_splits, model, predict_fun
 #' @importFrom stats predict
 #' @examples
 #' library("DALEX")
+#'  \dontrun{
 #' library("randomForest")
 #' set.seed(59)
 #' apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
 #'                                       no.rooms + district, data = apartments)
 #' vars <- c("construction.year", "surface", "floor", "no.rooms", "district")
 #' calculate_variable_splits(apartments, vars)
-#'
+#' }
 #' @export
 calculate_variable_splits <- function(data, variables = colnames(data), grid_points = 101) {
   UseMethod("calculate_variable_splits")

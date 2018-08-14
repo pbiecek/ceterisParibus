@@ -13,6 +13,7 @@
 #'
 #' @examples
 #' library("DALEX")
+#'  \dontrun{
 #' library("randomForest")
 #' set.seed(59)
 #'
@@ -52,6 +53,7 @@
 #'          select_points = 0.002, selected_variable = "surface")
 #' plot(cr_rf, plot_residuals = FALSE)
 #' plot(cr_rf)
+#' }
 plot.local_fit_explainer <- function(x, ..., plot_residuals = TRUE, palette = "default") {
   all_responses <- x
   class(all_responses) <- "data.frame"
