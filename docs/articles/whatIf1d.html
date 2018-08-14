@@ -79,7 +79,7 @@
       <h1>What If Plots</h1>
                         <h4 class="author">Przemyslaw Biecek</h4>
             
-            <h4 class="date">2018-08-11</h4>
+            <h4 class="date">2018-08-15</h4>
       
       
       <div class="hidden name"><code>whatIf1d.Rmd</code></div>
@@ -111,7 +111,11 @@
 <div id="ceteris-paribus-plots" class="section level1">
 <h1 class="hasAnchor">
 <a href="#ceteris-paribus-plots" class="anchor"></a>Ceteris Paribus Plots</h1>
-<p>We will explain prediction for</p>
+<p>Please, note that there are two methods that create Ceteris Paribus Plots. The older solution is to use <code><a href="../reference/what_if.html">what_if()</a></code> function. The new solution is to use <code><a href="../reference/ceteris_paribus.html">ceteris_paribus()</a></code> function. These functions have slightly different interfaces.</p>
+<div id="the-old-interface-what_if" class="section level2">
+<h2 class="hasAnchor">
+<a href="#the-old-interface-what_if" class="anchor"></a>The old interface (what_if)</h2>
+<p>Here is the one with <code><a href="../reference/what_if.html">what_if()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">new_apartment &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">1</span>, ]</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">new_apartment</a></code></pre></div>
 <pre><code>##      m2.price construction.year surface floor no.rooms    district
@@ -161,32 +165,109 @@
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">plot</span>(wi_lm)</a></code></pre></div>
 <p><img src="whatIf1d_files/figure-html/unnamed-chunk-2-6.png" width="672"></p>
 </div>
+<div id="the-new-interface-ceteris_paribus" class="section level2">
+<h2 class="hasAnchor">
+<a href="#the-new-interface-ceteris_paribus" class="anchor"></a>The new interface (ceteris_paribus)</h2>
+<p>Here is the one with <code><a href="../reference/ceteris_paribus.html">ceteris_paribus()</a></code>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">cp_rf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment)</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">cp_rf</a></code></pre></div>
+<pre><code>## Top profiles    : 
+##        m2.price construction.year surface floor no.rooms    district
+## 1001       4644              1920     131     3        5 Srodmiescie
+## 1001.1     4644              1921     131     3        5 Srodmiescie
+## 1001.2     4644              1922     131     3        5 Srodmiescie
+## 1001.3     4644              1923     131     3        5 Srodmiescie
+## 1001.4     4644              1923     131     3        5 Srodmiescie
+## 1001.5     4644              1924     131     3        5 Srodmiescie
+##          _yhat_           _vname_ _ids_      _label_
+## 1001   4255.354 construction.year  1001 randomForest
+## 1001.1 4300.702 construction.year  1001 randomForest
+## 1001.2 4301.926 construction.year  1001 randomForest
+## 1001.3 4305.352 construction.year  1001 randomForest
+## 1001.4 4305.352 construction.year  1001 randomForest
+## 1001.5 4267.723 construction.year  1001 randomForest
+## 
+## 
+## Top observations:
+##      m2.price construction.year surface floor no.rooms    district  _yhat_
+## 1001     4644              1976     131     3        5 Srodmiescie 4160.84
+##           _label_
+## 1001 randomForest</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">plot</span>(cp_rf)</a></code></pre></div>
+<p><img src="whatIf1d_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">plot</span>(cp_rf, <span class="dt">color =</span> <span class="st">"_vname_"</span>)</a></code></pre></div>
+<p><img src="whatIf1d_files/figure-html/unnamed-chunk-3-2.png" width="672"></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">cp_lm &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_lm, <span class="dt">observation =</span> new_apartment)</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">cp_lm</a></code></pre></div>
+<pre><code>## Top profiles    : 
+##        m2.price construction.year surface floor no.rooms    district
+## 1001       4644              1920     131     3        5 Srodmiescie
+## 1001.1     4644              1921     131     3        5 Srodmiescie
+## 1001.2     4644              1922     131     3        5 Srodmiescie
+## 1001.3     4644              1923     131     3        5 Srodmiescie
+## 1001.4     4644              1923     131     3        5 Srodmiescie
+## 1001.5     4644              1924     131     3        5 Srodmiescie
+##          _yhat_           _vname_ _ids_ _label_
+## 1001   4832.833 construction.year  1001      lm
+## 1001.1 4832.604 construction.year  1001      lm
+## 1001.2 4832.375 construction.year  1001      lm
+## 1001.3 4832.146 construction.year  1001      lm
+## 1001.4 4832.146 construction.year  1001      lm
+## 1001.5 4831.917 construction.year  1001      lm
+## 
+## 
+## Top observations:
+##      m2.price construction.year surface floor no.rooms    district
+## 1001     4644              1976     131     3        5 Srodmiescie
+##        _yhat_ _label_
+## 1001 4820.009      lm</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">plot</span>(cp_lm)</a></code></pre></div>
+<p><img src="whatIf1d_files/figure-html/unnamed-chunk-3-3.png" width="672"></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">plot</span>(cp_lm, <span class="dt">color =</span> <span class="st">"_vname_"</span>)</a></code></pre></div>
+<p><img src="whatIf1d_files/figure-html/unnamed-chunk-3-4.png" width="672"></p>
+</div>
+</div>
 <div id="ceteris-paribus---two-models" class="section level1">
 <h1 class="hasAnchor">
 <a href="#ceteris-paribus---two-models" class="anchor"></a>Ceteris Paribus - two models</h1>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">plot</span>(wi_rf, wi_lm, <span class="dt">split =</span> <span class="st">"variables"</span>, <span class="dt">color =</span> <span class="st">"models"</span>, <span class="dt">quantiles =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="whatIf1d_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">plot</span>(wi_rf, wi_lm, <span class="dt">split =</span> <span class="st">"variables"</span>, <span class="dt">color =</span> <span class="st">"models"</span>)</a></code></pre></div>
-<p><img src="whatIf1d_files/figure-html/unnamed-chunk-3-2.png" width="672"></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">plot</span>(wi_rf, wi_lm)</a></code></pre></div>
-<p><img src="whatIf1d_files/figure-html/unnamed-chunk-3-3.png" width="672"></p>
+<div id="the-old-interface-what_if-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#the-old-interface-what_if-1" class="anchor"></a>The old interface (what_if)</h2>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">plot</span>(wi_rf, wi_lm, <span class="dt">split =</span> <span class="st">"variables"</span>, <span class="dt">color =</span> <span class="st">"models"</span>, <span class="dt">quantiles =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="whatIf1d_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">plot</span>(wi_rf, wi_lm, <span class="dt">split =</span> <span class="st">"variables"</span>, <span class="dt">color =</span> <span class="st">"models"</span>)</a></code></pre></div>
+<p><img src="whatIf1d_files/figure-html/unnamed-chunk-4-2.png" width="672"></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">plot</span>(wi_rf, wi_lm)</a></code></pre></div>
+<p><img src="whatIf1d_files/figure-html/unnamed-chunk-4-3.png" width="672"></p>
+</div>
+<div id="the-new-interface-ceteris_paribus-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#the-new-interface-ceteris_paribus-1" class="anchor"></a>The new interface (ceteris_paribus)</h2>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">plot</span>(cp_rf, cp_lm)</a></code></pre></div>
+<p><img src="whatIf1d_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">plot</span>(cp_rf, cp_lm, <span class="dt">color =</span> <span class="st">"_vname_"</span>)</a></code></pre></div>
+<p><img src="whatIf1d_files/figure-html/unnamed-chunk-5-2.png" width="672"></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">plot</span>(cp_rf, cp_lm, <span class="dt">color =</span> <span class="st">"_label_"</span>)</a></code></pre></div>
+<p><img src="whatIf1d_files/figure-html/unnamed-chunk-5-3.png" width="672"></p>
+</div>
 </div>
 <div id="interactive-ceteris-paribus-plots" class="section level1">
 <h1 class="hasAnchor">
 <a href="#interactive-ceteris-paribus-plots" class="anchor"></a>Interactive Ceteris Paribus Plots</h1>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"ggiraph"</span>)</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="kw">plot_interactive</span>(wi_rf, <span class="dt">split =</span> <span class="st">"variables"</span>, <span class="dt">color =</span> <span class="st">"variables"</span>)</a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="kw">plot_interactive</span>(wi_rf)</a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="kw">plot_interactive</span>(wi_lm, <span class="dt">split =</span> <span class="st">"variables"</span>, <span class="dt">color =</span> <span class="st">"variables"</span>)</a>
-<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="kw">plot_interactive</span>(wi_lm)</a></code></pre></div>
+<p>Deprecated. Only for the old interface.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"ggiraph"</span>)</a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="kw">plot_interactive</span>(wi_rf, <span class="dt">split =</span> <span class="st">"variables"</span>, <span class="dt">color =</span> <span class="st">"variables"</span>)</a>
+<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="kw">plot_interactive</span>(wi_rf)</a>
+<a class="sourceLine" id="cb28-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb28-6" data-line-number="6"><span class="kw">plot_interactive</span>(wi_lm, <span class="dt">split =</span> <span class="st">"variables"</span>, <span class="dt">color =</span> <span class="st">"variables"</span>)</a>
+<a class="sourceLine" id="cb28-7" data-line-number="7"><span class="kw">plot_interactive</span>(wi_lm)</a></code></pre></div>
 </div>
 <div id="interactive-ceteris-paribus-plots---two-models" class="section level1">
 <h1 class="hasAnchor">
 <a href="#interactive-ceteris-paribus-plots---two-models" class="anchor"></a>Interactive Ceteris Paribus Plots - two models</h1>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">plot_interactive</span>(wi_rf, wi_lm)</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw">plot_interactive</span>(wi_rf, wi_lm, <span class="dt">split =</span> <span class="st">"variables"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">plot_interactive</span>(wi_rf, wi_lm)</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="kw">plot_interactive</span>(wi_rf, wi_lm, <span class="dt">split =</span> <span class="st">"variables"</span>)</a></code></pre></div>
 </div>
   </div>
 
@@ -196,8 +277,18 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#introduction">Introduction</a></li>
-      <li><a href="#ceteris-paribus-plots">Ceteris Paribus Plots</a></li>
-      <li><a href="#ceteris-paribus---two-models">Ceteris Paribus - two models</a></li>
+      <li>
+<a href="#ceteris-paribus-plots">Ceteris Paribus Plots</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#the-old-interface-what_if">The old interface (what_if)</a></li>
+      <li><a href="#the-new-interface-ceteris_paribus">The new interface (ceteris_paribus)</a></li>
+      </ul>
+</li>
+      <li>
+<a href="#ceteris-paribus---two-models">Ceteris Paribus - two models</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#the-old-interface-what_if-1">The old interface (what_if)</a></li>
+      <li><a href="#the-new-interface-ceteris_paribus-1">The new interface (ceteris_paribus)</a></li>
+      </ul>
+</li>
       <li><a href="#interactive-ceteris-paribus-plots">Interactive Ceteris Paribus Plots</a></li>
       <li><a href="#interactive-ceteris-paribus-plots---two-models">Interactive Ceteris Paribus Plots - two models</a></li>
       </ul>

@@ -33,7 +33,14 @@ explainer_lm <- explain(apartments_lm_model,
 
 # Ceteris Paribus Plots
 
-We will explain prediction for
+Please, note that there are two methods that create Ceteris Paribus Plots.
+The older solution is to use `what_if()` function. 
+The new solution is to use `ceteris_paribus()` function.
+These functions have slightly different interfaces.
+
+## The old interface (what_if)
+
+Here is the one with `what_if()`.
 
 ```{r, fig.width=7, fig.height=7}
 new_apartment <- apartmentsTest[1, ]
@@ -53,7 +60,25 @@ plot(wi_lm)
 
 ```
 
+## The new interface (ceteris_paribus)
+
+Here is the one with `ceteris_paribus()`.
+
+```{r, fig.width=7, fig.height=7}
+cp_rf <- ceteris_paribus(explainer_rf, observation = new_apartment)
+cp_rf
+plot(cp_rf)
+plot(cp_rf, color = "_vname_")
+
+cp_lm <- ceteris_paribus(explainer_lm, observation = new_apartment)
+cp_lm
+plot(cp_lm)
+plot(cp_lm, color = "_vname_")
+```
+
 # Ceteris Paribus - two models
+ 
+## The old interface (what_if)
 
 ```{r, fig.width=7, fig.height=7}
 plot(wi_rf, wi_lm, split = "variables", color = "models", quantiles = FALSE)
@@ -61,8 +86,18 @@ plot(wi_rf, wi_lm, split = "variables", color = "models")
 plot(wi_rf, wi_lm)
 ```
 
+## The new interface (ceteris_paribus)
+ 
+```{r, fig.width=7, fig.height=7}
+plot(cp_rf, cp_lm)
+plot(cp_rf, cp_lm, color = "_vname_")
+plot(cp_rf, cp_lm, color = "_label_")
+```
+
 
 # Interactive Ceteris Paribus Plots 
+
+Deprecated. Only for the old interface.
 
 ```{r, fig.width=7, fig.height=7, message=FALSE, warning=FALSE, eval=FALSE}
 library("ggiraph")

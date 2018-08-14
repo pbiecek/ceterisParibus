@@ -1,6 +1,7 @@
 ceterisParibus 0.3
 ----------------------------------------------------------------
 
+* The `ceteris_paribus()` function now covers a very flexible grammar for visual exploration of black box models. See https://pbiecek.github.io/DALEX_docs/5-ceterisParibus.html#ceterisParibus for more details.
 * The `ceteris_paribus()` function from ver 0.2 is now avaliable as `what_if()`. Here is where the development of older version will take place.
 
 Major refactoring of the code
