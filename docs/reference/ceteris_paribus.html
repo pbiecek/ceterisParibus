@@ -146,8 +146,7 @@ It's a data frame with calculated average responses.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX"</span>)</div><span class='co'># NOT RUN {</span>
-<span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX"</span>)</div><div class='input'><span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
 <span class='fu'>set.seed</span>(<span class='fl'>59</span>)
 
 <span class='no'>apartments_rf_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> + <span class='no'>floor</span> +
@@ -159,11 +158,71 @@ It's a data frame with calculated average responses.</p>
 <span class='no'>apartments_small</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='select_sample.html'>select_sample</a></span>(<span class='no'>apartmentsTest</span>, <span class='fl'>10</span>)
 
 <span class='no'>cp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>ceteris_paribus</span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small</span>)
-<span class='no'>cp_rf</span>
-
+<span class='no'>cp_rf</span></div><div class='output co'>#&gt; Top profiles    : 
+#&gt;        m2.price construction.year surface floor no.rooms district   _yhat_
+#&gt; 8946       2174              1920     123     8        4     Wola 2871.626
+#&gt; 8946.1     2174              1921     123     8        4     Wola 2896.045
+#&gt; 8946.2     2174              1922     123     8        4     Wola 2901.677
+#&gt; 8946.3     2174              1923     123     8        4     Wola 2891.101
+#&gt; 8946.4     2174              1923     123     8        4     Wola 2891.101
+#&gt; 8946.5     2174              1924     123     8        4     Wola 2890.361
+#&gt;                  _vname_ _ids_      _label_
+#&gt; 8946   construction.year  8946 randomForest
+#&gt; 8946.1 construction.year  8946 randomForest
+#&gt; 8946.2 construction.year  8946 randomForest
+#&gt; 8946.3 construction.year  8946 randomForest
+#&gt; 8946.4 construction.year  8946 randomForest
+#&gt; 8946.5 construction.year  8946 randomForest
+#&gt; 
+#&gt; 
+#&gt; Top observations:
+#&gt;      m2.price construction.year surface floor no.rooms    district   _yhat_
+#&gt; 8946     2174              1959     123     8        4        Wola 2386.002
+#&gt; 4458     4319              1927      68     8        2      Ochota 4222.164
+#&gt; 7384     5501              1929      95     5        3 Srodmiescie 4646.023
+#&gt; 5450     2810              1982     124    10        5      Ochota 3062.748
+#&gt; 6744     1770              1982     143     9        6     Ursynow 2171.529
+#&gt; 6688     2796              1938      75     7        3        Wola 3045.947
+#&gt;           _label_
+#&gt; 8946 randomForest
+#&gt; 4458 randomForest
+#&gt; 7384 randomForest
+#&gt; 5450 randomForest
+#&gt; 6744 randomForest
+#&gt; 6688 randomForest</div><div class='input'>
 <span class='no'>cp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>ceteris_paribus</span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments_small</span>$<span class='no'>m2.price</span>)
-<span class='no'>cp_rf</span>
-<span class='co'># }</span></pre>
+<span class='no'>cp_rf</span></div><div class='output co'>#&gt; Top profiles    : 
+#&gt;        m2.price construction.year surface floor no.rooms district   _yhat_
+#&gt; 8946       2174              1920     123     8        4     Wola 2871.626
+#&gt; 8946.1     2174              1921     123     8        4     Wola 2896.045
+#&gt; 8946.2     2174              1922     123     8        4     Wola 2901.677
+#&gt; 8946.3     2174              1923     123     8        4     Wola 2891.101
+#&gt; 8946.4     2174              1923     123     8        4     Wola 2891.101
+#&gt; 8946.5     2174              1924     123     8        4     Wola 2890.361
+#&gt;                  _vname_ _ids_      _label_
+#&gt; 8946   construction.year  8946 randomForest
+#&gt; 8946.1 construction.year  8946 randomForest
+#&gt; 8946.2 construction.year  8946 randomForest
+#&gt; 8946.3 construction.year  8946 randomForest
+#&gt; 8946.4 construction.year  8946 randomForest
+#&gt; 8946.5 construction.year  8946 randomForest
+#&gt; 
+#&gt; 
+#&gt; Top observations:
+#&gt;      m2.price construction.year surface floor no.rooms    district   _yhat_
+#&gt; 8946     2174              1959     123     8        4        Wola 2386.002
+#&gt; 4458     4319              1927      68     8        2      Ochota 4222.164
+#&gt; 7384     5501              1929      95     5        3 Srodmiescie 4646.023
+#&gt; 5450     2810              1982     124    10        5      Ochota 3062.748
+#&gt; 6744     1770              1982     143     9        6     Ursynow 2171.529
+#&gt; 6688     2796              1938      75     7        3        Wola 3045.947
+#&gt;       _y_      _label_
+#&gt; 8946 2174 randomForest
+#&gt; 4458 4319 randomForest
+#&gt; 7384 5501 randomForest
+#&gt; 5450 2810 randomForest
+#&gt; 6744 1770 randomForest
+#&gt; 6688 2796 randomForest</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

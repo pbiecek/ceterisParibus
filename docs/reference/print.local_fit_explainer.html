@@ -125,18 +125,22 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX"</span>)</div><span class='co'># NOT RUN {</span>
-<span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX"</span>)</div><div class='input'><span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
 <span class='no'>apartments_rf_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> + <span class='no'>floor</span> +
                      <span class='no'>no.rooms</span> + <span class='no'>district</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
 <span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DALEX/topics/explain'>explain</a></span>(<span class='no'>apartments_rf_model</span>,
                      <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)
 <span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>, ]
-<span class='no'>new_apartment</span>
-<span class='no'>cr_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_fit.html'>local_fit</a></span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>,
+<span class='no'>new_apartment</span></div><div class='output co'>#&gt;      m2.price construction.year surface floor no.rooms    district
+#&gt; 1001     4644              1976     131     3        5 Srodmiescie</div><div class='input'><span class='no'>cr_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_fit.html'>local_fit</a></span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>,
     <span class='kw'>select_points</span> <span class='kw'>=</span> <span class='fl'>0.002</span>, <span class='kw'>selected_variable</span> <span class='kw'>=</span> <span class='st'>"surface"</span>)
-<span class='no'>cr_rf</span>
-<span class='co'># }</span></pre>
+<span class='no'>cr_rf</span></div><div class='output co'>#&gt;      y_hat new_x   vname quant obs_id        label
+#&gt; 1 4736.864    20 surface  0.00      0 randomForest
+#&gt; 2 4729.518    21 surface  0.01      0 randomForest
+#&gt; 3 4730.079    23 surface  0.02      0 randomForest
+#&gt; 4 4725.593    24 surface  0.03      0 randomForest
+#&gt; 5 4725.606    26 surface  0.04      0 randomForest
+#&gt; 6 4718.965    27 surface  0.05      0 randomForest</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

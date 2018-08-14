@@ -224,8 +224,7 @@ Various parameters help to decide what should be plotted, profiles, aggregated p
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX"</span>)</div><span class='co'># NOT RUN {</span>
-<span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX"</span>)</div><div class='input'><span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
 <span class='fu'>set.seed</span>(<span class='fl'>59</span>)
 
 <span class='no'>apartments_rf_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> + <span class='no'>floor</span> +
@@ -251,20 +250,17 @@ Various parameters help to decide what should be plotted, profiles, aggregated p
                <span class='kw'>show_residuals</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
                <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>color_residuals</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>)
 
-<span class='no'>tmp</span>
-
+<span class='no'>tmp</span></div><div class='img'><img src='ceteris_paribus_layer-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='no'>tmp</span> +
  <span class='fu'>ceteris_paribus_layer</span>(<span class='no'>cp_rf_y2</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_observations</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-               <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkblue"</span>)
-
+               <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkblue"</span>)</div><div class='img'><img src='ceteris_paribus_layer-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='no'>tmp</span> +
   <span class='fu'>ceteris_paribus_layer</span>(<span class='no'>cp_rf_y2</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_observations</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
                <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkblue"</span>) +
   <span class='fu'>ceteris_paribus_layer</span>(<span class='no'>cp_rf_y2</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_observations</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
                <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"blue"</span>, <span class='kw'>aggregate_profiles</span> <span class='kw'>=</span> <span class='no'>mean</span>) +
   <span class='fu'>ceteris_paribus_layer</span>(<span class='no'>cp_rf_y1</span>, <span class='kw'>show_profiles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_observations</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-               <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>aggregate_profiles</span> <span class='kw'>=</span> <span class='no'>mean</span>)
-<span class='co'># }</span></pre>
+               <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>aggregate_profiles</span> <span class='kw'>=</span> <span class='no'>mean</span>)</div><div class='img'><img src='ceteris_paribus_layer-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
