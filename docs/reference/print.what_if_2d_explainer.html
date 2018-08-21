@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • ceterisParibus</title>
+<title>Print What If 2D Explainer Summary — print.what_if_2d_explainer • ceterisParibus</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -35,7 +35,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top navbar-mi2" role="navigation">
   <div class="container">
@@ -48,7 +48,7 @@
 	  <a class = "navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src = "https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt = "MI2" height = 46 title = "MI2">
 	  </a>
-      <a class="navbar-brand navbar-mi2" href="../index.html"></a>
+      <a class="navbar-brand navbar-mi2" href="../index.html">Print What If 2D Explainer Summary</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -98,41 +98,51 @@
       </header>
 
       <div class="row">
-
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Change log <small></small></h1>
+    <h1>Print What If 2D Explainer Summary</h1>
     </div>
 
-    <div class="contents">
-    <div id="ceterisparibus-0-3-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#ceterisparibus-0-3-1" class="anchor"></a>ceterisParibus 0.3.1</h2>
-<ul>
-<li>The <code><a href="../reference/what_if_2d.html">what_if_2d()</a></code> function plots 2D ceteris paribus plots. This function returns an object of the class <code>what_if_2d</code>. One can use generic <code>print()</code> or <code>plot()</code> to show these profiles. Note that profiles for all pairs of variables are generated, thus it may be a time consuming operation if number of variables is high.</li>
-</ul>
-</div>
-    <div id="ceterisparibus-0-3" class="section level2">
-<h2 class="hasAnchor">
-<a href="#ceterisparibus-0-3" class="anchor"></a>ceterisParibus 0.3</h2>
-<ul>
-<li>The <code><a href="../reference/ceteris_paribus.html">ceteris_paribus()</a></code> function now covers a very flexible grammar for visual exploration of black box models. See <a href="https://pbiecek.github.io/DALEX_docs/5-ceterisParibus.html#ceterisParibus" class="uri">https://pbiecek.github.io/DALEX_docs/5-ceterisParibus.html#ceterisParibus</a> for more details.</li>
-<li>The <code><a href="../reference/ceteris_paribus.html">ceteris_paribus()</a></code> function from ver 0.2 is now avaliable as <code><a href="../reference/what_if.html">what_if()</a></code>. Here is where the development of older version will take place.</li>
-</ul>
-</div>
-    </div>
+    
+    <p>Print What If 2D Explainer Summary</p>
+    
+
+    <pre class="usage"><span class='co'># S3 method for what_if_2d_explainer</span>
+<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>a what_if_2d explainer produced with the 'what_if_2d' function</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>other arguments that will be passed to head()</p></td>
+    </tr>
+    </table>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX"</span>)</div><div class='input'><span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
+<span class='no'>apartments_rf_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> + <span class='no'>floor</span> +
+                     <span class='no'>no.rooms</span> + <span class='no'>district</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
+<span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DALEX/topics/explain'>explain</a></span>(<span class='no'>apartments_rf_model</span>,
+                     <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)
+<span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>, ]
+<span class='no'>new_apartment</span></div><div class='output co'>#&gt;      m2.price construction.year surface floor no.rooms    district
+#&gt; 1001     4644              1976     131     3        5 Srodmiescie</div></pre>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked contents-mi2">
-        <li><a href="#ceterisparibus-0-3-1">0.3.1</a></li>
-        <li><a href="#ceterisparibus-0-3">0.3</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
+  </div>
 </div>
 
       <footer>
