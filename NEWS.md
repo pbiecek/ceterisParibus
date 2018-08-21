@@ -1,3 +1,11 @@
+ceterisParibus 0.3.1
+----------------------------------------------------------------
+
+* The `what_if_2d()` function plots 2D ceteris paribus plots. 
+This function returns an object of the class `what_if_2d`. 
+One can use generic `print()` or `plot()` to show these profiles. 
+Note that profiles for all pairs of variables are generated, thus it may be a time consuming operation if number of variables is high.
+
 ceterisParibus 0.3
 ----------------------------------------------------------------
 
