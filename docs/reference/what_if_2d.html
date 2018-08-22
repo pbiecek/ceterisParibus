@@ -80,6 +80,9 @@
     <li>
       <a href="../articles/whatIf1d.html">What If Plots</a>
     </li>
+    <li>
+      <a href="../articles/whatIf2d.html">What If 2D Plots</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -150,22 +153,15 @@ It's a data frame with calculated average responses.</p>
 <span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>, ]
 <span class='no'>new_apartment</span></div><div class='output co'>#&gt;      m2.price construction.year surface floor no.rooms    district
 #&gt; 1001     4644              1976     131     3        5 Srodmiescie</div><div class='input'>
-<span class='no'>wi_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='what_if.html'>what_if</a></span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>)
-<span class='no'>wi_rf</span></div><div class='output co'>#&gt;       y_hat new_x             vname   x_quant quant relative_quant        label
-#&gt; 0% 4255.354  1920 construction.year 0.6268889  0.00     -0.6268889 randomForest
-#&gt; 1% 4300.702  1921 construction.year 0.6268889  0.01     -0.6168889 randomForest
-#&gt; 2% 4301.926  1922 construction.year 0.6268889  0.02     -0.6068889 randomForest
-#&gt; 3% 4305.352  1923 construction.year 0.6268889  0.03     -0.5968889 randomForest
-#&gt; 4% 4305.352  1923 construction.year 0.6268889  0.04     -0.5868889 randomForest
-#&gt; 5% 4267.723  1924 construction.year 0.6268889  0.05     -0.5768889 randomForest</div><div class='input'><span class='no'>wi_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='what_if.html'>what_if</a></span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>,
+<span class='no'>wi_rf_2d</span> <span class='kw'>&lt;-</span> <span class='fu'>what_if_2d</span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>,
          <span class='kw'>selected_variables</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"surface"</span>, <span class='st'>"floor"</span>, <span class='st'>"no.rooms"</span>))
-<span class='no'>wi_rf</span></div><div class='output co'>#&gt;       y_hat new_x   vname   x_quant quant relative_quant        label
-#&gt; 0% 4768.305    20 surface 0.8541111  0.00     -0.8541111 randomForest
-#&gt; 1% 4765.291    21 surface 0.8541111  0.01     -0.8441111 randomForest
-#&gt; 2% 4761.576    23 surface 0.8541111  0.02     -0.8341111 randomForest
-#&gt; 3% 4760.838    24 surface 0.8541111  0.03     -0.8241111 randomForest
-#&gt; 4% 4760.290    26 surface 0.8541111  0.04     -0.8141111 randomForest
-#&gt; 5% 4743.734    27 surface 0.8541111  0.05     -0.8041111 randomForest</div></pre>
+<span class='no'>wi_rf_2d</span></div><div class='output co'>#&gt;      y_hat new_x1 new_x2  vname1 vname2        label
+#&gt; 1 4851.829     20   1.00 surface  floor randomForest
+#&gt; 2 4851.829     20   1.09 surface  floor randomForest
+#&gt; 3 4851.829     20   1.18 surface  floor randomForest
+#&gt; 4 4851.829     20   1.27 surface  floor randomForest
+#&gt; 5 4851.829     20   1.36 surface  floor randomForest
+#&gt; 6 4851.829     20   1.45 surface  floor randomForest</div><div class='input'><span class='fu'>plot</span>(<span class='no'>wi_rf_2d</span>)</div><div class='img'><img src='what_if_2d-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

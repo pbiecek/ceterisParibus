@@ -80,6 +80,9 @@
     <li>
       <a href="../articles/whatIf1d.html">What If Plots</a>
     </li>
+    <li>
+      <a href="../articles/whatIf2d.html">What If 2D Plots</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -108,8 +111,9 @@
     
 
     <pre class="usage"><span class='co'># S3 method for what_if_2d_explainer</span>
-<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='kw'>split_ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>add_raster</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>add_contour</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>add_observation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>3</span>)</pre>
+<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>split_ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>add_raster</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>add_contour</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>add_observation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>3</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -117,6 +121,10 @@
     <tr>
       <th>x</th>
       <td><p>a ceteris paribus explainer produced with the 'what_if_2d' function</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>currently will be ignored</p></td>
     </tr>
     <tr>
       <th>split_ncol</th>
