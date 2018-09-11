@@ -41,6 +41,7 @@ calculate_oscillations <- function(x, sort = TRUE, ...) {
   if (sort) {
     res <- res[order(res$oscillations, decreasing = TRUE),]
   }
+  class(res) = c("ceteris_paribus_oscillations", "data.frame")
   res
 }
 
