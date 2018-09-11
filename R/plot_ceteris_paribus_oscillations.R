@@ -20,10 +20,10 @@
 #' explainer_rf <- explain(apartments_rf_model,
 #'       data = apartmentsTest, y = apartmentsTest$m2.price)
 #'
-#' apartment <- apartmentsTest[1,]
+#' apartment <- apartmentsTest[1:2,]
 #'
 #' cp_rf <- ceteris_paribus(explainer_rf, apartment)
-#' plot(cp_rf)
+#' plot(cp_rf, color = "_ids_")
 #'
 #' vips <- calculate_oscillations(cp_rf)
 #' vips

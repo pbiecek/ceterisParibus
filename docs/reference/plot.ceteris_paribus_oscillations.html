@@ -144,6 +144,7 @@
 <span class='no'>apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>:<span class='fl'>2</span>,]
 
 <span class='no'>cp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ceteris_paribus.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>apartment</span>)
+<span class='fu'>plot</span>(<span class='no'>cp_rf</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"_ids_"</span>)</div><div class='img'><img src='plot.ceteris_paribus_oscillations-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='no'>vips</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='calculate_oscillations.html'>calculate_oscillations</a></span>(<span class='no'>cp_rf</span>)
 <span class='no'>vips</span></div><div class='output co'>#&gt;              _vname_ _ids_ oscillations
 #&gt; 11          district  1001   1103.42482
@@ -157,7 +158,7 @@
 #&gt; 9           no.rooms  1001    143.53000
 #&gt; 3  construction.year  1001     52.17142
 #&gt; 1           m2.price  1001      0.00000
-#&gt; 2           m2.price  1002      0.00000</div><div class='input'><span class='fu'>plot</span>(<span class='no'>vips</span>)</div><div class='img'><img src='plot.ceteris_paribus_oscillations-1.png' alt='' width='700' height='433' /></div></pre>
+#&gt; 2           m2.price  1002      0.00000</div><div class='input'><span class='fu'>plot</span>(<span class='no'>vips</span>)</div><div class='img'><img src='plot.ceteris_paribus_oscillations-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
