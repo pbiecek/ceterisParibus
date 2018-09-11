@@ -24,10 +24,9 @@
 #' calculate_oscillations(cp_rf)
 #' }
 calculate_oscillations <- function(x, sort = TRUE, ...) {
-  stopifnot(class(x) == "ceteris_paribus_explainer")
+  stopifnot("ceteris_paribus_explainer" %in% class(x))
 
   observations <- attr(x, "observations")
-
   variables <- unique(as.character(x$`_vname_`))
   ids <- unique(as.character(x$`_ids_`))
   lapply(variables, function(variable) {
