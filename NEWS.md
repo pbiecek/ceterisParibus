@@ -5,6 +5,8 @@ ceterisParibus 0.3.1
 This function returns an object of the class `what_if_2d`. 
 One can use generic `print()` or `plot()` to show these profiles. 
 Note that profiles for all pairs of variables are generated, thus it may be a time consuming operation if number of variables is high.
+* New function `calculate_oscillations()` that calculates variable 
+importance measures for a single observation.
 
 ceterisParibus 0.3
 ----------------------------------------------------------------
