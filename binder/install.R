@@ -1,4 +1,5 @@
-install.packages("ceterisParibus")
+devtools::install_github("pbiecek/ceterisParibus")
+#install.packages("ceterisParibus")
 install.packages("randomForest")
 install.packages("rpart")
 install.packages("e1071")
