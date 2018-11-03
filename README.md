@@ -5,8 +5,7 @@
 [![Build Status](https://api.travis-ci.org/pbiecek/ceterisParibus.png)](https://travis-ci.org/pbiecek/ceterisParibus)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/pbiecek/ceterisParibus/master.svg)](https://codecov.io/github/pbiecek/ceterisParibus?branch=master)
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/kmichael08/ceterisParibus/binders?filepath=jupyter-notebooks)
-
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/pbiecek/ceterisParibus/master?filepath=jupyter-notebooks)
 
 *Ceteris Paribus Plots* (What-If Plots) are designed to present model responses around a single point in the feature space. For example around a single prediction for an interesting observation. Plots are designed to work in a model-agnostic fashion, they are working for any Machine Learning model and allow for model comparisons.
 
