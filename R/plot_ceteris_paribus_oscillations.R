@@ -7,7 +7,8 @@
 #'
 #' @return a ggplot2 object
 #' @export
-#'
+#' @importFrom stats reorder
+#' 
 #' @examples
 #' library("DALEX")
 #'  \dontrun{
