@@ -1,7 +1,9 @@
 Package: ceterisParibus
 Title: Ceteris Paribus Profiles
 Version: 0.3.1
-Authors@R: person("Przemyslaw", "Biecek", email = "przemyslaw.biecek@gmail.com", role = c("aut", "cre"))
+Authors@R: person("Przemyslaw", "Biecek", email = "przemyslaw.biecek@gmail.com", 
+    role = c("aut", "cre"),
+    comment = c(ORCID = "0000-0001-8423-1823"))
 Description: Ceteris Paribus Profiles (What-If Plots) are designed to present model 
     responses around selected points in a feature space. 
     For example around a single prediction for an interesting observation. 

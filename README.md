@@ -36,7 +36,7 @@ install.packages("ceterisParibus")
 or from GitHub:
 
 ```
-devtools::install_github("pbiecek/ceterisParibus")
+source("https://install-github.me/pbiecek/ceterisParibus")
 ```
 
 # Simple Ceteris Paribus Plot
