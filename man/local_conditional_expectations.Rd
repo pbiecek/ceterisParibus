@@ -8,25 +8,17 @@ local_conditional_expectations(explainer, observations, y = NULL,
   variable_splits = NULL, variables = NULL, grid_points = 101)
 }
 \arguments{
-\item{y}{true labels for `new_observation`. If specified then will be added to LCE plots.}
+\item{explainer}{a model to be explained, preprocessed by function `DALEX::explain()`.}
+
+\item{observations}{set of observarvation for which profiles are to be calculated}
+
+\item{y}{true labels for `observations`. If specified then will be added to local conditional expectations plots.}
 
 \item{variable_splits}{named list of splits for variables, in most cases created with `calculate_variable_splits()`. If NULL then it will be calculated based on validation data avaliable in the `explainer`.}
 
 \item{variables}{names of variables for which profiles shall be calculated. Will be passed to `calculate_variable_splits()`. If NULL then all variables from the validation data will be used.}
 
 \item{grid_points}{number of points for profile. Will be passed to `calculate_variable_splits()`.}
-
-\item{x}{a model to be explained, or an explainer created with function `DALEX::explain()`.}
-
-\item{data}{validation dataset, will be extracted from `x` if it's an explainer}
-
-\item{predict_function}{predict function, will be extracted from `x` if it's an explainer}
-
-\item{new_observation}{a new observation with columns that corresponds to variables used in the model}
-
-\item{...}{other parameters}
-
-\item{label}{name of the model. By default it's extracted from the 'class' attribute of the model}
 }
 \value{
 An object of the class 'ceteris_paribus_explainer'.
@@ -53,7 +45,7 @@ new_apartment <- apartments[1, ]
 lce_rf <- local_conditional_expectations(explainer_rf, new_apartment)
 lce_rf
 
-lce_rf <- local_conditional_expectations(explainer_rf, new_apartment, y = apartments_small$m2.price)
+lce_rf <- local_conditional_expectations(explainer_rf, new_apartment, y = new_apartment$m2.price)
 lce_rf
 }
 }

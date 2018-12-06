@@ -32,7 +32,7 @@
 #' lce_rf <- local_conditional_expectations(explainer_rf, new_apartment)
 #' lce_rf
 #'
-#' lce_rf <- local_conditional_expectations(explainer_rf, new_apartment, y = apartments_small$m2.price)
+#' lce_rf <- local_conditional_expectations(explainer_rf, new_apartment, y = new_apartment$m2.price)
 #' lce_rf
 #' }
 

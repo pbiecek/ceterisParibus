@@ -22,10 +22,10 @@
 #' apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
 #'                                       no.rooms + district, data = apartments)
 #' explainer_rf <- explain(apartments_rf_model,
-#'       data = apartmentsTest[,2:6], y = apartmentsTest$m2.price)
+#'       data = apartments[,2:6], y = apartments$m2.price)
 #' vars <- c("construction.year", "surface", "floor", "no.rooms", "district")
 #' variable_splits <- calculate_variable_splits(apartments, vars)
-#' new_apartment <- apartmentsTest[1, ]
+#' new_apartment <- apartments[1, ]
 #' 
 #' profiles <- calculate_profiles_lce(new_apartment, variable_splits,
 #'                                apartments_rf_model, explainer_rf$data)
