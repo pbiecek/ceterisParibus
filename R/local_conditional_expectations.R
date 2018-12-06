@@ -3,16 +3,12 @@
 #' This explainer works for individual observations.
 #' For each observation it calculates Local Conditional Expectation (LCE) profiles for selected variables.
 #'
-#' @param x a model to be explained, or an explainer created with function `DALEX::explain()`.
-#' @param data validation dataset, will be extracted from `x` if it's an explainer
-#' @param predict_function predict function, will be extracted from `x` if it's an explainer
-#' @param new_observation a new observation with columns that corresponds to variables used in the model
-#' @param y true labels for `new_observation`. If specified then will be added to LCE plots.
-#' @param variables names of variables for which profiles shall be calculated. Will be passed to `calculate_variable_splits()`. If NULL then all variables from the validation data will be used.
-#' @param ... other parameters
+#' @param explainer a model to be explained, preprocessed by function `DALEX::explain()`.
+#' @param observations set of observarvation for which profiles are to be calculated
+#' @param y true labels for `observations`. If specified then will be added to local conditional expectations plots.
 #' @param variable_splits named list of splits for variables, in most cases created with `calculate_variable_splits()`. If NULL then it will be calculated based on validation data avaliable in the `explainer`.
 #' @param grid_points number of points for profile. Will be passed to `calculate_variable_splits()`.
-#' @param label name of the model. By default it's extracted from the 'class' attribute of the model
+#' @param variables names of variables for which profiles shall be calculated. Will be passed to `calculate_variable_splits()`. If NULL then all variables from the validation data will be used.
 #'
 #'
 #' @return An object of the class 'ceteris_paribus_explainer'.
