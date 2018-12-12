@@ -13,6 +13,7 @@
 #' @param dataset a data.frame, usually training data of a model, used for calculation of LCE profiles
 #' @param ... other parameters that will be passed to the \code{predict_function}
 #'
+#' @importFrom stats model.matrix
 #' @return a data frame with profiles for selected variables and selected observations
 #' @examples
 #' library("DALEX")
@@ -26,7 +27,7 @@
 #' vars <- c("construction.year", "surface", "floor", "no.rooms", "district")
 #' variable_splits <- calculate_variable_splits(apartments, vars)
 #' new_apartment <- apartments[1, ]
-#' 
+#'
 #' profiles <- calculate_profiles_lce(new_apartment, variable_splits,
 #'                                apartments_rf_model, explainer_rf$data)
 #' profiles
@@ -39,17 +40,17 @@ calculate_profiles_lce.default <- function(data, variable_splits, model, dataset
   variables <- names(variable_splits)
   profiles <- lapply(variables, function(variable) {
     split_points <- variable_splits[[variable]]
-    
+
     # remember ids of selected points
     if (is.null(rownames(data))) {
       ids <- rep(1:nrow(data), each = length(split_points))
     } else {
       ids <- rep(rownames(data), each = length(split_points))
     }
-    
+
     new_data <- data[rep(1:nrow(data), each = length(split_points)),]
     new_data[, variable] <- rep(split_points, nrow(data))
-    
+
     # fitting linear model pairwise between 'variable' and every other feature variable
     for (feature_variable in setdiff(variables, variable)) {
       formula <- formula(paste(feature_variable, " ~ ", variable))
@@ -61,20 +62,20 @@ calculate_profiles_lce.default <- function(data, variable_splits, model, dataset
             data[, feature_variable] - model.matrix( ~ data[, variable])[,-1] * lm$coefficients[-1]
         } else {
           shifted_intercepts_tmp <-
-            data[, feature_variable] - model.matrix( ~ data[, variable])[,-1] %*% lm$coefficients[-1] %>% t()
+            data[, feature_variable] - t( model.matrix( ~ data[, variable])[,-1] %*% lm$coefficients[-1] )
         }
         shifted_intercepts <- shifted_intercepts_tmp
         names(shifted_intercepts) <- unique(data[, feature_variable])
         #new_data[, feature_variable] <- alpha*new_data[, variable] + shifted_intercepts
-        X <- model.matrix(~new_data[, variable])[, -1] %>% as.matrix()
+        X <- as.matrix( model.matrix(~new_data[, variable])[, -1] )
         for (i in 1:nrow(new_data)) {
           x <- X[i, ]
-          new_data[i, feature_variable] <- alpha%*%x + shifted_intercepts[paste(new_data[i, feature_variable])]
+          new_data[i, feature_variable] <- alpha %*% x + shifted_intercepts[paste(new_data[i, feature_variable])]
         }
       }
     }
-    
-    
+
+
     yhat <- predict_function(model, new_data, ...)
     new_data <- cbind(new_data,
                       `_yhat_` = yhat,
@@ -82,7 +83,7 @@ calculate_profiles_lce.default <- function(data, variable_splits, model, dataset
                       `_ids_` = ids)
     new_data
   })
-  
+
   profile <- do.call(rbind, profiles)
   class(profile) <- c("ceteris_paribus_profile", class(profile))
   profile

@@ -4,8 +4,8 @@
 \alias{ceteris_paribus}
 \title{Ceteris Paribus Explainer}
 \usage{
-ceteris_paribus(explainer, observations, y = NULL, variable_splits = NULL,
-  variables = NULL, grid_points = 101)
+ceteris_paribus(explainer, observations, y = NULL,
+  variable_splits = NULL, variables = NULL, grid_points = 101)
 }
 \arguments{
 \item{explainer}{a model to be explained, preprocessed by function `DALEX::explain()`.}

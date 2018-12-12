@@ -3,8 +3,6 @@
 \name{plot_interactive}
 \alias{plot_interactive}
 \alias{plot_interactive.what_if_explainer}
-\alias{plot_interactive}
-\alias{plot_interactive}
 \alias{plot_interactive.default}
 \title{Plots Interactive What-If Explanations}
 \usage{

@@ -4,8 +4,8 @@
 \alias{calculate_profiles}
 \title{Calculate Ceteris Paribus Profiles}
 \usage{
-calculate_profiles(data, variable_splits, model, predict_function = predict,
-  ...)
+calculate_profiles(data, variable_splits, model,
+  predict_function = predict, ...)
 }
 \arguments{
 \item{data}{set of observations. Profile will be calculated for every observation (every row)}

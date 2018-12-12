@@ -4,8 +4,8 @@
 \alias{plot.what_if_explainer}
 \title{Plot What If Explanations}
 \usage{
-\method{plot}{what_if_explainer}(x, ..., quantiles = TRUE, split = "models",
-  split_ncol = NULL, color = "variables")
+\method{plot}{what_if_explainer}(x, ..., quantiles = TRUE,
+  split = "models", split_ncol = NULL, color = "variables")
 }
 \arguments{
 \item{x}{a ceteris paribus explainer produced with the 'what_if' function}
