@@ -167,13 +167,13 @@
 <span class='no'>new_apartment</span></div><div class='output co'>#&gt;      m2.price construction.year surface floor no.rooms    district
 #&gt; 1001     4644              1976     131     3        5 Srodmiescie</div><div class='input'>
 <span class='no'>wi_rf_2d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='what_if_2d.html'>what_if_2d</a></span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>)
-<span class='no'>wi_rf_2d</span></div><div class='output co'>#&gt;      y_hat new_x1 new_x2            vname1  vname2        label
-#&gt; 1 4899.536   1920   20.0 construction.year surface randomForest
-#&gt; 2 4896.920   1920   21.3 construction.year surface randomForest
-#&gt; 3 4900.060   1920   22.6 construction.year surface randomForest
-#&gt; 4 4900.187   1920   23.9 construction.year surface randomForest
-#&gt; 5 4901.809   1920   25.2 construction.year surface randomForest
-#&gt; 6 4896.952   1920   26.5 construction.year surface randomForest</div><div class='input'>
+<span class='no'>wi_rf_2d</span></div><div class='output co'>#&gt;           y_hat new_x1 new_x2            vname1  vname2        label
+#&gt; 1001   4899.536   1920   20.0 construction.year surface randomForest
+#&gt; 1001.1 4896.920   1920   21.3 construction.year surface randomForest
+#&gt; 1001.2 4900.060   1920   22.6 construction.year surface randomForest
+#&gt; 1001.3 4900.187   1920   23.9 construction.year surface randomForest
+#&gt; 1001.4 4901.809   1920   25.2 construction.year surface randomForest
+#&gt; 1001.5 4896.952   1920   26.5 construction.year surface randomForest</div><div class='input'>
 <span class='fu'>plot</span>(<span class='no'>wi_rf_2d</span>)</div><div class='img'><img src='plot.what_if_2d_explainer-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>wi_rf_2d</span>, <span class='kw'>add_contour</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='plot.what_if_2d_explainer-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>wi_rf_2d</span>, <span class='kw'>add_observation</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='plot.what_if_2d_explainer-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>wi_rf_2d</span>, <span class='kw'>add_raster</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='plot.what_if_2d_explainer-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># HR data</span>
 <span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>status</span> ~ <span class='no'>gender</span> + <span class='no'>age</span> + <span class='no'>hours</span> + <span class='no'>evaluation</span> + <span class='no'>salary</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>HR</span>)

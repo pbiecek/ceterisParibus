@@ -82,7 +82,7 @@
       <h1>What If 2D Plots</h1>
                         <h4 class="author">Przemyslaw Biecek</h4>
             
-            <h4 class="date">2018-09-11</h4>
+            <h4 class="date">2018-12-13</h4>
       
       
       <div class="hidden name"><code>whatIf2d.Rmd</code></div>
@@ -112,13 +112,13 @@
 ## 1001     4644              1976     131     3        5 Srodmiescie</code></pre>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">wi_rf_2d &lt;-<span class="st"> </span><span class="kw"><a href="../reference/what_if_2d.html">what_if_2d</a></span>(explainer_rf, <span class="dt">observation =</span> new_apartment)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">wi_rf_2d</a></code></pre></div>
-<pre><code>##      y_hat new_x1 new_x2            vname1  vname2        label
-## 1 4899.536   1920   20.0 construction.year surface randomForest
-## 2 4896.920   1920   21.3 construction.year surface randomForest
-## 3 4900.060   1920   22.6 construction.year surface randomForest
-## 4 4900.187   1920   23.9 construction.year surface randomForest
-## 5 4901.809   1920   25.2 construction.year surface randomForest
-## 6 4896.952   1920   26.5 construction.year surface randomForest</code></pre>
+<pre><code>##           y_hat new_x1 new_x2            vname1  vname2        label
+## 1001   4899.536   1920   20.0 construction.year surface randomForest
+## 1001.1 4896.920   1920   21.3 construction.year surface randomForest
+## 1001.2 4900.060   1920   22.6 construction.year surface randomForest
+## 1001.3 4900.187   1920   23.9 construction.year surface randomForest
+## 1001.4 4901.809   1920   25.2 construction.year surface randomForest
+## 1001.5 4896.952   1920   26.5 construction.year surface randomForest</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">plot</span>(wi_rf_2d)</a></code></pre></div>
 <p><img src="whatIf2d_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">plot</span>(wi_rf_2d, <span class="dt">add_contour =</span> <span class="ot">FALSE</span>)</a></code></pre></div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>What-If 2D Plot — what_if_2d • ceterisParibus</title>
+<title>Calculate Local Conditional Expectation profiles — calculate_profiles_lce • ceterisParibus</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -48,7 +48,7 @@
 	  <a class = "navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src = "https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt = "MI2" height = 46 title = "MI2">
 	  </a>
-      <a class="navbar-brand navbar-mi2" href="../index.html">What-If 2D Plot</a>
+      <a class="navbar-brand navbar-mi2" href="../index.html">Calculate Local Conditional Expectation profiles</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -103,65 +103,83 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>What-If 2D Plot</h1>
+    <h1>Calculate Local Conditional Expectation profiles</h1>
     </div>
 
     
-    <p>This function calculates what if scores for grid of values spanned by two variables.</p>
+    <p>This function Local Conditional Expectation profiles</p>
     
 
-    <pre class="usage"><span class='fu'>what_if_2d</span>(<span class='no'>explainer</span>, <span class='no'>observation</span>, <span class='kw'>grid_points</span> <span class='kw'>=</span> <span class='fl'>101</span>,
-  <span class='kw'>selected_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>calculate_profiles_lce</span>(<span class='no'>data</span>, <span class='no'>variable_splits</span>, <span class='no'>model</span>, <span class='no'>dataset</span>,
+  <span class='kw'>predict_function</span> <span class='kw'>=</span> <span class='no'>predict</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>explainer</th>
-      <td><p>a model to be explained, preprocessed by the 'DALEX::explain' function</p></td>
+      <th>data</th>
+      <td><p>set of observations. Profile will be calculated for every observation (every row)</p></td>
     </tr>
     <tr>
-      <th>observation</th>
-      <td><p>a new observarvation for which predictions need to be explained</p></td>
+      <th>variable_splits</th>
+      <td><p>named list of vectors. Elements of the list are vectors with points in which profiles should be calculated. See an example for more details.</p></td>
     </tr>
     <tr>
-      <th>grid_points</th>
-      <td><p>number of points used for response path. Will be used for both variables</p></td>
+      <th>model</th>
+      <td><p>a model that will be passed to the <code>predict_function</code></p></td>
     </tr>
     <tr>
-      <th>selected_variables</th>
-      <td><p>if specified, then only these variables will be explained</p></td>
+      <th>dataset</th>
+      <td><p>a data.frame, usually training data of a model, used for calculation of LCE profiles</p></td>
+    </tr>
+    <tr>
+      <th>predict_function</th>
+      <td><p>function that takes data and model and returns numeric predictions. Note that the ... arguments will be passed to this function.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>other parameters that will be passed to the <code>predict_function</code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of the class 'what_if_2d_explainer'.
-It's a data frame with calculated average responses.</p>
+    <p>a data frame with profiles for selected variables and selected observations</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Note that <code>calculate_profiles_lce</code> function is S3 generic.
+If you want to work on non standard data sources (like H2O ddf, external databases)
+you should overload it.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='st'>"DALEX"</span>)</div><div class='input'><span class='fu'>library</span>(<span class='st'>"randomForest"</span>)
 <span class='fu'>set.seed</span>(<span class='fl'>59</span>)
-
 <span class='no'>apartments_rf_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> + <span class='no'>floor</span> +
-      <span class='no'>no.rooms</span> + <span class='no'>district</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
-
+                                      <span class='no'>no.rooms</span> + <span class='no'>district</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
 <span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DALEX/topics/explain'>explain</a></span>(<span class='no'>apartments_rf_model</span>,
-      <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)
+      <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments</span>$<span class='no'>m2.price</span>)
+<span class='no'>vars</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"construction.year"</span>, <span class='st'>"surface"</span>, <span class='st'>"floor"</span>, <span class='st'>"no.rooms"</span>, <span class='st'>"district"</span>)
+<span class='no'>variable_splits</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='calculate_variable_splits.html'>calculate_variable_splits</a></span>(<span class='no'>apartments</span>, <span class='no'>vars</span>)
+<span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartments</span>[<span class='fl'>1</span>, ]
 
-<span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartmentsTest</span>[<span class='fl'>1</span>, ]
-<span class='no'>new_apartment</span></div><div class='output co'>#&gt;      m2.price construction.year surface floor no.rooms    district
-#&gt; 1001     4644              1976     131     3        5 Srodmiescie</div><div class='input'>
-<span class='no'>wi_rf_2d</span> <span class='kw'>&lt;-</span> <span class='fu'>what_if_2d</span>(<span class='no'>explainer_rf</span>, <span class='kw'>observation</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>,
-         <span class='kw'>selected_variables</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"surface"</span>, <span class='st'>"floor"</span>, <span class='st'>"no.rooms"</span>))
-<span class='no'>wi_rf_2d</span></div><div class='output co'>#&gt;           y_hat new_x1 new_x2  vname1 vname2        label
-#&gt; 1001   4851.829     20   1.00 surface  floor randomForest
-#&gt; 1001.1 4851.829     20   1.09 surface  floor randomForest
-#&gt; 1001.2 4851.829     20   1.18 surface  floor randomForest
-#&gt; 1001.3 4851.829     20   1.27 surface  floor randomForest
-#&gt; 1001.4 4851.829     20   1.36 surface  floor randomForest
-#&gt; 1001.5 4851.829     20   1.45 surface  floor randomForest</div><div class='input'><span class='fu'>plot</span>(<span class='no'>wi_rf_2d</span>)</div><div class='img'><img src='what_if_2d-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='no'>profiles</span> <span class='kw'>&lt;-</span> <span class='fu'>calculate_profiles_lce</span>(<span class='no'>new_apartment</span>, <span class='no'>variable_splits</span>,
+                               <span class='no'>apartments_rf_model</span>, <span class='no'>explainer_rf</span>$<span class='no'>data</span>)
+<span class='no'>profiles</span></div><div class='output co'>#&gt;     m2.price construction.year  surface    floor  no.rooms    district   _yhat_
+#&gt; 1       5897              1920 21.84884 3.087808 0.9151128 Srodmiescie 5450.533
+#&gt; 1.1     5897              1921 21.94433 3.085148 0.9176852 Srodmiescie 5490.713
+#&gt; 1.2     5897              1922 22.03982 3.082487 0.9202575 Srodmiescie 5485.823
+#&gt; 1.3     5897              1923 22.13531 3.079826 0.9228298 Srodmiescie 5498.118
+#&gt; 1.4     5897              1924 22.23080 3.077165 0.9254022 Srodmiescie 5509.683
+#&gt; 1.5     5897              1925 22.32629 3.074504 0.9279745 Srodmiescie 5477.263
+#&gt;               _vname_ _ids_
+#&gt; 1   construction.year     1
+#&gt; 1.1 construction.year     1
+#&gt; 1.2 construction.year     1
+#&gt; 1.3 construction.year     1
+#&gt; 1.4 construction.year     1
+#&gt; 1.5 construction.year     1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -169,6 +187,8 @@ It's a data frame with calculated average responses.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

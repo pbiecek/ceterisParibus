@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ceteris Paribus Explainer — ceteris_paribus • ceterisParibus</title>
+<title>Local Conditional Expectation Explainer — local_conditional_expectations • ceterisParibus</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -48,7 +48,7 @@
 	  <a class = "navbar-mi2logo" href="http://mi2.mini.pw.edu.pl/">
         <img src = "https://github.com/mi2-warsaw/MI2template/blob/master/inst/pkgdown/assets/MI2logo.jpg?raw=true" alt = "MI2" height = 46 title = "MI2">
 	  </a>
-      <a class="navbar-brand navbar-mi2" href="../index.html">Ceteris Paribus Explainer</a>
+      <a class="navbar-brand navbar-mi2" href="../index.html">Local Conditional Expectation Explainer</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="navbar-mi2 nav navbar-nav">
@@ -103,14 +103,15 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Ceteris Paribus Explainer</h1>
+    <h1>Local Conditional Expectation Explainer</h1>
     </div>
 
     
-    <p>This function calculate ceteris paribus profiles for selected data points.</p>
+    <p>This explainer works for individual observations.
+For each observation it calculates Local Conditional Expectation (LCE) profiles for selected variables.</p>
     
 
-    <pre class="usage"><span class='fu'>ceteris_paribus</span>(<span class='no'>explainer</span>, <span class='no'>observations</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>local_conditional_expectations</span>(<span class='no'>explainer</span>, <span class='no'>observations</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>variable_splits</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>grid_points</span> <span class='kw'>=</span> <span class='fl'>101</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
@@ -126,7 +127,7 @@
     </tr>
     <tr>
       <th>y</th>
-      <td><p>true labels for `observations`. If specified then will be added to ceteris paribus plots.</p></td>
+      <td><p>true labels for `observations`. If specified then will be added to local conditional expectations plots.</p></td>
     </tr>
     <tr>
       <th>variable_splits</th>
@@ -145,7 +146,7 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object of the class 'ceteris_paribus_explainer'.
-It's a data frame with calculated average responses.</p>
+A data frame with calculated LCE profiles.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -156,76 +157,56 @@ It's a data frame with calculated average responses.</p>
       <span class='no'>no.rooms</span> + <span class='no'>district</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
 
 <span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DALEX/topics/explain'>explain</a></span>(<span class='no'>apartments_rf_model</span>,
-      <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)
+      <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>6</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments</span>$<span class='no'>m2.price</span>)
 
-<span class='no'>apartments_small</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='select_sample.html'>select_sample</a></span>(<span class='no'>apartmentsTest</span>, <span class='fl'>10</span>)
+<span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='no'>apartments</span>[<span class='fl'>1</span>, ]
 
-<span class='no'>cp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>ceteris_paribus</span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small</span>)
-<span class='no'>cp_rf</span></div><div class='output co'>#&gt; Top profiles    : 
-#&gt;        m2.price construction.year surface floor no.rooms district   _yhat_
-#&gt; 8946       2174              1920     123     8        4     Wola 2871.626
-#&gt; 8946.1     2174              1921     123     8        4     Wola 2896.045
-#&gt; 8946.2     2174              1922     123     8        4     Wola 2901.677
-#&gt; 8946.3     2174              1923     123     8        4     Wola 2891.101
-#&gt; 8946.4     2174              1923     123     8        4     Wola 2891.101
-#&gt; 8946.5     2174              1924     123     8        4     Wola 2890.361
-#&gt;                  _vname_ _ids_      _label_
-#&gt; 8946   construction.year  8946 randomForest
-#&gt; 8946.1 construction.year  8946 randomForest
-#&gt; 8946.2 construction.year  8946 randomForest
-#&gt; 8946.3 construction.year  8946 randomForest
-#&gt; 8946.4 construction.year  8946 randomForest
-#&gt; 8946.5 construction.year  8946 randomForest
+<span class='no'>lce_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>local_conditional_expectations</span>(<span class='no'>explainer_rf</span>, <span class='no'>new_apartment</span>)
+<span class='no'>lce_rf</span></div><div class='output co'>#&gt; Top profiles    : 
+#&gt;     m2.price construction.year  surface    floor  no.rooms    district   _yhat_
+#&gt; 1       5897              1920 21.84884 3.087808 0.9151128 Srodmiescie 5450.533
+#&gt; 1.1     5897              1921 21.94433 3.085148 0.9176852 Srodmiescie 5490.713
+#&gt; 1.2     5897              1922 22.03982 3.082487 0.9202575 Srodmiescie 5485.823
+#&gt; 1.3     5897              1923 22.13531 3.079826 0.9228298 Srodmiescie 5498.118
+#&gt; 1.4     5897              1924 22.23080 3.077165 0.9254022 Srodmiescie 5509.683
+#&gt; 1.5     5897              1925 22.32629 3.074504 0.9279745 Srodmiescie 5477.263
+#&gt;               _vname_ _ids_      _label_
+#&gt; 1   construction.year     1 randomForest
+#&gt; 1.1 construction.year     1 randomForest
+#&gt; 1.2 construction.year     1 randomForest
+#&gt; 1.3 construction.year     1 randomForest
+#&gt; 1.4 construction.year     1 randomForest
+#&gt; 1.5 construction.year     1 randomForest
 #&gt; 
 #&gt; 
 #&gt; Top observations:
-#&gt;      m2.price construction.year surface floor no.rooms    district   _yhat_
-#&gt; 8946     2174              1959     123     8        4        Wola 2386.002
-#&gt; 4458     4319              1927      68     8        2      Ochota 4222.164
-#&gt; 7384     5501              1929      95     5        3 Srodmiescie 4646.023
-#&gt; 5450     2810              1982     124    10        5      Ochota 3062.748
-#&gt; 6744     1770              1982     143     9        6     Ursynow 2171.529
-#&gt; 6688     2796              1938      75     7        3        Wola 3045.947
-#&gt;           _label_
-#&gt; 8946 randomForest
-#&gt; 4458 randomForest
-#&gt; 7384 randomForest
-#&gt; 5450 randomForest
-#&gt; 6744 randomForest
-#&gt; 6688 randomForest</div><div class='input'>
-<span class='no'>cp_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>ceteris_paribus</span>(<span class='no'>explainer_rf</span>, <span class='no'>apartments_small</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartments_small</span>$<span class='no'>m2.price</span>)
-<span class='no'>cp_rf</span></div><div class='output co'>#&gt; Top profiles    : 
-#&gt;        m2.price construction.year surface floor no.rooms district   _yhat_
-#&gt; 8946       2174              1920     123     8        4     Wola 2871.626
-#&gt; 8946.1     2174              1921     123     8        4     Wola 2896.045
-#&gt; 8946.2     2174              1922     123     8        4     Wola 2901.677
-#&gt; 8946.3     2174              1923     123     8        4     Wola 2891.101
-#&gt; 8946.4     2174              1923     123     8        4     Wola 2891.101
-#&gt; 8946.5     2174              1924     123     8        4     Wola 2890.361
-#&gt;                  _vname_ _ids_      _label_
-#&gt; 8946   construction.year  8946 randomForest
-#&gt; 8946.1 construction.year  8946 randomForest
-#&gt; 8946.2 construction.year  8946 randomForest
-#&gt; 8946.3 construction.year  8946 randomForest
-#&gt; 8946.4 construction.year  8946 randomForest
-#&gt; 8946.5 construction.year  8946 randomForest
+#&gt;   m2.price construction.year surface floor no.rooms    district   _yhat_
+#&gt; 1     5897              1953      25     3        1 Srodmiescie 5447.656
+#&gt;        _label_
+#&gt; 1 randomForest</div><div class='input'>
+<span class='no'>lce_rf</span> <span class='kw'>&lt;-</span> <span class='fu'>local_conditional_expectations</span>(<span class='no'>explainer_rf</span>, <span class='no'>new_apartment</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>new_apartment</span>$<span class='no'>m2.price</span>)
+<span class='no'>lce_rf</span></div><div class='output co'>#&gt; Top profiles    : 
+#&gt;     m2.price construction.year  surface    floor  no.rooms    district   _yhat_
+#&gt; 1       5897              1920 21.84884 3.087808 0.9151128 Srodmiescie 5450.533
+#&gt; 1.1     5897              1921 21.94433 3.085148 0.9176852 Srodmiescie 5490.713
+#&gt; 1.2     5897              1922 22.03982 3.082487 0.9202575 Srodmiescie 5485.823
+#&gt; 1.3     5897              1923 22.13531 3.079826 0.9228298 Srodmiescie 5498.118
+#&gt; 1.4     5897              1924 22.23080 3.077165 0.9254022 Srodmiescie 5509.683
+#&gt; 1.5     5897              1925 22.32629 3.074504 0.9279745 Srodmiescie 5477.263
+#&gt;               _vname_ _ids_      _label_
+#&gt; 1   construction.year     1 randomForest
+#&gt; 1.1 construction.year     1 randomForest
+#&gt; 1.2 construction.year     1 randomForest
+#&gt; 1.3 construction.year     1 randomForest
+#&gt; 1.4 construction.year     1 randomForest
+#&gt; 1.5 construction.year     1 randomForest
 #&gt; 
 #&gt; 
 #&gt; Top observations:
-#&gt;      m2.price construction.year surface floor no.rooms    district   _yhat_
-#&gt; 8946     2174              1959     123     8        4        Wola 2386.002
-#&gt; 4458     4319              1927      68     8        2      Ochota 4222.164
-#&gt; 7384     5501              1929      95     5        3 Srodmiescie 4646.023
-#&gt; 5450     2810              1982     124    10        5      Ochota 3062.748
-#&gt; 6744     1770              1982     143     9        6     Ursynow 2171.529
-#&gt; 6688     2796              1938      75     7        3        Wola 3045.947
-#&gt;       _y_      _label_
-#&gt; 8946 2174 randomForest
-#&gt; 4458 4319 randomForest
-#&gt; 7384 5501 randomForest
-#&gt; 5450 2810 randomForest
-#&gt; 6744 1770 randomForest
-#&gt; 6688 2796 randomForest</div></pre>
+#&gt;   m2.price construction.year surface floor no.rooms    district   _yhat_  _y_
+#&gt; 1     5897              1953      25     3        1 Srodmiescie 5447.656 5897
+#&gt;        _label_
+#&gt; 1 randomForest</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
