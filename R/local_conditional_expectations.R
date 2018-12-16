@@ -29,11 +29,21 @@
 #'
 #' new_apartment <- apartments[1, ]
 #'
+#' cp_rf <- ceteris_paribus(explainer_rf, new_apartment)
 #' lce_rf <- local_conditional_expectations(explainer_rf, new_apartment)
 #' lce_rf
 #'
 #' lce_rf <- local_conditional_expectations(explainer_rf, new_apartment, y = new_apartment$m2.price)
 #' lce_rf
+#' 
+#' # Plot LCE
+#' sel_vars <- c("surface", "no.rooms")
+#' plot(lce_rf, selected_variables = sel_vars)
+#' 
+#' # Compare ceteris paribus profiles with LCE profiles 
+#' plot(cp_rf, selected_variables = sel_vars) + 
+#'    ceteris_paribus_layer(lce_rf, selected_variables = sel_vars, color = "red")
+#'
 #' }
 
 
