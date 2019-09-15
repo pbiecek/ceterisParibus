@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::knitr}
-  %\VignetteIndexEntry{Title of your vignette}
+  %\VignetteIndexEntry{What If Plots}
   %\usepackage[UTF-8]{inputenc}
 ---
 
@@ -42,7 +42,7 @@ These functions have slightly different interfaces.
 
 Here is the one with `what_if()`.
 
-```{r, fig.width=7, fig.height=7}
+```{r, fig.width=7, fig.height=6}
 new_apartment <- apartmentsTest[1, ]
 new_apartment
 
@@ -64,7 +64,7 @@ plot(wi_lm)
 
 Here is the one with `ceteris_paribus()`.
 
-```{r, fig.width=7, fig.height=7}
+```{r, fig.width=7, fig.height=6}
 cp_rf <- ceteris_paribus(explainer_rf, observation = new_apartment)
 cp_rf
 plot(cp_rf)
@@ -80,7 +80,7 @@ plot(cp_lm, color = "_vname_")
  
 ## The old interface (what_if)
 
-```{r, fig.width=7, fig.height=7}
+```{r, fig.width=7, fig.height=6}
 plot(wi_rf, wi_lm, split = "variables", color = "models", quantiles = FALSE)
 plot(wi_rf, wi_lm, split = "variables", color = "models")
 plot(wi_rf, wi_lm)
@@ -88,7 +88,7 @@ plot(wi_rf, wi_lm)
 
 ## The new interface (ceteris_paribus)
  
-```{r, fig.width=7, fig.height=7}
+```{r, fig.width=7, fig.height=6}
 plot(cp_rf, cp_lm)
 plot(cp_rf, cp_lm, color = "_vname_")
 plot(cp_rf, cp_lm, color = "_label_")
@@ -99,7 +99,7 @@ plot(cp_rf, cp_lm, color = "_label_")
 
 Deprecated. Only for the old interface.
 
-```{r, fig.width=7, fig.height=7, message=FALSE, warning=FALSE, eval=FALSE}
+```{r, fig.width=7, fig.height=6, message=FALSE, warning=FALSE, eval=FALSE}
 library("ggiraph")
 
 plot_interactive(wi_rf, split = "variables", color = "variables")
@@ -111,7 +111,7 @@ plot_interactive(wi_lm)
 
 # Interactive Ceteris Paribus Plots - two models
 
-```{r, fig.width=7, fig.height=7, eval=FALSE}
+```{r, fig.width=7, fig.height=6, eval=FALSE}
 plot_interactive(wi_rf, wi_lm)
 plot_interactive(wi_rf, wi_lm, split = "variables")
 ```

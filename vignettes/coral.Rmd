@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::knitr}
-  %\VignetteIndexEntry{Title of your vignette}
+  %\VignetteIndexEntry{Local Fit Plots / Wangkardu Explanations}
   %\usepackage[UTF-8]{inputenc}
 ---
 
@@ -49,7 +49,7 @@ new_apartment
 The validation data has 9000 observations. We will use 0.2 percents (18 observations) to see local fit for selected observation. 
 As you see below residuals for neighbouring observations are quite large. Locally the fit is pretty bad.
 
-```{r, fig.width=7, fig.height=7}
+```{r, fig.width=7, fig.height=6}
 cr_rf <- local_fit(explainer_rf, observation = new_apartment, 
                    select_points = 0.002, selected_variable = "surface")
 plot(cr_rf, plot_residuals = FALSE)
@@ -58,7 +58,7 @@ plot(cr_rf)
 
 How it looks for other points? Better, just see, now residuals are ore or less symmetric.
 
-```{r, fig.width=7, fig.height=7}
+```{r, fig.width=7, fig.height=6}
 new_apartment <- apartmentsTest[10, ]
 cr_rf <- local_fit(explainer_rf, observation = new_apartment, 
                    select_points = 0.002, selected_variable = "surface")
@@ -80,7 +80,7 @@ Wangkardu Explanations are Local Fit Plots with changed color palette. Here colo
 
 Let's see some examples.
 
-```{r, fig.width=7, fig.height=7}
+```{r, fig.width=7, fig.height=6}
 cr_rf <- local_fit(explainer_rf, observation = new_apartment, 
                    select_points = 0.002, selected_variable = "surface")
 plot(cr_rf, plot_residuals = FALSE, palette = "wangkardu")

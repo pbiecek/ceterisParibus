@@ -1,11 +1,11 @@
 ---
-title: "Ceteris Paribus Plots"
+title: "Ceteris Paribus Profiles"
 author: "Przemyslaw Biecek"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::knitr}
-  %\VignetteIndexEntry{Title of your vignette}
+  %\VignetteIndexEntry{Ceteris Paribus Profiles}
   %\usepackage[UTF-8]{inputenc}
 ---
 
@@ -36,7 +36,7 @@ explainer_rf <- explain(apartments_rf_model,
 
 Let's start with plots for a single observation.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 apartments_A <- apartmentsTest[958,]
 cp_rf_A <- ceteris_paribus(explainer_rf, apartments_A, y = apartments_A$m2.price)
 
@@ -46,7 +46,7 @@ plot(cp_rf_A, show_profiles = TRUE, show_observations = TRUE,
 
 Here are plots for neighbours of this observation.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 apartments_B <- select_neighbours(apartmentsTest, apartmentsTest[958,], n = 15)
 cp_rf_B <- ceteris_paribus(explainer_rf, apartments_B, y = apartments_B$m2.price)
 
@@ -57,7 +57,7 @@ plot(cp_rf_B,
 
 Here we have an example for a subset of observations and only points.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 apartments_C <- select_sample(apartmentsTest, n = 15)
 cp_rf_C <- ceteris_paribus(explainer_rf, apartments_C, y = apartments_C$m2.price)
 
@@ -68,7 +68,7 @@ plot(cp_rf_C,
 
 Only rugs
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 plot(cp_rf_C, 
      show_profiles = FALSE, show_observations = FALSE, show_rugs = TRUE, 
      selected_variables = c("surface","construction.year"))
@@ -76,7 +76,7 @@ plot(cp_rf_C,
 
 Only profiles
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 plot(cp_rf_C, 
      show_profiles = TRUE, show_observations = FALSE, 
      selected_variables = c("surface","construction.year")) 
@@ -84,7 +84,7 @@ plot(cp_rf_C,
 
 Only residuals
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 plot(cp_rf_C, 
      show_profiles = FALSE, show_observations = FALSE, show_residuals = TRUE, 
      selected_variables = c("surface","construction.year"))
@@ -92,7 +92,7 @@ plot(cp_rf_C,
 
 Only average profile
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 plot(cp_rf_C, 
      show_profiles = TRUE, show_observations = FALSE, 
      aggregate_profiles = mean, size = 2,
@@ -101,7 +101,7 @@ plot(cp_rf_C,
 
 Colors correspond to district
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 plot(cp_rf_C, 
      show_profiles = TRUE, show_observations = FALSE, 
      color = "district", alpha = 1,
@@ -110,7 +110,7 @@ plot(cp_rf_C,
 
 Colors correspond to surface.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 plot(cp_rf_C, 
      show_profiles = TRUE, show_observations = TRUE, 
      color = "surface", alpha = 1, 
@@ -119,7 +119,7 @@ plot(cp_rf_C,
 
 Observations without rugs.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 plot(cp_rf_C, 
      show_profiles = TRUE, show_observations = TRUE, 
      selected_variables = c("surface","construction.year"))
@@ -128,7 +128,7 @@ plot(cp_rf_C,
 
 Different colors for different elements.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 plot(cp_rf_C, 
      show_profiles = TRUE, show_observations = TRUE, show_rugs = TRUE,
      show_residuals = TRUE, 
@@ -144,7 +144,7 @@ Here we are going to mix two or more layers.
 
 First one presents individual profiles and the average between profiles.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 # mixtures
 
 plot(cp_rf_C, 
@@ -159,7 +159,7 @@ plot(cp_rf_C,
 
 Neighbourings for two observations.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 apartments_D <- select_neighbours(apartmentsTest, apartmentsTest[348,], n = 15)
 cp_rf_D <- ceteris_paribus(explainer_rf, apartments_D, y = apartments_D$m2.price)
 
@@ -175,7 +175,7 @@ plot(cp_rf_B,
 
 Profiles for two models: random forest and SVM.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 library("rpart")
 library("e1071")
 apartments_svm_model <- svm(m2.price ~ construction.year + surface + floor + 
@@ -208,7 +208,7 @@ plot(cp_rf_A,
 
 Both models in a single layer
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 plot(cp_rf_A, cp_rf_E, cp_rpart_F,
      color = "_label_", 
     selected_variables = c("surface","construction.year"))
@@ -219,7 +219,7 @@ plot(cp_rf_A, cp_rf_E, cp_rpart_F,
 
 Images and codes used in the cheatsheet
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 apartments_A <- apartmentsTest[2,]
 cp_rf_A <- ceteris_paribus(explainer_rf, apartments_A, y = apartments_A$m2.price)
 
@@ -269,7 +269,7 @@ plot(cp_rf_B,
 
 ```
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 plot(cp_rf_A, cp_rf_E, cp_rpart_F,
      color = "_label_", alpha = 0.5, size_points = 4, 
      selected_variables = "surface", 
@@ -283,7 +283,7 @@ plot(cp_rf_C[as.numeric(cp_rf_C$district) < 8,],
 
 ```
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 
 plot(cp_rf_A,
      alpha = 0.5, size_points = 4, 

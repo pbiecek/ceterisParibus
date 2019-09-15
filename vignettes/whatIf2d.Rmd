@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::knitr}
-  %\VignetteIndexEntry{Title of your vignette}
+  %\VignetteIndexEntry{What If 2D Plots}
   %\usepackage[UTF-8]{inputenc}
 ---
 
@@ -15,7 +15,7 @@ Here we present 2D What If plots.
 
 First, an example for regression model.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 library("DALEX")
 library("ceterisParibus")
 library("randomForest")
@@ -40,7 +40,7 @@ plot(wi_rf_2d, add_raster = FALSE)
 
 And an example for classification.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 # HR data
 model <- randomForest(status ~ gender + age + hours + evaluation + salary, data = HR)
 pred1 <- function(m, x)   predict(m, x, type = "prob")[,1]

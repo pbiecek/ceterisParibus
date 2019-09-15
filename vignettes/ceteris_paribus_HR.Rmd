@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::knitr}
-  %\VignetteIndexEntry{Title of your vignette}
+  %\VignetteIndexEntry{Ceteris Paribus Plots for classification}
   %\usepackage[UTF-8]{inputenc}
 ---
 
@@ -51,7 +51,7 @@ explainer_rf_promoted <- explain(model, data = HR[,1:5],
 
 Ceteris Paribus package can plot many explainers in a single panel. This will be useful for multiclass classification. You can simply create an explainer for each class and plot all these explainers together.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 cp_rf1 <- ceteris_paribus(explainer_rf_fired, HR[1,])
 cp_rf2 <- ceteris_paribus(explainer_rf_ok, HR[1,])
 cp_rf3 <- ceteris_paribus(explainer_rf_promoted, HR[1,])
@@ -67,7 +67,7 @@ The `explainer_rf_fired` explainer is focused on class `fired`. Let's see Ceteri
 
 They are colored with the `gender` variable. It's useful since in the model there is an interaction between age and gender. Can you spot it?
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 cp_rf_fired <- ceteris_paribus(explainer_rf_fired, HR[1:10,])
 
 plot(cp_rf_fired, color = "gender")
@@ -80,7 +80,7 @@ We can plot explainers for two classes (fired and promoted) in the same plot. He
 The `hours` variable is an interesting one. People with low average working hours are on average more likely to be fired not promoted. Also the `salary` seems to be related with probability of being `fired` but not `promoted`.
 
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 cp_rf1 <- ceteris_paribus(explainer_rf_fired, HR[1:100,])
 cp_rf2 <- ceteris_paribus(explainer_rf_ok, HR[1:100,])
 cp_rf3 <- ceteris_paribus(explainer_rf_promoted, HR[1:100,])
@@ -100,7 +100,7 @@ For the `age` variable it looks like younger woman are more likely to be fired w
 
 Is it because employers are afraid of maternity leaves? Maybe, but please note, that this dataset is an artificial/simulated one.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 cp_rfF <- ceteris_paribus(explainer_rf_fired, 
                           HR[which(HR$gender == "female")[1:100],])
 cp_rfF$`_label_` = "Fired Female"
@@ -122,7 +122,7 @@ Let's start with examples for a single observation. We need to train models firs
 
 Here is for the random forest.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 library("ceterisParibus")
 library("e1071")
 
@@ -136,7 +136,7 @@ explainer_rf_fired <- explain(model, data = HR[,1:5],
 
 Here is for generalized linear model.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 model_fired <- glm(status == "fired" ~ gender + age + hours + evaluation + salary, data = HR, family = "binomial")
 
 pred_glm_fired <- function(m, x)   predict.glm(m, x, type = "response")
@@ -148,7 +148,7 @@ explainer_glm_fired <- explain(model_fired, data = HR[,1:5],
 
 And here is one for support vector machines.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 model_svm_fired <- svm(status ~ gender + age + hours + evaluation + salary, data = HR, probability = TRUE)
 
 pred_svm_fired <- function(m, x) attr(predict(m, x, probability = TRUE), "probabilities")[,1]
@@ -160,7 +160,7 @@ explainer_svm_fired <- explain(model_svm_fired, data = HR[,1:5],
 
 Having explainers, we can now create Ceteris Paribus profiles for a selected single observation.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 new_obs <- HR[1,]
 
 cp_rf <- ceteris_paribus(explainer_rf_fired, new_obs)
@@ -170,7 +170,7 @@ cp_svm <- ceteris_paribus(explainer_svm_fired, new_obs)
 
 And we can plot profiles for this observations. Note that both SVM and RF captured the interaction between gender and age. Also they captured the nonlinear relation for salary.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 plot(cp_rf, cp_glm, cp_svm,
      alpha = 0.5, size_points = 3, color="_label_")
 ```
@@ -178,7 +178,7 @@ plot(cp_rf, cp_glm, cp_svm,
 Now we can calculate average profile for global explanations. Here the average will be calculated based on 100 observations.
 Note that since age and gender are in interaction, on average there is no relation between score and the age.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 cp_rf <- ceteris_paribus(explainer_rf_fired, HR[1:100,])
 cp_glm <- ceteris_paribus(explainer_glm_fired, HR[1:100,])
 cp_svm <- ceteris_paribus(explainer_svm_fired, HR[1:100,])
@@ -193,7 +193,7 @@ plot(cp_rf, cp_glm, cp_svm,
 
 Images and codes used in the cheatsheet
 
-```{r, warning=FALSE, message=FALSE}
+```{r, fig.width=7, fig.height=6, warning=FALSE, message=FALSE}
 percent <- function (x) 
     paste0(format(round(x, 2) * 100, big.mark = ",", scientific = FALSE, trim = TRUE), "%")
 
