@@ -4,8 +4,14 @@
 \alias{local_conditional_expectations}
 \title{Local Conditional Expectation Explainer}
 \usage{
-local_conditional_expectations(explainer, observations, y = NULL,
-  variable_splits = NULL, variables = NULL, grid_points = 101)
+local_conditional_expectations(
+  explainer,
+  observations,
+  y = NULL,
+  variable_splits = NULL,
+  variables = NULL,
+  grid_points = 101
+)
 }
 \arguments{
 \item{explainer}{a model to be explained, preprocessed by function `DALEX::explain()`.}

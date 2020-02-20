@@ -88,7 +88,7 @@ plot.local_fit_explainer <- function(x, ..., plot_residuals = TRUE, palette = "d
     geom_point(data = all_predictions[1,], aes(x, predictions), size = 4, color = selected_palette$background) +
     ylab("Predicted y") + xlab(vname) + theme(legend.position = "none") +
     scale_color_manual(values = c("TRUE" = selected_palette$down, "FALSE" = selected_palette$up))
-  pl + if(palette == "wangkardu") theme_wangkardu(selected_palette) else theme_mi2()
+  pl + if(palette == "wangkardu") theme_wangkardu(selected_palette) else theme_drwhy()
 }
 
 theme_wangkardu <- function(selected_palette) {

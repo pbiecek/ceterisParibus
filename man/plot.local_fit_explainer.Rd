@@ -4,8 +4,7 @@
 \alias{plot.local_fit_explainer}
 \title{Local Fit Plots / Wangkardu Explanations}
 \usage{
-\method{plot}{local_fit_explainer}(x, ..., plot_residuals = TRUE,
-  palette = "default")
+\method{plot}{local_fit_explainer}(x, ..., plot_residuals = TRUE, palette = "default")
 }
 \arguments{
 \item{x}{a local fir explainer produced with the 'local_fit' function}

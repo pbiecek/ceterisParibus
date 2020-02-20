@@ -8,7 +8,7 @@
 #' @return a ggplot2 object
 #' @export
 #' @importFrom stats reorder
-#' 
+#'
 #' @examples
 #' library("DALEX")
 #'  \dontrun{
@@ -42,5 +42,5 @@ plot.ceteris_paribus_oscillations <- function(x, ...) {
     geom_errorbar() + coord_flip() +
     facet_wrap(~`_ids_`, scales = "free_y") +
     ylab("Ceteris Paribus Oscillations") + xlab("") +
-    theme_mi2()
+    theme_drwhy()
 }

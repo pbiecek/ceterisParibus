@@ -4,8 +4,13 @@
 \alias{local_fit}
 \title{Local Fit / Wangkardu Explanations}
 \usage{
-local_fit(explainer, observation, selected_variable, grid_points = 101,
-  select_points = 0.1)
+local_fit(
+  explainer,
+  observation,
+  selected_variable,
+  grid_points = 101,
+  select_points = 0.1
+)
 }
 \arguments{
 \item{explainer}{a model to be explained, preprocessed by the 'DALEX::explain' function}

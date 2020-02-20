@@ -4,8 +4,12 @@
 \alias{what_if_2d}
 \title{What-If 2D Plot}
 \usage{
-what_if_2d(explainer, observation, grid_points = 101,
-  selected_variables = NULL)
+what_if_2d(
+  explainer,
+  observation,
+  grid_points = 101,
+  selected_variables = NULL
+)
 }
 \arguments{
 \item{explainer}{a model to be explained, preprocessed by the 'DALEX::explain' function}

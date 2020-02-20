@@ -6,13 +6,11 @@
 \alias{plot_interactive.default}
 \title{Plots Interactive What-If Explanations}
 \usage{
-\method{plot_interactive}{what_if_explainer}(x, ..., split = "models",
-  color = "variables")
+\method{plot_interactive}{what_if_explainer}(x, ..., split = "models", color = "variables")
 
 plot_interactive(x, ...)
 
-\method{plot_interactive}{default}(x, ..., split = "models",
-  color = "variables")
+\method{plot_interactive}{default}(x, ..., split = "models", color = "variables")
 }
 \arguments{
 \item{x}{a ceteris_paribus explainer produced with the 'ceteris_paribus' function}

@@ -4,8 +4,7 @@
 \alias{what_if}
 \title{What-If Plot}
 \usage{
-what_if(explainer, observation, grid_points = 101,
-  selected_variables = NULL)
+what_if(explainer, observation, grid_points = 101, selected_variables = NULL)
 }
 \arguments{
 \item{explainer}{a model to be explained, preprocessed by the 'DALEX::explain' function}

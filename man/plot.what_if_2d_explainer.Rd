@@ -4,9 +4,15 @@
 \alias{plot.what_if_2d_explainer}
 \title{Plot What If 2D Explanations}
 \usage{
-\method{plot}{what_if_2d_explainer}(x, ..., split_ncol = NULL,
-  add_raster = TRUE, add_contour = TRUE, add_observation = TRUE,
-  bins = 3)
+\method{plot}{what_if_2d_explainer}(
+  x,
+  ...,
+  split_ncol = NULL,
+  add_raster = TRUE,
+  add_contour = TRUE,
+  add_observation = TRUE,
+  bins = 3
+)
 }
 \arguments{
 \item{x}{a ceteris paribus explainer produced with the 'what_if_2d' function}

@@ -30,7 +30,7 @@
 #' @return a ggplot2 object
 #' @export
 #' @import ggplot2
-#' @importFrom DALEX theme_mi2
+#' @importFrom DALEX theme_drwhy
 #' @importFrom stats aggregate
 #'
 #' @examples
@@ -163,7 +163,7 @@ plot.ceteris_paribus_explainer <- function(x, ...,
 #' @return a ggplot2 object
 #' @export
 #' @import ggplot2
-#' @importFrom DALEX theme_mi2
+#' @importFrom DALEX theme_drwhy
 #'
 #' @examples
 #' library("DALEX")
@@ -353,7 +353,7 @@ ceteris_paribus_layer <- function(x, ...,
     }
 
     if (init_plot) {
-      pl <- pl + theme_mi2()
+      pl <- pl + theme_drwhy()
     }
 
     if (!as.gg) {

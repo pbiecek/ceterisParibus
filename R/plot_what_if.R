@@ -12,7 +12,7 @@
 #' @return a ggplot2 object
 #' @export
 #' @import ggplot2
-#' @importFrom DALEX theme_mi2
+#' @importFrom DALEX theme_drwhy
 #'
 #' @examples
 #' library("DALEX")
@@ -73,7 +73,7 @@ plot.what_if_explainer <- function(x, ..., quantiles = TRUE, split = "models", s
     geom_hline(data = all_predictions, aes(yintercept = prediction), lty = 2) +
     geom_point() +
     geom_line() +
-    theme_mi2() + ylab("Predicted y") + ggtitle("Ceteris Paribus Plot") +
+    theme_drwhy() + ylab("Predicted y") + ggtitle("Ceteris Paribus Plot") +
     theme(legend.position = "bottom")
 
   if (quantiles) {

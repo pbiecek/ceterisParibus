@@ -4,8 +4,7 @@
 \alias{calculate_variable_splits}
 \title{Calculate Split Points for Selected Variables}
 \usage{
-calculate_variable_splits(data, variables = colnames(data),
-  grid_points = 101)
+calculate_variable_splits(data, variables = colnames(data), grid_points = 101)
 }
 \arguments{
 \item{data}{validation dataset. Is used to determine distribution of observations.}

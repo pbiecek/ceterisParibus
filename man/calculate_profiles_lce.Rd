@@ -4,8 +4,14 @@
 \alias{calculate_profiles_lce}
 \title{Calculate Local Conditional Expectation profiles}
 \usage{
-calculate_profiles_lce(data, variable_splits, model, dataset,
-  predict_function = predict, ...)
+calculate_profiles_lce(
+  data,
+  variable_splits,
+  model,
+  dataset,
+  predict_function = predict,
+  ...
+)
 }
 \arguments{
 \item{data}{set of observations. Profile will be calculated for every observation (every row)}

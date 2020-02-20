@@ -4,14 +4,31 @@
 \alias{plot.ceteris_paribus_explainer}
 \title{Plot Ceteris Paribus Explanations}
 \usage{
-\method{plot}{ceteris_paribus_explainer}(x, ..., size = 1, alpha = 0.3,
-  color = "black", size_points = 2, alpha_points = 1,
-  color_points = color, size_rugs = 0.5, alpha_rugs = 1,
-  color_rugs = color, size_residuals = 1, alpha_residuals = 1,
-  color_residuals = color, only_numerical = TRUE,
-  show_profiles = TRUE, show_observations = TRUE, show_rugs = FALSE,
-  show_residuals = FALSE, aggregate_profiles = NULL, as.gg = FALSE,
-  facet_ncol = NULL, selected_variables = NULL)
+\method{plot}{ceteris_paribus_explainer}(
+  x,
+  ...,
+  size = 1,
+  alpha = 0.3,
+  color = "black",
+  size_points = 2,
+  alpha_points = 1,
+  color_points = color,
+  size_rugs = 0.5,
+  alpha_rugs = 1,
+  color_rugs = color,
+  size_residuals = 1,
+  alpha_residuals = 1,
+  color_residuals = color,
+  only_numerical = TRUE,
+  show_profiles = TRUE,
+  show_observations = TRUE,
+  show_rugs = FALSE,
+  show_residuals = FALSE,
+  aggregate_profiles = NULL,
+  as.gg = FALSE,
+  facet_ncol = NULL,
+  selected_variables = NULL
+)
 }
 \arguments{
 \item{x}{a ceteris paribus explainer produced with function `ceteris_paribus()`}
