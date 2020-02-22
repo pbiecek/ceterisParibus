@@ -5,7 +5,6 @@
 [![Build Status](https://api.travis-ci.org/pbiecek/ceterisParibus.png)](https://travis-ci.org/pbiecek/ceterisParibus)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/pbiecek/ceterisParibus/master.svg)](https://codecov.io/github/pbiecek/ceterisParibus?branch=master)
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/pbiecek/ceterisParibus/master?filepath=jupyter-notebooks)
 
 *Ceteris Paribus Plots* (What-If Plots) are designed to present model responses around a single point in the feature space. For example around a single prediction for an interesting observation. Plots are designed to work in a model-agnostic fashion, they are working for any Machine Learning model and allow for model comparisons.
 
@@ -17,12 +16,12 @@ Ceteris Paribus Plots show possible scenarios for model predictions allowing for
 
 See a short 100 secs introduction to the package [on YouTube](https://youtu.be/ya1SEWFXN08).
 
-[![Ceteris Paribus 100 sec introduction](misc/ceterisParibus100sec.png)](https://youtu.be/ya1SEWFXN08 "100 sec into ceterisParobis package")
+[![Ceteris Paribus 100 sec introduction](https://github.com/pbiecek/ceterisParibus/blob/master/cheatsheets/CeterisParibusCheatsheet.pdf)](https://youtu.be/ya1SEWFXN08 "100 sec into ceterisParibus package")
 
-Find more about Ceteris Paribus Profiles in this [Gentle introduction to DALEX with examples](https://pbiecek.github.io/DALEX_docs/5-ceterisParibus.html#ceterisParibus) or in the cheatsheet presented below.
+Find more about Ceteris Paribus Profiles in this [Gentle introduction to DALEX with examples](https://pbiecek.github.io/ema/ceterisParibus.html) or in the cheatsheet presented below.
 
-<a href="cheatsheets/CeterisParibusCheatsheet.pdf">
-<img src="cheatsheets/CeterisParibusCheatsheet.png">
+<a href="https://github.com/pbiecek/ceterisParibus/blob/master/cheatsheets/CeterisParibusCheatsheet.pdf">
+<img src="https://github.com/pbiecek/ceterisParibus/blob/master/cheatsheets/CeterisParibusCheatsheet.png">
 </a>
 
 ## Installation

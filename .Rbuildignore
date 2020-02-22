@@ -5,7 +5,7 @@ vignettes/
 .travis.yml
 _pkgdown.yml
 binder
-cheatsheets
 documentation.yml
 jupyter-notebooks
 misc
+cheatsheets
