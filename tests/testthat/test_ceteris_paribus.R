@@ -16,7 +16,7 @@ test_that("Output format - ceteris_paribus_explainer",{
 
 test_that("Plotting ceteris_paribus_explainer",{
   expect_is(plot(cp_rf), "gg")
-  expect_is(plot(cp_rf, only_numerical = FALSE, int_plot = TRUE, show_rugs = TRUE, show_observations = TRUE,
+  expect_is(plot(cp_rf, only_numerical = FALSE, show_rugs = TRUE, show_observations = TRUE,
                  show_profiles = FALSE, show_residuals = TRUE, aggregate_profiles = mean), "gg")
   expect_is(plot(cp_rf, show_profiles = TRUE, aggregate_profiles = mean), "gg")
 })
