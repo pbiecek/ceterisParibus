@@ -1,7 +1,7 @@
 ceterisParibus 0.4.3
 ----------------------------------------------------------------
 
-* Now in `ceteris_paribus` function one can specify how grid points shall be calculated, see `variable_splits_type`
+* Now in the `ceteris_paribus` function one can specify how grid points shall be calculated, see `variable_splits_type`
 
 ceterisParibus 0.4.2
 ----------------------------------------------------------------
