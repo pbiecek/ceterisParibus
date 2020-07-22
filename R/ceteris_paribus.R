@@ -6,6 +6,7 @@
 #' @param observations set of observarvation for which profiles are to be calculated
 #' @param y true labels for `observations`. If specified then will be added to ceteris paribus plots.
 #' @param variable_splits named list of splits for variables, in most cases created with `calculate_variable_splits()`. If NULL then it will be calculated based on validation data avaliable in the `explainer`.
+#' @param variable_splits_type how variable grids shall be calculated? Use "quantiles" (default) for percentiles or "uniform" to get uniform grid of points
 #' @param grid_points number of points for profile. Will be passed to `calculate_variable_splits()`.
 #' @param variables names of variables for which profiles shall be calculated. Will be passed to `calculate_variable_splits()`. If NULL then all variables from the validation data will be used.
 #'
@@ -33,7 +34,7 @@
 #' cp_rf <- ceteris_paribus(explainer_rf, apartments_small, y = apartments_small$m2.price)
 #' cp_rf
 #' }
-ceteris_paribus <- function(explainer, observations, y = NULL, variable_splits = NULL, variables = NULL, grid_points = 101) {
+ceteris_paribus <- function(explainer, observations, y = NULL, variable_splits = NULL, variable_splits_type = "quantiles", variables = NULL, grid_points = 101) {
   if (!("explainer" %in% class(explainer)))
       stop("The ceteris_paribus() function requires an object created with explain() function.")
 
@@ -50,7 +51,7 @@ ceteris_paribus <- function(explainer, observations, y = NULL, variable_splits =
       variables <- intersect(colnames(explainer$data),
                              colnames(observations))
 
-    variable_splits <- calculate_variable_splits(explainer$data, variables = variables, grid_points = grid_points)
+    variable_splits <- calculate_variable_splits(explainer$data, variables = variables, grid_points = grid_points, variable_splits_type = variable_splits_type)
   }
 
   # calculate profiles

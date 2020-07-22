@@ -9,6 +9,7 @@ ceteris_paribus(
   observations,
   y = NULL,
   variable_splits = NULL,
+  variable_splits_type = "quantiles",
   variables = NULL,
   grid_points = 101
 )
@@ -21,6 +22,8 @@ ceteris_paribus(
 \item{y}{true labels for `observations`. If specified then will be added to ceteris paribus plots.}
 
 \item{variable_splits}{named list of splits for variables, in most cases created with `calculate_variable_splits()`. If NULL then it will be calculated based on validation data avaliable in the `explainer`.}
+
+\item{variable_splits_type}{how variable grids shall be calculated? Use "quantiles" (default) for percentiles or "uniform" to get uniform grid of points}
 
 \item{variables}{names of variables for which profiles shall be calculated. Will be passed to `calculate_variable_splits()`. If NULL then all variables from the validation data will be used.}
 

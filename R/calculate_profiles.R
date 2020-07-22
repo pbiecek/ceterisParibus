@@ -89,6 +89,7 @@ calculate_profiles.default <- function(data, variable_splits, model, predict_fun
 #' @param data validation dataset. Is used to determine distribution of observations.
 #' @param variables names of variables for which splits shall be calculated
 #' @param grid_points number of points used for response path
+#' @param variable_splits_type how variable grids shall be calculated? Use "quantiles" (default) for percentiles or "uniform" to get uniform grid of points
 #'
 #' @return A named list with splits for selected variables
 #' @importFrom stats predict
@@ -103,16 +104,21 @@ calculate_profiles.default <- function(data, variable_splits, model, predict_fun
 #' calculate_variable_splits(apartments, vars)
 #' }
 #' @export
-calculate_variable_splits <- function(data, variables = colnames(data), grid_points = 101) {
+calculate_variable_splits <- function(data, variables = colnames(data), grid_points = 101, variable_splits_type = "quantiles") {
   UseMethod("calculate_variable_splits")
 }
 #' @export
-calculate_variable_splits.default <- function(data, variables = colnames(data), grid_points = 101) {
+calculate_variable_splits.default <- function(data, variables = colnames(data), grid_points = 101, variable_splits_type = "quantiles") {
   variable_splits <- lapply(variables, function(var) {
     selected_column <- data[,var]
     if (is.numeric(selected_column)) {
       probs <- seq(0, 1, length.out = grid_points)
-      quantile(selected_column, probs = probs)
+      if (variable_splits_type == "quantiles") {
+        # variable quantiles
+        unique(quantile(selected_column, probs = probs))
+      } else {
+        seq(min(selected_column, na.rm = TRUE), max(selected_column, na.rm = TRUE), length.out = grid_points)
+      }
     } else {
       unique(selected_column)
     }

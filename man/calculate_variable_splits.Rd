@@ -4,7 +4,12 @@
 \alias{calculate_variable_splits}
 \title{Calculate Split Points for Selected Variables}
 \usage{
-calculate_variable_splits(data, variables = colnames(data), grid_points = 101)
+calculate_variable_splits(
+  data,
+  variables = colnames(data),
+  grid_points = 101,
+  variable_splits_type = "quantiles"
+)
 }
 \arguments{
 \item{data}{validation dataset. Is used to determine distribution of observations.}
@@ -12,6 +17,8 @@ calculate_variable_splits(data, variables = colnames(data), grid_points = 101)
 \item{variables}{names of variables for which splits shall be calculated}
 
 \item{grid_points}{number of points used for response path}
+
+\item{variable_splits_type}{how variable grids shall be calculated? Use "quantiles" (default) for percentiles or "uniform" to get uniform grid of points}
 }
 \value{
 A named list with splits for selected variables
